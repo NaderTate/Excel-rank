@@ -16,7 +16,7 @@ const Page = () => {
   }
 
   if (session?.user) {
-    redirect('/');
+    redirect('/dashboard');
   }
 
   return (

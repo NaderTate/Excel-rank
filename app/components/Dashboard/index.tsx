@@ -2,38 +2,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
-import {
-  FcSettings,
-  FcConferenceCall,
-  FcCapacitor,
-  FcGenealogy,
-  FcDataProtection,
-  FcNext,
-} from 'react-icons/fc';
-
-const links = [
-  {
-    title: 'Users',
-    icon: FcConferenceCall,
-    href: '/dashboard/users',
-  },
-  {
-    title: 'Products',
-    icon: FcCapacitor,
-    href: '/dashboard/products',
-  },
-  {
-    title: 'Categories',
-    icon: FcGenealogy,
-    href: '/dashboard/categories',
-  },
-  {
-    title: 'Orders',
-    icon: FcDataProtection,
-    href: '/dashboard/orders',
-  },
-];
+import { FcNext, FcSettings } from 'react-icons/fc';
+import {productsList} from '@/lib/data';
 
 export default function Dashboard() {
   const pathname = usePathname();
@@ -67,17 +37,17 @@ export default function Dashboard() {
                 </Link>
               </div>
               <ul className="space-y-1 sm:space-y-5 border-t border-gray-100 pt-4">
-                {links.map((link) => (
-                  <li key={link.href + 'dashboardLink'}>
+                {productsList.map((link) => (
+                  <li key={link.link + 'dashboardLink'}>
                     <Link
-                      href={link.href}
+                      href={link.link}
                       className={`group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
-                        pathname === link.href && 'bg-blue-100/60'
+                        pathname === link.link && 'bg-blue-100/60'
                       }`}
                     >
                       <link.icon className="h-5 w-5 opacity-75" />
                       <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
-                        {link.title}
+                        {link.name}
                       </span>
                     </Link>
                   </li>

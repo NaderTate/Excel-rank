@@ -1,3 +1,21 @@
+import { FcCollaboration, FcPositiveDynamic } from 'react-icons/fc';
+
+export const productsList = [
+  {
+    name: 'Reviews',
+    link: '/dashboard/reviews',
+    icon: FcCollaboration,
+    description:
+      'Reviewalyzer instantly analyzes product reviews using advanced NLP. It delivers an easy to grasp summary highlighting key themes, so you can make informed purchase decisions fast.',
+  },
+  {
+    name: 'Analytics',
+    link: '/dashboard/analytics',
+    icon: FcPositiveDynamic,
+    description: 'Coming soon...',
+  },
+];
+
 export const navItems = [
   {
     name: 'Plans',
