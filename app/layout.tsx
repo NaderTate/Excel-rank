@@ -1,4 +1,3 @@
-'use client';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Bebas_Neue } from 'next/font/google';
