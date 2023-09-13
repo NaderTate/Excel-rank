@@ -1,7 +1,8 @@
+'use client';
 import React from 'react';
 import { pricingItems } from '@/lib/data';
 
-export default function page() {
+export default function Page() {
   return (
     <div className="mx-auto px-4 sm:px-6 min-h-screen flex items-center justify-center pt-20">
       <div className="flex flex-wrap items-center justify-center gap-8">

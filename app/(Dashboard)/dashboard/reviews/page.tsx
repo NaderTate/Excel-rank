@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 
-export default function page() {
+export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleGetReviews = async () => {

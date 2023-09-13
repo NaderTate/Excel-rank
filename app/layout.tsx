@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Bebas_Neue } from 'next/font/google';
-import { SessionProvider } from 'next-auth/react';
+import SessionProv from '@components/auth/SessionProv';
 import Navbar from '@components/Navbar';
 
 const bebas = Bebas_Neue({
@@ -32,10 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={bebas.className}>
-        <SessionProvider session={session}>
+        <SessionProv session={session}>
           <Navbar />
           {children}
-        </SessionProvider>
+        </SessionProv>
       </body>
     </html>
   );
