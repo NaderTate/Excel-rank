@@ -16,7 +16,9 @@ export default function Page() {
         'Content-Type': 'application/json',
       },
     });
+
     const data = await res.json();
+    console.log(data);
     console.log(JSON.parse(JSON.parse(data.aiResponse).data.content));
     setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
   };
