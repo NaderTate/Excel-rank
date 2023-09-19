@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-export default function () {
+const SkeletonLoad = () => {
   return (
     <div className="flex flex-col gap-3 w-full animate-pulse p-2 md:p-8">
       <motion.div
@@ -39,4 +39,6 @@ export default function () {
       />
     </div>
   );
-}
+};
+
+export default SkeletonLoad;

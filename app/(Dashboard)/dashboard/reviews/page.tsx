@@ -35,7 +35,7 @@ export default function Page() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 1 },
+      transition: { staggerChildren: 2 },
     },
   };
 
