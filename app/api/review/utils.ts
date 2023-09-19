@@ -1,6 +1,7 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import OpenAI from 'openai';
+import GPT3Tokenizer from 'gpt3-tokenizer';
 
 export const getReview = async (link: string) => {
   try {
@@ -40,6 +41,12 @@ export const getReview = async (link: string) => {
       data.push(item);
     }
 
+    const tokenizer = new GPT3Tokenizer({ type: 'gpt3' });
+    const tokens = tokenizer.encode(
+      data.map((item) => item.starRating + ' ' + item.comment).join(' '),
+    );
+    const text = tokenizer.decode(tokens.bpe.slice(0, 2500));
+
     const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 
     const response = await openai.chat.completions.create({
@@ -48,11 +55,11 @@ export const getReview = async (link: string) => {
         {
           role: 'system',
           content:
-            'Analyze these responses in general and only return the following json has the following formate => "{"FinalReview": "string", "OverAllRating": number, "max3PositiveThings":Array<string>, "max3NegativeThings":Array<string>, "RecommendationsForImprovement":Array<string>}"',
+            'Analyze these responses in general and only return nothing but the following json has the following formate => "{"FinalReview": "string", "OverAllRating": number, "max3PositiveThings":Array<string>, "max3NegativeThings":Array<string>, "RecommendationsForImprovement":Array<string>}"',
         },
         {
           role: 'user',
-          content: data.map((item) => item.starRating + ' ' + item.comment).join(' '),
+          content: text,
         },
       ],
       temperature: 0,

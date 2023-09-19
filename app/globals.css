@@ -2,10 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* no scroll bar */
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  letter-spacing: 1px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .gradient_text {
   @apply bg-gradient-to-r from-blue-600 to-orange-800 text-transparent bg-clip-text;
 }
 
 .gradient_bg {
   @apply bg-gradient-to-r from-blue-600 to-orange-700;
+}
+
+.gradient_bg_darker {
+  @apply bg-gradient-to-r from-violet-800 to-cyan-700;
+}
+
+.gradient_bg_dark {
+  @apply bg-gradient-to-r from-violet-600 to-cyan-600;
 }

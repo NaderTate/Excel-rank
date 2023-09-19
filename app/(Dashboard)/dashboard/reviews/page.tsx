@@ -1,14 +1,19 @@
 'use client';
 import { useRef, useState } from 'react';
+import { HiStar } from 'react-icons/hi';
+import { GoDot } from 'react-icons/go';
+import { motion, AnimatePresence } from 'framer-motion';
+import SkeletonLoad from '@components/SkeletonLoad';
 
 export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [review, setReview] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleGetReviews = async () => {
     const url = inputRef.current?.value;
     if (!url) return;
-
+    setLoading(true);
     const res = await fetch('/api/review', {
       method: 'POST',
       body: JSON.stringify({ link: url }),
@@ -16,11 +21,22 @@ export default function Page() {
         'Content-Type': 'application/json',
       },
     });
-
     const data = await res.json();
-    console.log(data);
-    console.log(JSON.parse(JSON.parse(data.aiResponse).data.content));
     setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
+    setLoading(false);
+  };
+
+  const itemVariants = {
+    hidden: { y: 100, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 120, duration: 1 } },
+  };
+
+  const listItemContainerVariant = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 1 },
+    },
   };
 
   return (
@@ -45,59 +61,118 @@ export default function Page() {
           </button>
         </div>
       </div>
-      {review && (
-        <div>
-          <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">Results</h2>
-          <div className="flex flex-col gap-3">
+      <AnimatePresence>
+        {review && (
+          <div>
+            <motion.h2 variants={itemVariants} className="text-2xl text-gray-900 py-2 text-center">
+              Results
+            </motion.h2>
             {review.FinalReview && (
-              <div>
-                <div>
-                  <h3 className="text-xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-                    Overall Rating
-                  </h3>
-                  <p className="text-gray-700">{review.OverAllRating}</p>
-                </div>
-                <div>
-                  <h3 className="text-xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-                    Final Review
-                  </h3>
-                  <p className="text-gray-700">{review.FinalReview}</p>
-                </div>
-                <div>
-                  <h3 className="text-xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-                    Prositive Points
-                  </h3>
-                  {review.max3PositiveThings.map((item: any) => (
-                    <p key={item + 'positive'} className="text-gray-700">
+              <motion.ul
+                variants={listItemContainerVariant}
+                initial="hidden"
+                animate="visible"
+                className="grid grid-cols-1 lg:grid-cols-6 gap-3 text-slate-100 "
+              >
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="gradient_bg_dark rounded-2xl shadow-lg col-span-1 w-full h-full border-slate-200/40 p-2"
+                >
+                  <h3 className="text-xl m-2 w-fit">Overall Rating</h3>
+                  <p
+                    style={{
+                      textShadow: '5px 5px 10px rgba(0,0,0,0.8)',
+                    }}
+                    className="text-white h-3/5 flex items-center justify-center p-8 text-5xl text-center"
+                  >
+                    {review.OverAllRating}
+                    <HiStar className="text-4xl text-amber-300 mt-2" />
+                  </p>
+                </motion.li>
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="lg:col-span-5 gap-3 flex flex-col justify-between gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
+                >
+                  <h3 className="text-xl m-2 w-fit">Final Review</h3>
+                  <p className="text-white m-2 drop-shadow-xl font-sans text-justify first-letter:ml-6">
+                    {review.FinalReview}
+                  </p>
+                </motion.li>
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="lg:col-span-2 gap-3 flex flex-col  gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
+                >
+                  <h3 className="text-xl m-2 w-fit">Prositive Points</h3>
+                  {review.max3PositiveThings.map((item: any, index: number) => (
+                    <p key={item + 'positive' + index} className="text-white">
+                      <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
                   ))}
-                </div>
-                <div>
-                  <h3 className="text-xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-                    Negative Points
-                  </h3>
-                  {review.max3NegativeThings.map((item: any) => (
-                    <p key={item + 'negative'} className="text-gray-700">
+                </motion.li>
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="lg:col-span-2 gap-3 flex flex-col gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
+                >
+                  <h3 className="text-xl m-2 w-fit">Negative Points</h3>
+                  {review.max3NegativeThings.map((item: any, index: number) => (
+                    <p key={item + 'negative' + index} className="text-white">
+                      <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
                   ))}
-                </div>
-                <div>
-                  <h3 className="text-xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-                    Suggestions
-                  </h3>
-                  {review.RecommendationsForImprovement.map((item: any) => (
-                    <p key={item + 'recom'} className="text-gray-700">
+                </motion.li>
+                <motion.li
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="lg:col-span-2 gap-3 flex flex-col gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
+                >
+                  <h3 className="text-xl m-2 w-fit">Suggestions</h3>
+                  {review.RecommendationsForImprovement.map((item: any, index: number) => (
+                    <p key={item + 'recom' + index} className="text-white">
+                      <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
                   ))}
-                </div>
-              </div>
+                </motion.li>
+              </motion.ul>
             )}
           </div>
-        </div>
-      )}
+        )}
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full grid grid-cols-1 lg:grid-cols-6 gap-3 text-slate-100"
+          >
+            <div className="col-span-1 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-5 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
