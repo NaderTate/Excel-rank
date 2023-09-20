@@ -1,9 +1,9 @@
-'use client';
-import { useRef, useState } from 'react';
-import { HiStar } from 'react-icons/hi';
-import { GoDot } from 'react-icons/go';
-import { motion, AnimatePresence } from 'framer-motion';
-import SkeletonLoad from '@components/SkeletonLoad';
+"use client";
+import { useRef, useState } from "react";
+import { HiStar } from "react-icons/hi";
+import { GoDot } from "react-icons/go";
+import { motion, AnimatePresence } from "framer-motion";
+import SkeletonLoad from "@components/SkeletonLoad";
 
 export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -14,21 +14,34 @@ export default function Page() {
     const url = inputRef.current?.value;
     if (!url) return;
     setLoading(true);
-    const res = await fetch('/api/review', {
-      method: 'POST',
+    const res1 = await fetch(`/api/bizinfo`, {
+      method: "POST",
       body: JSON.stringify({ link: url }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
-    const data = await res.json();
-    setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
-    setLoading(false);
+    const data = await res1.json();
+    console.log(data);
+    // const res = await fetch('/api/review', {
+    //   method: 'POST',
+    //   body: JSON.stringify({ link: url }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+    // const data = await res.json();
+    // setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
+    // setLoading(false);
   };
 
   const itemVariants = {
     hidden: { y: 100, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 120, duration: 1 } },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 120, duration: 1 },
+    },
   };
 
   const listItemContainerVariant = {
@@ -64,7 +77,10 @@ export default function Page() {
       <AnimatePresence>
         {review && (
           <div>
-            <motion.h2 variants={itemVariants} className="text-2xl text-gray-900 py-2 text-center">
+            <motion.h2
+              variants={itemVariants}
+              className="text-2xl text-gray-900 py-2 text-center"
+            >
               Results
             </motion.h2>
             {review.FinalReview && (
@@ -83,7 +99,7 @@ export default function Page() {
                   <h3 className="text-xl m-2 w-fit">Overall Rating</h3>
                   <p
                     style={{
-                      textShadow: '5px 5px 10px rgba(0,0,0,0.8)',
+                      textShadow: "5px 5px 10px rgba(0,0,0,0.8)",
                     }}
                     className="text-white h-3/5 flex items-center justify-center p-8 text-5xl text-center"
                   >
@@ -110,7 +126,7 @@ export default function Page() {
                 >
                   <h3 className="text-xl m-2 w-fit">Prositive Points</h3>
                   {review.max3PositiveThings.map((item: any, index: number) => (
-                    <p key={item + 'positive' + index} className="text-white">
+                    <p key={item + "positive" + index} className="text-white">
                       <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
@@ -124,7 +140,7 @@ export default function Page() {
                 >
                   <h3 className="text-xl m-2 w-fit">Negative Points</h3>
                   {review.max3NegativeThings.map((item: any, index: number) => (
-                    <p key={item + 'negative' + index} className="text-white">
+                    <p key={item + "negative" + index} className="text-white">
                       <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
@@ -137,12 +153,14 @@ export default function Page() {
                   className="lg:col-span-2 gap-3 flex flex-col gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
                 >
                   <h3 className="text-xl m-2 w-fit">Suggestions</h3>
-                  {review.RecommendationsForImprovement.map((item: any, index: number) => (
-                    <p key={item + 'recom' + index} className="text-white">
-                      <GoDot className="inline-block mx-2" />
-                      {item}
-                    </p>
-                  ))}
+                  {review.RecommendationsForImprovement.map(
+                    (item: any, index: number) => (
+                      <p key={item + "recom" + index} className="text-white">
+                        <GoDot className="inline-block mx-2" />
+                        {item}
+                      </p>
+                    )
+                  )}
                 </motion.li>
               </motion.ul>
             )}
