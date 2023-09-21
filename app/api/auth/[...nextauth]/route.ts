@@ -20,6 +20,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }: any) {
       session.user.plan = user.plan || null;
+      console.log(user, session);
       return Promise.resolve(session);
     },
   },

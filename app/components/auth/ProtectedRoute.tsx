@@ -15,14 +15,14 @@ const ProtectedRoute = ({ children, plan }: { children: React.ReactNode; plan: s
     }
   };
 
-  const checkIfSubscribed = () => {
-    if (!plan.includes(session?.user?.plan)) {
-      redirect('/pricing');
-    }
-  };
+  // const checkIfSubscribed = () => {
+  //   if (!plan.includes(session?.user?.plan)) {
+  //     redirect('/pricing');
+  //   }
+  // };
 
   checkIfLoggedIn();
-  checkIfSubscribed();
+  // checkIfSubscribed();
 
   return children;
 };
