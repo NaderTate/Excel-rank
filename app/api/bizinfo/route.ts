@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   const data = await response.json();
   return NextResponse.json({
     name: data.name,
-    iamge: data.image_url,
+    image: data.image_url,
     rating: data.rating,
     location: data.location,
     openNow: data.hours[0].is_open_now,
