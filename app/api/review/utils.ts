@@ -19,33 +19,19 @@ export const getReview = async (link: string) => {
       })
       .get();
 
-    const reviewsCount = $('[href=#reviews]')
-      .map((index, element) => {
-        return $(element).text();
-      })
-      .get();
-
     const starRating = $('ul.list__09f24__ynIEd div.five-stars__09f24__mBKym')
       .map((index, element) => {
         return $(element).attr('aria-label');
       })
       .get();
 
-    const data = [];
-
-    for (let i = 0; i < comments.length; i++) {
-      const item = {
-        starRating: starRating[i],
-        comment: comments[i],
-      };
-      data.push(item);
-    }
+    const textData = comments
+      .map((comment, index) => 'starRating: ' + starRating[index] + ' comment: ' + comment)
+      .join(' ');
 
     const tokenizer = new GPT3Tokenizer({ type: 'gpt3' });
-    const tokens = tokenizer.encode(
-      data.map((item) => item.starRating + ' ' + item.comment).join(' '),
-    );
-    const text = tokenizer.decode(tokens.bpe.slice(0, 2500));
+    const tokens = tokenizer.encode(textData);
+    const text = tokenizer.decode(tokens.bpe.slice(0, 2000));
 
     const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
 
@@ -67,6 +53,6 @@ export const getReview = async (link: string) => {
 
     return { data: response.choices[0].message };
   } catch (error: any) {
-    return { error: `An error occurred: ${error.message}` };
+    return false;
   }
 };

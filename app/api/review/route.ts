@@ -11,13 +11,14 @@ export async function POST(request: Request) {
   const session: any = await getServerSession(authOptions);
   // check if the link is already in the database
 
-  if (!session || ['free', '', null].includes(session.user.plan)) {
-    return NextResponse.redirect('/pricing');
-  }
+  // if (!session || ['free', '', null].includes(session.user.plan)) {
+  //   return NextResponse.redirect('/pricing');
+  // }
 
   try {
     let review = await prisma.aiReview.findFirst({
       where: {
+        userId: session.user.id,
         link: link,
       },
     });
@@ -28,6 +29,7 @@ export async function POST(request: Request) {
 
     // if not exists or updated more than 24 hours ago
     const data = await getReview(link);
+    if (!data) return NextResponse.json({ error: ` An error occured` }, { status: 500 });
     if (review) {
       review = await prisma.aiReview.update({
         where: {
@@ -42,6 +44,7 @@ export async function POST(request: Request) {
       review = await prisma.aiReview.create({
         data: {
           link: link,
+          userId: session.user.id,
           // convert data to string
           aiResponse: JSON.stringify(data),
         },

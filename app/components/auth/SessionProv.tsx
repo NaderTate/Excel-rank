@@ -9,5 +9,14 @@ export default function SessionProv({
   children: React.ReactNode;
   session: any;
 }) {
-  return <SessionProvider session={session}>{children}</SessionProvider>;
+  return (
+    <SessionProvider
+      // set the interval to 1/4 hour
+      refetchInterval={1000 * 60 * 15}
+      refetchOnWindowFocus={false}
+      session={session}
+    >
+      {children}
+    </SessionProvider>
+  );
 }
