@@ -14,25 +14,25 @@ export default function Page() {
     const url = inputRef.current?.value;
     if (!url) return;
     setLoading(true);
-    const res1 = await fetch(`/api/bizinfo`, {
+    // const res1 = await fetch(`/api/bizinfo`, {
+    //   method: "POST",
+    //   body: JSON.stringify({ link: url }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const data = await res1.json();
+    // console.log(data);
+    const res = await fetch("/api/review", {
       method: "POST",
       body: JSON.stringify({ link: url }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await res1.json();
-    console.log(data);
-    // const res = await fetch('/api/review', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ link: url }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
-    // const data = await res.json();
-    // setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
-    // setLoading(false);
+    const data = await res.json();
+    setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
+    setLoading(false);
   };
 
   const itemVariants = {
@@ -53,7 +53,7 @@ export default function Page() {
   };
 
   return (
-    <div className="mt-20 flex flex-col w-full gap-3 p-2 md:p-8">
+    <div className="flex flex-col w-full gap-3 p-2 md:p-8">
       <div className="flex flex-col gap-3 ">
         <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
           GET REVIEWS FROM CUSTOMERS

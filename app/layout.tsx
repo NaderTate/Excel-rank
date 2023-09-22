@@ -1,23 +1,24 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Bebas_Neue } from 'next/font/google';
-import SessionProv from '@components/auth/SessionProv';
-import Navbar from '@components/Navbar';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Bebas_Neue } from "next/font/google";
+import SessionProv from "@components/auth/SessionProv";
+import Navbar from "@components/Navbar";
 
 const bebas = Bebas_Neue({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400'],
+  subsets: ["latin", "latin-ext"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
-  title: 'Craft Care',
-  description: 'Craft Care is a platform for crafters to manage their business.',
+  title: "Craft Care",
+  description:
+    "Craft Care is a platform for crafters to manage their business.",
   icons: [
     {
-      href: '/logo.svg',
-      url: '/logo.svg',
-      sizes: 'any',
-      type: 'image/svg+xml',
+      href: "/logo.svg",
+      url: "/logo.svg",
+      sizes: "any",
+      type: "image/svg+xml",
     },
   ],
 };

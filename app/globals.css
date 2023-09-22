@@ -29,3 +29,7 @@
 .gradient_bg_dark {
   @apply bg-gradient-to-r from-violet-600 to-cyan-600;
 }
+.mapContainer {
+  width: 100%;
+  height: 100vh;
+}
