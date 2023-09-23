@@ -8,21 +8,23 @@ import SkeletonLoad from "@components/SkeletonLoad";
 export default function Page() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [review, setReview] = useState<any>(null);
+  const [info, setInfo] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleGetReviews = async () => {
     const url = inputRef.current?.value;
     if (!url) return;
     setLoading(true);
-    // const res1 = await fetch(`/api/bizinfo`, {
-    //   method: "POST",
-    //   body: JSON.stringify({ link: url }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
-    // const data = await res1.json();
-    // console.log(data);
+    const biz = await fetch(`/api/bizinfo`, {
+      method: "POST",
+      body: JSON.stringify({ link: url }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const yelpData = await biz.json();
+    setInfo(yelpData);
+    console.log(yelpData);
     const res = await fetch("/api/review", {
       method: "POST",
       body: JSON.stringify({ link: url }),
@@ -31,6 +33,7 @@ export default function Page() {
       },
     });
     const data = await res.json();
+    console.log(data);
     setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
     setLoading(false);
   };
@@ -74,6 +77,60 @@ export default function Page() {
           </button>
         </div>
       </div>
+      <AnimatePresence>
+        {info && (
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="w-full text-slate-100"
+          >
+            <div>
+              <h1 className="text-2xl text-gray-900 py-2 text-center">
+                {info.name}
+              </h1>
+              <p className="text-gray-500 text-center">
+                {info.location?.address1} | {info.location?.city} |{" "}
+                {info.location?.country}
+              </p>
+            </div>
+            {info.image && (
+              <div className="flex justify-center">
+                <img
+                  className=" w-3/4 md:w-1/2 rounded-xl border border-gray-500/30 shadow-xl"
+                  src={info.image}
+                  alt="business image"
+                />
+              </div>
+            )}
+          </motion.div>
+        )}
+        {loading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="w-full grid grid-cols-1 lg:grid-cols-6 gap-3 text-slate-100"
+          >
+            <div className="col-span-1 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-5 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
+              <SkeletonLoad />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {review && (
           <div>

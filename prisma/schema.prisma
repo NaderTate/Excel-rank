@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String    @unique
-  createdAt     DateTime  @default(now())
-  emailVerified DateTime? @map("verifiedAt")
+  email         String     @unique
+  createdAt     DateTime   @default(now())
+  emailVerified DateTime?  @map("verifiedAt")
   sessions      Session[]
   image         String
-  array         String[]  @default([])
-  plan          String?   @default("")
+  array         String[]   @default([])
+  plan          String?    @default("")
   Account       Account[]
+  AiReview      AiReview[]
 
   @@map("users")
 }
@@ -71,6 +72,8 @@ model AiReview {
   updatedAt  DateTime @updatedAt
   link       String
   aiResponse String
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
 
   @@map("ai_reviews")
 }
