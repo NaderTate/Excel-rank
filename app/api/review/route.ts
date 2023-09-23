@@ -7,7 +7,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
-  const { link }: { link: string } = await request.json();
+  const { link, yelp }: { link: string; yelp: any } = await request.json();
   const session: any = await getServerSession(authOptions);
   // check if the link is already in the database
 
@@ -47,6 +47,9 @@ export async function POST(request: Request) {
           userId: session.user.id,
           // convert data to string
           aiResponse: JSON.stringify(data),
+          image: yelp.image,
+          title: yelp.name,
+          address: yelp.location ? yelp.location.address1 : '',
         },
       });
     }

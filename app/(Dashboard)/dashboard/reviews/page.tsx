@@ -27,7 +27,7 @@ export default function Page() {
     console.log(yelpData);
     const res = await fetch('/api/review', {
       method: 'POST',
-      body: JSON.stringify({ link: url }),
+      body: JSON.stringify({ link: url, yelp: yelpData }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -89,42 +89,20 @@ export default function Page() {
             <div>
               <h1 className="text-2xl text-gray-900 py-2 text-center">{info.name}</h1>
               <p className="text-gray-500 text-center">
-                {info.location?.address1} | {info.location?.city} | {info.location?.country} 
+                {info.location?.address1} | {info.location?.city} | {info.location?.country}
               </p>
             </div>
             {info.image && (
               <div className="flex justify-center">
-                <img className=" w-3/4 md:w-1/2 rounded-xl border border-gray-500/30 shadow-xl" src={info.image} alt="business image" />
+                <img
+                  className=" w-3/4 md:w-1/2 rounded-xl border border-gray-500/30 shadow-xl"
+                  src={info.image}
+                  alt="business image"
+                />
               </div>
             )}
           </motion.div>
         )}
-        {loading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="w-full grid grid-cols-1 lg:grid-cols-6 gap-3 text-slate-100"
-          >
-            <div className="col-span-1 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-5 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
         {review && (
           <div>
             <motion.h2 variants={itemVariants} className="text-2xl text-gray-900 py-2 text-center">
