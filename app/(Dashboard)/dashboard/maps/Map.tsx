@@ -1,13 +1,13 @@
-"use client";
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { AiFillStar } from "react-icons/ai";
-import ClipLoader from "react-spinners/ClipLoader";
-import Places from "./Places";
+'use client';
+import { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
+import { AiFillStar } from 'react-icons/ai';
+import ClipLoader from 'react-spinners/ClipLoader';
+import Places from './Places';
 type LatLngLiteral = google.maps.LatLngLiteral;
 type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
-function Map() {
+function Map({ step, setStep }: { step: string; setStep: (step: string) => void }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [place, setPlace] = useState<LatLngLiteral>();
   const [id, setId] = useState<string | null>(null);
@@ -25,24 +25,20 @@ function Map() {
   const mapRef = useRef<GoogleMap>();
   const center = useMemo<LatLngLiteral>(
     () => ({ lat: place?.lat || 40, lng: place?.lng || -73 }),
-    [place]
+    [place],
   );
   const options = useMemo<MapOptions>(
     () => ({
-      mapId: "cc93c8e2ede4cd81",
+      mapId: 'cc93c8e2ede4cd81',
       disableDefaultUI: true,
       clickableIcons: false,
     }),
-    []
+    [],
   );
   const onLoad = useCallback((map: any) => (mapRef.current = map), []);
   // radius in meters and steps in meters
   // steps is the distance between each random location
-  const generateRandomLocations = (
-    center: LatLngLiteral,
-    radius: number,
-    steps: number
-  ) => {
+  const generateRandomLocations = (center: LatLngLiteral, radius: number, steps: number) => {
     const sections = Math.floor(radius / steps);
     const randomLocations: Array<{ id: number; lat: number; lng: number }> = [];
     // Generate the MATRIX
@@ -113,7 +109,7 @@ function Map() {
       for (let i = 0; i < randomLocations.length; i++) {
         const location = randomLocations[i];
         const res = await fetch(`/api/nearbysearch`, {
-          method: "POST",
+          method: 'POST',
           body: JSON.stringify({
             lat: location.lat,
             lng: location.lng,
@@ -153,20 +149,20 @@ function Map() {
       className={`bg-white rounded-md p-1 my-1 border-2 text-black w-full ${
         competitorId == id &&
         (position <= 5
-          ? "border-green-500/80"
+          ? 'border-green-500/80'
           : position > 5 && position <= 10
-          ? "border-yellow-500/80"
-          : "border-red-500/80")
+          ? 'border-yellow-500/80'
+          : 'border-red-500/80')
       }`}
     >
       <div className="flex justify-between items-center">
         <span
           className={` rounded-md px-1 ${
             position <= 5
-              ? "bg-green-600/50 text-green-900"
+              ? 'bg-green-600/50 text-green-900'
               : position > 5 && position <= 10
-              ? "bg-yellow-600/50 text-yellow-900"
-              : "bg-red-600/50 text-red-900"
+              ? 'bg-yellow-600/50 text-yellow-900'
+              : 'bg-red-600/50 text-red-900'
           }`}
         >
           pos: {position}
@@ -188,10 +184,10 @@ function Map() {
         <div className="">
           <div>
             {averageRanking <= 5
-              ? "Great"
+              ? 'Great'
               : averageRanking > 5 && averageRanking <= 12
-              ? "Medium"
-              : "Bad"}
+              ? 'Medium'
+              : 'Bad'}
           </div>
           <div className="relative h-2">
             <div className="absolute top-0 right-0 left-0 bottom-0 flex bg-white rounded-full"></div>
@@ -221,12 +217,10 @@ function Map() {
       {/* The second component that lets you type some keywords */}
       {place && id && results.length == 0 && (
         <div className="m-28 p-10 border-teal-300 border rounded-md">
-          <h1 className="text-3xl">
-            Type some keywords separated by comma (",")
-          </h1>
+          <h1 className="text-3xl">Type some keywords separated by comma (",")</h1>
           <div className="flex justify-center">
             <input
-              onChange={(e) => setKeywords(e.target.value.split(","))}
+              onChange={(e) => setKeywords(e.target.value.split(','))}
               type="text"
               className="rounded-md w-full p-2 outline-1 border border-teal-800 outline-teal-600"
               placeholder="Type some keywords"
@@ -235,7 +229,7 @@ function Map() {
           {suggestedKeywords.length > 0 && (
             <div className="flex justify-center mt-10">
               <p className="text-lg">
-                Suggested keywords:{" "}
+                Suggested keywords:{' '}
                 {suggestedKeywords.map((keyword) => (
                   <span key={keyword} className="text-teal-800 mx-2">
                     {keyword}
@@ -248,7 +242,7 @@ function Map() {
             <button
               onClick={async () => {
                 const res = await fetch(`/api/nearbysearch`, {
-                  method: "POST",
+                  method: 'POST',
                   body: JSON.stringify({
                     lat: place.lat,
                     lng: place.lng,
@@ -279,9 +273,7 @@ function Map() {
                 </div>
               </div>
             )}
-            {averageRanking && (
-              <VisibilityBar averageRanking={averageRanking} />
-            )}
+            {averageRanking && <VisibilityBar averageRanking={averageRanking} />}
             <ul>
               {results.map((result: any, i) => (
                 <li key={result.place_id}>
@@ -317,7 +309,7 @@ function Map() {
                     lng: number;
                     ranking: number;
                   },
-                  i
+                  i,
                 ) => (
                   <Marker
                     key={i}
@@ -325,31 +317,29 @@ function Map() {
                       lat: lat,
                       lng: lng,
                     }}
-                    title={`You rank #${
-                      ranking > 0 ? ranking : "20+"
-                    } at this location`}
+                    title={`You rank #${ranking > 0 ? ranking : '20+'} at this location`}
                     options={{
                       icon: {
                         url: `${
                           ranking <= 5 && ranking > 0
-                            ? "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413191/Frame_18_tvweyd.svg"
+                            ? 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413191/Frame_18_tvweyd.svg'
                             : ranking <= 10 && ranking > 5
-                            ? "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_20_byzjky.svg"
-                            : "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_21_usmjgy.svg"
+                            ? 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_20_byzjky.svg'
+                            : 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_21_usmjgy.svg'
                         }`,
                         scaledSize: new google.maps.Size(50, 50),
                         anchor: new google.maps.Point(25, 25),
                       },
                       opacity: 1,
                       label: {
-                        text: ranking > 0 ? ranking.toString() : "20+",
-                        color: "black",
-                        fontSize: "16px",
-                        fontWeight: "bold",
+                        text: ranking > 0 ? ranking.toString() : '20+',
+                        color: 'black',
+                        fontSize: '16px',
+                        fontWeight: 'bold',
                       },
                     }}
                   />
-                )
+                ),
               )}
             </GoogleMap>
           </div>
