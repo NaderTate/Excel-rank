@@ -84,7 +84,7 @@ export default function PlacesSection({ setPlace }: any) {
                 className="flex flex-col gap-2 overflow-hidden"
               >
                 <p className="sm:text-lg">
-                  <span className="font-bold">Step 1:</span> Type your business name in the search box (it's the same name at google maps)
+                  <span className="font-bold">Step 1:</span> Type your business name in the search box (it&apos;s the same name at google maps)
                 </p>
                 <p className="sm:text-lg">
                   <span className="font-bold">Step 2:</span> Select your business from the dropdown
