@@ -53,6 +53,12 @@ export default function Main() {
     },
   };
 
+  const { day, month, year } = {
+    day: new Date().getDate(),
+    month: new Date().toLocaleString('default', { month: 'short' }),
+    year: new Date().getFullYear(),
+  };
+
   return (
     <div className="flex flex-col w-full gap-3 p-2 md:p-8">
       <div className="flex flex-col gap-3 ">
@@ -76,17 +82,39 @@ export default function Main() {
       <AnimatePresence>
         {info && (
           <motion.div variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="w-full text-slate-100">
-            <div>
-              <h1 className="text-2xl text-gray-900 py-2 text-center">{info.name}</h1>
-              <p className="text-gray-500 text-center">
-                {info.location?.address1} | {info.location?.city} | {info.location?.country}
-              </p>
-            </div>
-            {info.image && (
-              <div className="flex justify-center">
-                <img className=" w-3/4 md:w-1/2 rounded-xl border border-gray-500/30 shadow-xl" src={info.image} alt="business image" />
+            <article className="flex bg-white transition hover:shadow-xl">
+              <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
+                <div className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
+                  <span>{year}</span>
+                  <span className="w-px flex-1 bg-gray-900/10"></span>
+                  <span>
+                    {day} - {month}
+                  </span>
+                </div>
               </div>
-            )}
+
+              <div className="hidden sm:block sm:basis-56">
+                <img alt="business image" src={info.image} className="aspect-square h-full w-full object-cover" />
+              </div>
+
+              <div className="flex flex-1 flex-col justify-between">
+                <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                  <a href="#">
+                    <h3 className="font-bold uppercase text-gray-900">{info.name}</h3>
+                  </a>
+
+                  <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                    {info.location?.address1} | {info.location?.city} | {info.location?.country}
+                  </p>
+                </div>
+
+                <div className="sm:flex sm:items-end sm:justify-end">
+                  <span className="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
+                    {info.openNow ? 'Open' : 'Closed'}
+                  </span>
+                </div>
+              </div>
+            </article>
           </motion.div>
         )}
         {review && (
