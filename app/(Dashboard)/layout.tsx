@@ -4,12 +4,13 @@ import Dashboard from '@components/Dashboard';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ProtectedRoute plan={['free', 'standard', 'plus', 'premium']}>
-      <div className="flex min-h-screen overflow-x-hidden bg-slate-100/80">
-        <Dashboard />
-        {children}
-      </div>
-    </ProtectedRoute>
+    // @ts-ignore
+    // <ProtectedRoute plan={["free", "standard", "plus", "premium"]}>
+    <div className="flex min-h-screen overflow-x-hidden bg-slate-100/80">
+      <Dashboard />
+      <div className="mt-20 w-full">{children}</div>
+    </div>
+    // </ProtectedRoute>
   );
 };
 

@@ -9,10 +9,10 @@ export const productsList = [
       'Reviewalyzer instantly analyzes product reviews using advanced NLP. It delivers an easy to grasp summary highlighting key themes, so you can make informed purchase decisions fast.',
   },
   {
-    name: 'Analytics',
-    link: '/dashboard/analytics',
+    name: 'Local Ranking',
+    link: '/dashboard/maps',
     icon: FcPositiveDynamic,
-    description: 'Coming soon...',
+    description: 'Compare your business SEO and advertising performance with your competitors.',
   },
 ];
 

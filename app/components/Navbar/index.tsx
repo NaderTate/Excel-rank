@@ -18,7 +18,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="flex justify-between items-center bg-tra text-gray-600 right-0 fixed w-full shadow-lg bg-white/90 dark:shadow-slate-800 z-10  dark:bg-gray-900 h-16 lg:h-20">
+    <nav className="flex justify-between items-center bg-tra text-gray-600 right-0 fixed w-full shadow-lg bg-white/90 dark:shadow-slate-800 z-10  dark:bg-gray-900 h-14 ">
       <div className="py-2 sm:py-1 px-2 md:px-5 lg:px-8 sm:p-8flex itmes-center ">
         <Link href="/" className="flex items-center justify-center">
           <Image
