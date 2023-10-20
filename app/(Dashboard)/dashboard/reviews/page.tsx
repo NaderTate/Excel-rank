@@ -25,9 +25,9 @@ export default function Page() {
     const yelpData = await biz.json();
     setInfo(yelpData);
     console.log(yelpData);
-    const res = await fetch("/api/review", {
-      method: "POST",
-      body: JSON.stringify({ link: url }),
+    const res = await fetch('/api/review', {
+      method: 'POST',
+      body: JSON.stringify({ link: url, yelp: yelpData }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -91,8 +91,7 @@ export default function Page() {
                 {info.name}
               </h1>
               <p className="text-gray-500 text-center">
-                {info.location?.address1} | {info.location?.city} |{" "}
-                {info.location?.country}
+                {info.location?.address1} | {info.location?.city} | {info.location?.country}
               </p>
             </div>
             {info.image && (
@@ -106,32 +105,6 @@ export default function Page() {
             )}
           </motion.div>
         )}
-        {loading && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="w-full grid grid-cols-1 lg:grid-cols-6 gap-3 text-slate-100"
-          >
-            <div className="col-span-1 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-5 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-            <div className="col-span-1 lg:col-span-2 w-full h-full border-slate-200/40 p-2">
-              <SkeletonLoad />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <AnimatePresence>
         {review && (
           <div>
             <motion.h2
