@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 function CircleSocials() {
   const { ref, inView } = useInView({
-    threshold: 0,
+    threshold: 1,
     triggerOnce: true,
   });
   const Images: Array<string> = [
@@ -20,9 +20,7 @@ function CircleSocials() {
   ];
 
   // take the array of images and get the absolute x and y coordinates for each image so that they form a circle
-  // the circle should be centered in the middle of the div
   // the images should be spaced evenly around the circle
-  // the images should be rotated so that they are evenly spaced around the circle
   const getCoordinates = (images: Array<string>) => {
     const coordinates_: {}[] = [];
     const radius = 160;
@@ -35,13 +33,13 @@ function CircleSocials() {
     }
     return coordinates_;
   };
-  const [coordinates, setCoordinates] = useState<{}[] | undefined>([]);
+  const [coordinates, setCoordinates] = useState<{}[]>([]);
   useEffect(() => {
     setCoordinates(getCoordinates(Images));
   }, []);
   return (
     <div ref={ref}>
-      {inView && (
+      {/* {inView && (
         <AnimatePresence mode="wait">
           <motion.div className="bg-white w-[486px] m-auto h-[486px] rounded-full relative shadow-xl">
             <motion.img
@@ -85,6 +83,29 @@ function CircleSocials() {
             </motion.div>
           </motion.div>
         </AnimatePresence>
+      )} */}
+      {inView && (
+        <div
+          className={`bg-white w-[486px] m-auto h-[486px] rounded-full relative shadow-xl ${
+            inView ? " opacity-100" : " opacity-0"
+          } transition-opacity duration-300 `}
+        >
+          <div className="flex justify-center items-center h-full imgContainer">
+            {coordinates?.map((coordinate: any, i: number) => (
+              <img
+                key={coordinate.url}
+                className={`absolute w-[65px] `}
+                style={{ left: coordinate.x, top: coordinate.y }}
+                src={coordinate.url}
+              />
+            ))}
+            <img
+              src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/image_42_e131zo.svg"
+              alt=""
+              className="absolute w-[65px] top-0 left-0 right-0 bottom-0 m-auto"
+            />
+          </div>
+        </div>
       )}
     </div>
   );

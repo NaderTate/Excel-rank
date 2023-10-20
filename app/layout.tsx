@@ -1,12 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Bebas_Neue } from "next/font/google";
+import { Nunito } from "next/font/google";
 import SessionProv from "@components/auth/SessionProv";
 import Navbar from "@components/Navbar";
 
-const bebas = Bebas_Neue({
+const nunito = Nunito({
   subsets: ["latin", "latin-ext"],
-  weight: ["400"],
+  weight: ["600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={bebas.className}>
+      <body className={nunito.className}>
         <SessionProv session={session}>
           <Navbar />
           {children}
