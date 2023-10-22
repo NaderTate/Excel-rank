@@ -1,7 +1,7 @@
 "use client";
 import { useLoadScript } from "@react-google-maps/api";
 import Map from "../../../components/Map";
-function page() {
+function Page() {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     libraries: ["places"],
@@ -9,4 +9,4 @@ function page() {
   return <div>{isLoaded ? <Map /> : <div>Loading...</div>}</div>;
 }
 
-export default page;
+export default Page;

@@ -90,7 +90,7 @@ function CircleSocials() {
             inView ? " opacity-100" : " opacity-0"
           } transition-opacity duration-300 `}
         >
-          <div className="flex justify-center items-center h-full imgContainer">
+          <div className="flex justify-center items-center h-full imgContainer ">
             {coordinates?.map((coordinate: any, i: number) => (
               <img
                 key={coordinate.url}

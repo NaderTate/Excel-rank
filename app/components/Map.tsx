@@ -222,7 +222,7 @@ function Map() {
       {place && id && results.length == 0 && (
         <div className="m-28 p-10 border-teal-300 border rounded-md">
           <h1 className="text-3xl">
-            Type some keywords separated by comma (",")
+            Type some keywords separated by comma (&quot;,&quot;)
           </h1>
           <div className="flex justify-center">
             <input
