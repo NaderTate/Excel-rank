@@ -86,7 +86,7 @@ function CircleSocials() {
       )} */}
       {inView && (
         <div
-          className={`bg-white w-[486px] m-auto h-[486px] rounded-full relative shadow-xl ${
+          className={`bg-white max-w-[486px] m-auto max-h-[486px] rounded-full relative shadow-xl ${
             inView ? " opacity-100" : " opacity-0"
           } transition-opacity duration-300 `}
         >
@@ -94,7 +94,7 @@ function CircleSocials() {
             {coordinates?.map((coordinate: any, i: number) => (
               <img
                 key={coordinate.url}
-                className={`absolute w-[65px] `}
+                className={`absolute w-[65px] hover:rotate-[180] transition-transform duration-500 hover:scale-105`}
                 style={{ left: coordinate.x, top: coordinate.y }}
                 src={coordinate.url}
               />

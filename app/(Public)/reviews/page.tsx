@@ -24,9 +24,9 @@ function Page() {
         Something will be here...
       </div>
       <div className="space-y-[175px] min-h-[486px]">
-        <div ref={ref} className="min-h-[300px]">
+        {/* <div ref={ref} className="min-h-[300px]">
           {inview && (
-            <div className="grid grid-cols-2 items-center">
+            <div className="flex flex-col items-center">
               <div className="text-[36px]">
                 <GPT_Type_Effect text={text} />
               </div>
@@ -35,7 +35,7 @@ function Page() {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
 
         <LandingPageAnimatedSection data={reviewsLandingPageItems} />
       </div>

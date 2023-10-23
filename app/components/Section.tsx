@@ -23,23 +23,21 @@ const Section = ({
   }, [inView]);
 
   return (
-    <div ref={ref} className="min-h-[345px]">
+    <div ref={ref} className="lg:min-h-[345px] min-h-[100px]">
       {inview && (
         <div
-          className={`flex items-center justify-between ${
-            i % 2 == 0 && " flex-row-reverse"
+          className={`flex flex-col items-center xl:flex-row gap-10 justify-between ${
+            i % 2 == 0 && "xl:flex-row-reverse"
           }`}
         >
-          <div className={`text-[36px] font-semibold ${i % 2 == 0 && " flex"}`}>
-            <span
-              className={`m-auto mr-0 text-[36px] w-[552px] whitespace-pre-line `}
-            >
+          <div className={` font-semibold ${i % 2 == 0 && " flex"}`}>
+            <span className={`m-auto mr-0  `}>
               <GPT_Type_Effect text={text} />
             </span>
           </div>
           <img
             src={img}
-            className="rounded-[40px]  shadow-lg landingImg min-h-[345px]"
+            className="rounded-[40px]  shadow-lg landingImg "
             alt=""
           />
         </div>
