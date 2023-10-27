@@ -44,7 +44,6 @@ export default function RootLayout({
         ></Script>
         <SessionProv session={session}>
           <Navbar />
-
           {children}
         </SessionProv>
       </body>

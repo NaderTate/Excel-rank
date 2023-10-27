@@ -2,7 +2,6 @@
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook, FaDiscord } from "react-icons/fa";
-import FBInit from "@/lib/FBInit";
 
 const GoogleSignIn = () => {
   const sharedClasses =
@@ -39,7 +38,6 @@ const GoogleSignIn = () => {
         >
           <FaDiscord />
         </button>
-        <FBInit />
       </div>
     </div>
   );
