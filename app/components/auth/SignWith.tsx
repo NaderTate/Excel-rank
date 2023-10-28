@@ -12,13 +12,13 @@ const GoogleSignIn = () => {
       </p>
       <div className="flex gap-4 items-center justify-center p-6 transition">
         <button
-          onClick={() => signIn('google', { callbackUrl: '/' })}
+          onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
           className={' border-red-600 border google-btn hover:bg-red-600' + sharedClasses}
         >
           <FcGoogle />
         </button>
         <button
-          onClick={() => signIn('facebook', { callbackUrl: '/' })}
+          onClick={() => signIn('facebook', { callbackUrl: '/dashboard' })}
           className={
             'text-blue-700 hover:text-white hover:bg-blue-600 border-blue-600' + sharedClasses
           }
@@ -26,7 +26,7 @@ const GoogleSignIn = () => {
           <FaFacebook />
         </button>
         <button
-          onClick={() => signIn('discord', { callbackUrl: '/' })}
+          onClick={() => signIn('discord', { callbackUrl: '/dashboard' })}
           className={
             'text-indigo-500 hover:text-white hover:bg-indigo-500 border-indigo-500' + sharedClasses
           }
