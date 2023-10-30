@@ -16,7 +16,7 @@ export default function Dashboard() {
         }`}
       ></div>
       <div
-        className={` fixed top-0 left-0 flex h-screen flex-col justify-between border-e bg-white pt-20 transition-all duration-300 ${
+        className={` fixed top-0 left-0 flex h-screen flex-col justify-between border-e bg-white pt-20 transition-all duration-300 z-10 ${
           isOpened ? 'w-16' : 'w-0 opacity-0 -translate-x-28'
         }`}
       >
@@ -57,7 +57,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-[20px] left-0 w-12 rounded-r-full bg-gray-100/70">
+      <div className="fixed bottom-[20px] left-0 w-12 rounded-r-full bg-gray-100/70 z-50">
         <button
           onClick={() => setIsOpened(!isOpened)}
           className="w-full h-10 flex justify-center items-center rounded-r-full"

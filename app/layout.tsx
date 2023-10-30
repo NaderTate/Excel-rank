@@ -1,13 +1,13 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import SessionProv from "@components/auth/SessionProv";
 import Navbar from "@components/Navbar";
 import Script from "next/script";
 
-const nunito = Nunito({
+const quick = Quicksand({
   subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={nunito.className}>
+      <body className={quick.className}>
         <div id="fb-root"></div>
         <Script
           async
