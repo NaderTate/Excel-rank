@@ -30,7 +30,7 @@ const Section = ({
             i % 2 == 0 && "xl:flex-row-reverse"
           }`}
         >
-          <div className={` font-semibold ${i % 2 == 0 && " flex"}`}>
+          <div className={` ${i % 2 == 0 && " flex"} xl:max-w-[50vw]`}>
             <span className={`m-auto mr-0  `}>
               <GPT_Type_Effect text={text} />
             </span>

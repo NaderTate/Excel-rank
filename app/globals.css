@@ -107,37 +107,37 @@
   height: 100vh;
 }
 
-/* Animate the page content separatly */
-.mains {
-  view-transition-name: mains;
+.exit-left {
+  view-transition-name: exit-left;
+}
+.exit-right {
+  view-transition-name: exit-right;
 }
 
-::view-transition-old(mains) {
+::view-transition-old(exit-left) {
   animation: slide-left 0.5s ease-in-out 1 forwards;
 }
-
-::view-transition-new(mains) {
-  animation: slide-left2 0.5s ease-in-out 1 forwards;
+::view-transition-old(exit-right) {
+  animation: slide-right 0.5s ease-in-out 1 forwards;
 }
 
-/* ::view-transition-old(page-header) {
-  animation: hide 1s ease-in-out 1 forwards;
+@keyframes slide-right {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
 }
-
-::view-transition-new(page-header) {
-  animation: slide-right 2s ease-in-out 1 forwards;
+@keyframes slide-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
-
-::view-transition-old(page-content) {
-  animation: hide 1s ease-in-out 1 forwards;
-}
-
-::view-transition-new(page-content) {
-  animation: slide-left 2.5s ease-in-out 1 forwards;
-} */
-
-/* First Animation */
-
 @keyframes fade-and-scale-in {
   from {
     transform: rotate(180deg);
@@ -213,4 +213,21 @@
   100% {
     opacity: 0;
   }
+}
+.navItem {
+  display: inline-block;
+  padding-bottom: 2px;
+  background-image: linear-gradient(
+    hsl(var(--muted-foreground)),
+    hsl(var(--muted-foreground))
+  );
+  background-position: 0 100%; /*OR bottom left*/
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s, background-position 0s 0.3s; /*change after the size immediately*/
+}
+
+.navItem:hover {
+  background-position: 100% 100%; /*OR bottom right*/
+  background-size: 100% 2px;
 }

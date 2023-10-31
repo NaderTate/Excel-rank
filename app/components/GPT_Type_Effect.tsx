@@ -24,7 +24,7 @@ function GPT_Type_Effect({
   }, []);
   return (
     <div>
-      <h1 className="whitespace-pre-line text-lg sm:text-2xl lg:text-3xl xl:text-4xl text-center xl:text-start ">
+      <h1 className="whitespace-pre-line text-lg sm:text-2xl lg:text-3xl xl:text-4xl text-center xl:text-start font-semibold">
         {displayText}{" "}
         {!completedTyping && (
           <svg

@@ -1,9 +1,9 @@
-'use client';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { FcNext, FcSettings } from 'react-icons/fc';
-import {productsList} from '@/lib/data';
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { FcHome, FcNext } from "react-icons/fc";
+import { productsList } from "@/lib/data";
 
 export default function Dashboard() {
   const pathname = usePathname();
@@ -12,12 +12,12 @@ export default function Dashboard() {
     <>
       <div
         className={` transition-all duration-300 ${
-          isOpened ? 'w-16' : 'w-0 opacity-0 -translate-x-28'
+          isOpened ? "w-16" : "w-0 opacity-0 -translate-x-28"
         }`}
       ></div>
       <div
         className={` fixed top-0 left-0 flex h-screen flex-col justify-between border-e bg-white pt-20 transition-all duration-300 z-10 ${
-          isOpened ? 'w-16' : 'w-0 opacity-0 -translate-x-28'
+          isOpened ? "w-16" : "w-0 opacity-0 -translate-x-28"
         }`}
       >
         <div>
@@ -27,29 +27,29 @@ export default function Dashboard() {
                 <Link
                   href="/dashboard"
                   className={`t group relative flex justify-center rounded  px-2 py-1.5 text-blue-700 ${
-                    pathname === '/dashboard' && 'bg-blue-100/60'
+                    pathname === "/dashboard" && "bg-blue-100/60"
                   }`}
                 >
-                  <FcSettings className="h-5 w-5 opacity-75" />
+                  <FcHome className="h-5 w-5 opacity-75" />
                   <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
-                    General
+                    Main dashboard
                   </span>
                 </Link>
               </div>
               <ul className="space-y-1 sm:space-y-5 border-t border-gray-100 pt-4">
                 {productsList.map((link) => (
-                  <li key={link.link + 'dashboardLink'}>
-                    <Link
+                  <li key={link.link + "dashboardLink"}>
+                    <a
                       href={link.link}
                       className={`group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
-                        pathname === link.link && 'bg-blue-100/60'
+                        pathname === link.link && "bg-blue-100/60"
                       }`}
                     >
                       <link.icon className="h-5 w-5 opacity-75" />
                       <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
                         {link.name}
                       </span>
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -64,7 +64,7 @@ export default function Dashboard() {
         >
           <FcNext
             className={`h-5 w-5 opacity-75 transition-all duration-300 transform ${
-              isOpened ? '-rotate-180' : ''
+              isOpened ? "-rotate-180" : ""
             }`}
           />
         </button>

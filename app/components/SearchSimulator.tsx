@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiFillGoogleCircle, AiOutlineCheck } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaTabletAlt } from "react-icons/fa";
@@ -58,20 +58,25 @@ function SearchSimulator() {
       });
   }, []);
   return (
-    <div>
+    <div className="mt-24 max-w-xl m-auto">
+      <h1 className="text-lg text-center font-bold">Google Search Simulator</h1>
+      <p className="text-center text-lg font-semibold">
+        Google search simulator is a tool that helps you check your site and
+        google ads SEO performance in any country in the world
+      </p>
       <Input
         placeholder="Type your keywords..."
         className="my-5"
         onChange={(e) => setSearchWords(e.target.value)}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 justify-center gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-10">
         <Popover open={openCountry} modal onOpenChange={setOpenCountry}>
           <PopoverTrigger asChild>
             <Button
               variant="outline"
               role="combobox"
               aria-expanded={openCountry}
-              className="w-[200px] justify-between"
+              className="w-[200px]  m-auto"
             >
               {selectedCountry
                 ? allCountries.find(
@@ -116,7 +121,7 @@ function SearchSimulator() {
               variant="outline"
               role="combobox"
               aria-expanded={openState}
-              className="w-[200px] justify-between"
+              className="w-[200px]  m-auto"
             >
               {selectedState
                 ? allStates?.find((state) => state === selectedState)
@@ -158,7 +163,7 @@ function SearchSimulator() {
               variant="outline"
               role="combobox"
               aria-expanded={openCity}
-              className="w-[200px] justify-between"
+              className="w-[200px]  m-auto"
             >
               {selectedCity
                 ? allCities?.find((city) => city === selectedCity)
@@ -200,7 +205,7 @@ function SearchSimulator() {
               variant="outline"
               role="combobox"
               aria-expanded={openLanguage}
-              className="w-[200px] justify-between"
+              className="w-[200px]  m-auto"
             >
               {languages?.find(
                 (language) => language.symbol === selectedLanguage
@@ -244,7 +249,7 @@ function SearchSimulator() {
               variant="outline"
               role="combobox"
               aria-expanded={openDomain}
-              className="w-[200px] justify-between"
+              className="w-[200px]  m-auto"
             >
               {googleDomains?.find((domain) => domain === selectedDomain)
                 ? selectedDomain
@@ -278,7 +283,7 @@ function SearchSimulator() {
             </Command>
           </PopoverContent>
         </Popover>
-        <div className="items-center flex space-x-2">
+        <div className="items-center flex space-x-2  m-auto">
           <Checkbox
             id="safeSearch"
             onClick={(e) => setSafeSearch(!safeSearch)}
@@ -323,7 +328,7 @@ function SearchSimulator() {
           }`}
         />
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-2">
         <Button
           className="text-lg my-5"
           disabled={!searchWords}
@@ -351,7 +356,8 @@ function SearchSimulator() {
             );
           }}
         >
-          Search <MdOpenInNew className="ml-2" />
+          <AiFillGoogleCircle size={20} className="mr-2" /> Search
+          <MdOpenInNew className="ml-2" />
         </Button>
       </div>
     </div>

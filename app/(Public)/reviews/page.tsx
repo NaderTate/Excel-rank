@@ -24,18 +24,18 @@ function Page() {
         Something will be here...
       </div>
       <div className="space-y-[175px] min-h-[486px]">
-        {/* <div ref={ref} className="min-h-[300px]">
+        <div ref={ref} className="min-h-[300px]">
           {inview && (
-            <div className="flex flex-col items-center">
-              <div className="text-[36px]">
+            <div className="flex flex-col lg:flex-row items-center">
+              <div className="">
                 <GPT_Type_Effect text={text} />
               </div>
-              <div className="m-auto mr-0 min-h-[486px]">
+              <div className="m-auto lg:mr-0 min-h-[486px]">
                 <CircleSocials />
               </div>
             </div>
           )}
-        </div> */}
+        </div>
 
         <LandingPageAnimatedSection data={reviewsLandingPageItems} />
       </div>

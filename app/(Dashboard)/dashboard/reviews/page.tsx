@@ -24,16 +24,14 @@ export default function Page() {
     });
     const yelpData = await biz.json();
     setInfo(yelpData);
-    console.log(yelpData);
-    const res = await fetch('/api/review', {
-      method: 'POST',
+    const res = await fetch("/api/review", {
+      method: "POST",
       body: JSON.stringify({ link: url, yelp: yelpData }),
       headers: {
         "Content-Type": "application/json",
       },
     });
     const data = await res.json();
-    console.log(data);
     setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
     setLoading(false);
   };
@@ -71,7 +69,7 @@ export default function Page() {
           <button
             onClick={handleGetReviews}
             type="button"
-            className="absolute gradient_bg right-0 m-1 rounded-full w-20 py-2 text-gray-200 hover:text-white transition"
+            className="absolute gradient_bg right-0 m-1 rounded-full w-fit px-5 font-bold py-2 text-gray-200 hover:text-white transition"
           >
             Get Reviews
           </button>
@@ -80,6 +78,7 @@ export default function Page() {
       <AnimatePresence>
         {info && (
           <motion.div
+            key={"info"}
             variants={itemVariants}
             initial="hidden"
             animate="visible"
@@ -91,7 +90,8 @@ export default function Page() {
                 {info.name}
               </h1>
               <p className="text-gray-500 text-center">
-                {info.location?.address1} | {info.location?.city} | {info.location?.country}
+                {info.location?.address1} | {info.location?.city} |{" "}
+                {info.location?.country}
               </p>
             </div>
             {info.image && (
@@ -108,6 +108,7 @@ export default function Page() {
         {review && (
           <div>
             <motion.h2
+              key={"results"}
               variants={itemVariants}
               className="text-2xl text-gray-900 py-2 text-center"
             >
@@ -115,6 +116,7 @@ export default function Page() {
             </motion.h2>
             {review.FinalReview && (
               <motion.ul
+                key={"list"}
                 variants={listItemContainerVariant}
                 initial="hidden"
                 animate="visible"

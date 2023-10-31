@@ -5,10 +5,6 @@ import { useInView } from "react-intersection-observer";
 import { useEffect, useRef, useState } from "react";
 
 function CircleSocials() {
-  const { ref, inView } = useInView({
-    threshold: 1,
-    triggerOnce: true,
-  });
   const Images: Array<string> = [
     "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_50_xzekzy.svg",
     "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_44_khna8j.svg",
@@ -38,7 +34,7 @@ function CircleSocials() {
     setCoordinates(getCoordinates(Images));
   }, []);
   return (
-    <div ref={ref}>
+    <div>
       {/* {inView && (
         <AnimatePresence mode="wait">
           <motion.div className="bg-white w-[486px] m-auto h-[486px] rounded-full relative shadow-xl">
@@ -84,29 +80,27 @@ function CircleSocials() {
           </motion.div>
         </AnimatePresence>
       )} */}
-      {inView && (
-        <div
-          className={`bg-white max-w-[486px] m-auto max-h-[486px] rounded-full relative shadow-xl ${
-            inView ? " opacity-100" : " opacity-0"
-          } transition-opacity duration-300 `}
-        >
-          <div className="flex justify-center items-center h-full imgContainer ">
-            {coordinates?.map((coordinate: any, i: number) => (
-              <img
-                key={coordinate.url}
-                className={`absolute w-[65px] hover:rotate-[180] transition-transform duration-500 hover:scale-105`}
-                style={{ left: coordinate.x, top: coordinate.y }}
-                src={coordinate.url}
-              />
-            ))}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className={`bg-white m-auto h-[485px] w-[485px] rounded-full relative shadow-xl transition-opacity duration-300 `}
+      >
+        <div className="flex justify-center items-center h-full imgContainer ">
+          {coordinates?.map((coordinate: any, i: number) => (
             <img
-              src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/image_42_e131zo.svg"
-              alt=""
-              className="absolute w-[65px] top-0 left-0 right-0 bottom-0 m-auto"
+              key={coordinate.url}
+              className={`absolute w-[65px] hover:rotate-[180] transition-transform duration-500 hover:scale-105`}
+              style={{ left: coordinate.x, top: coordinate.y }}
+              src={coordinate.url}
             />
-          </div>
+          ))}
+          <img
+            src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/image_42_e131zo.svg"
+            alt=""
+            className="absolute w-[65px] top-0 left-0 right-0 bottom-0 m-auto"
+          />
         </div>
-      )}
+      </motion.div>
     </div>
   );
 }

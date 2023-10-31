@@ -1,37 +1,45 @@
-import { FcCollaboration, FcPositiveDynamic } from "react-icons/fc";
+import { FcComments, FcPositiveDynamic, FcShare } from "react-icons/fc";
 
 export const productsList = [
   {
-    name: "Reviews",
+    name: "Review Manager",
     link: "/dashboard/reviews",
-    icon: FcCollaboration,
+    icon: FcComments,
     description:
       "Reviewalyzer instantly analyzes product reviews using advanced NLP. It delivers an easy to grasp summary highlighting key themes, so you can make informed purchase decisions fast.",
   },
   {
-    name: "Analytics",
-    link: "/dashboard/analytics",
+    name: "Local Ranking",
+    link: "/dashboard/localranking",
     icon: FcPositiveDynamic,
-    description: "Coming soon...",
+    description:
+      "Compare your business SEO and advertising performance with your competitors.",
+  },
+  {
+    name: "Social Monitoring",
+    link: "/dashboard/socialmonitor",
+    icon: FcShare,
+    description:
+      "Track your social media performance and analyze your customers’ feedback.",
   },
 ];
 
 export const navItems = [
   {
-    name: "Plans",
-    url: "/plans",
+    name: "Review Manager",
+    url: "/reviews",
   },
   {
-    name: "Products",
-    url: "/products",
+    name: "Local Ranking",
+    url: "/localranking",
   },
   {
-    name: "About",
-    url: "/about",
+    name: "Social Monitoring",
+    url: "/socialmonitor",
   },
   {
-    name: "Contact",
-    url: "/contact",
+    name: "pricing",
+    url: "/pricing",
   },
 ];
 

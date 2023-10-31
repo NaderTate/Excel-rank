@@ -11,7 +11,6 @@ function page() {
           scelerisque justo.
         </p>
       </div>
-      <CircleSocials />
     </div>
   );
 }
