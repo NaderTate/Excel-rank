@@ -2,6 +2,7 @@
 import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
 import GPT_Type_Effect from "./GPT_Type_Effect";
+import Image from "next/image";
 
 const Section = ({
   text,
@@ -35,9 +36,12 @@ const Section = ({
               <GPT_Type_Effect text={text} />
             </span>
           </div>
-          <img
+          <Image
+            priority
+            width={600}
+            height={600}
             src={img}
-            className="rounded-[40px]  shadow-lg landingImg "
+            className="rounded-[40px]  shadow-lg landingImg object-contain"
             alt=""
           />
         </div>

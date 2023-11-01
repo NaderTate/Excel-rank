@@ -57,7 +57,7 @@ export default function Page() {
     <div className="flex flex-col w-full gap-3 p-2 md:p-8">
       <div className="flex flex-col gap-3 ">
         <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-          GET REVIEWS FROM CUSTOMERS
+          Analyze your customers reviews
         </h2>
         <div className="relative w-full items-center flex">
           <input

@@ -103,8 +103,8 @@ export const localRankingLandinPageItems = [
     text: "See your position on the map, compare it with your competitors, and discover new opportunities to grow your audience.",
   },
   {
-    img: "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697824712/image_57_c5wvgc.svg",
-    text: "See how your business ranks \n among your competitors in different areas. \n Discover your strengths and weaknesses, \n and find new ways to grow",
+    img: "https://res.cloudinary.com/dqkyatgoy/image/upload/v1698829470/competitors_ranking_nvvve9.svg",
+    text: "See how your business ranks \n among your competitors in different areas. \n Discover your strengths and weaknesses, and find new ways to grow",
   },
   {
     img: "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697823180/Frame_3_fbgimg.svg",
@@ -126,7 +126,7 @@ export const socialMonitoringLandingPageItems = [
     text: "Analyze social media comments in seconds. \n Discover the themes, sentiments, and topics of your customers’ feedback.",
   },
   {
-    img: "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697908664/competitors_auavtl.svg  ",
+    img: "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697908664/competitors_auavtl.svg",
     text: "Keeping track of your social media ranking among your competitors is crucial for your business success. \n See how you compare with others in your industry. ",
   },
   {

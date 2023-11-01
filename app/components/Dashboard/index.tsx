@@ -39,17 +39,31 @@ export default function Dashboard() {
               <ul className="space-y-1 sm:space-y-5 border-t border-gray-100 pt-4">
                 {productsList.map((link) => (
                   <li key={link.link + "dashboardLink"}>
-                    <a
-                      href={link.link}
-                      className={`group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
-                        pathname === link.link && "bg-blue-100/60"
-                      }`}
-                    >
-                      <link.icon className="h-5 w-5 opacity-75" />
-                      <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
-                        {link.name}
-                      </span>
-                    </a>
+                    {link.name == "Social Monitoring" ? (
+                      <a
+                        href={link.link}
+                        className={`group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
+                          pathname === link.link && "bg-blue-100/60"
+                        }`}
+                      >
+                        <link.icon className="h-5 w-5 opacity-75" />
+                        <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
+                          {link.name}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={{ pathname: link.link }}
+                        className={`group relative flex justify-center rounded px-2 py-1.5 text-gray-500 hover:bg-gray-50 hover:text-gray-700 ${
+                          pathname === link.link && "bg-blue-100/60"
+                        }`}
+                      >
+                        <link.icon className="h-5 w-5 opacity-75" />
+                        <span className="absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white -translate-x-20 opacity-0 group-hover:opacity-100 group-hover:translate-x-0">
+                          {link.name}
+                        </span>
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

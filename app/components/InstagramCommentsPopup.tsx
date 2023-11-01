@@ -46,6 +46,9 @@ function InstagramCommentsPopup({
           <DialogTitle>Comments</DialogTitle>
         </DialogHeader>
         {!comments && <SkeletonLoad />}
+        {comments?.length === 0 && (
+          <h1 className="text-lg font-bold">No comments</h1>
+        )}
         {comments?.map((comment: any) => (
           <div
             key={comment.id}

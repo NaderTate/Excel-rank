@@ -6,6 +6,8 @@ import SearchSimulator from "@/app/components/SearchSimulator";
 
 function page() {
   const [content, setContent] = useState<"maps" | "search" | null>(null);
+
+  const buttonStyle = `rounded-md font-semibold px-4 py-2`;
   const Card = ({
     img,
     title,
@@ -23,7 +25,7 @@ function page() {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0, opacity: 0 }}
         transition={{ duration: 0.5, type: "spring" }}
-        className="flex flex-col items-center justify-center rounded-xl w-80 h-96 p-5 bg-gradient-to-tl from-fuchsia-400 via-sky-100 to-sky-400 transition-all cursor-pointer"
+        className={`flex flex-col items-center justify-center rounded-xl w-80 h-96 p-5 bg-gradient-to-tl from-fuchsia-400 via-sky-100 to-sky-400 transition-all cursor-pointer hover:shadow-xl`}
       >
         <img src={img} className=" rounded-full h-52 object-contain " />
         <h1 className="text-2xl font-bold ">{title}</h1>
@@ -31,11 +33,16 @@ function page() {
       </motion.div>
     );
   };
+
   return (
     <AnimatePresence mode="wait">
-      {content == null && (
-        <div className="h-screen flex flex-col justify-center items-center">
-          <h1 className="text-4xl text-center font-bold my-5 mt-16">
+      {content === null && (
+        <motion.div
+          exit={{ scale: 0, opacity: 0 }}
+          transition={{ duration: 0.5, type: "spring" }}
+          className="h-screen flex flex-col justify-center items-center"
+        >
+          <h1 className="text-4xl text-center font-bold my-5 ">
             Select a tool
           </h1>
           <div className="flex flex-col md:flex-row gap-5">
@@ -56,6 +63,35 @@ function page() {
               />
             </div>
           </div>
+        </motion.div>
+      )}
+
+      {content && (
+        <div key={"switch"} className="flex justify-center gap-5 mt-28">
+          <button
+            className={
+              content == "maps"
+                ? buttonStyle + " bg-blue-700 text-white"
+                : buttonStyle + " bg-white text-black"
+            }
+            onClick={() => {
+              setContent("maps");
+            }}
+          >
+            Maps Ranking
+          </button>
+          <button
+            className={
+              content == "search"
+                ? buttonStyle + " bg-blue-700 text-white"
+                : buttonStyle + " bg-white text-black"
+            }
+            onClick={() => {
+              setContent("search");
+            }}
+          >
+            Search Simulator
+          </button>
         </div>
       )}
       {content === "maps" && (
@@ -64,7 +100,7 @@ function page() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
-          transition={{ duration: 0.5, type: "spring" }}
+          transition={{ duration: 0.4, type: "spring" }}
         >
           <Main />
         </motion.div>
@@ -75,7 +111,7 @@ function page() {
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0, opacity: 0 }}
-          transition={{ duration: 0.5, type: "spring" }}
+          transition={{ duration: 0.4, type: "spring" }}
         >
           <SearchSimulator />
         </motion.div>

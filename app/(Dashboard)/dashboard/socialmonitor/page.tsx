@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import {
   getFacebookLoginStatus,
@@ -35,21 +35,6 @@ function Page() {
           setIsConnected(false);
         } else if (response.authResponse) {
           setIsConnected(true);
-          getUserPages().then((response) => {
-            console.log(response);
-            setUserPages(response.data);
-            if (response.data.length > 0) {
-              setCurrentPage(response.data[0].id);
-              setCurrentPageToken(response.data[0].access_token);
-              setShowPageData(true);
-              getFacebookPageData(
-                response.data[0].id,
-                response.data[0].access_token
-              ).then((data) => {
-                setPageData(data);
-              });
-            }
-          });
         } else {
           alert("Something went wrong");
           setIsConnected(false);
@@ -60,7 +45,23 @@ function Page() {
   }, []);
 
   // get the user pages after login
-  // useEffect(() => {}, [isConnected]);
+  useEffect(() => {
+    getUserPages().then((response) => {
+      console.log(response);
+      setUserPages(response.data);
+      if (response.data.length > 0) {
+        setCurrentPage(response.data[0].id);
+        setCurrentPageToken(response.data[0].access_token);
+        setShowPageData(true);
+        getFacebookPageData(
+          response.data[0].id,
+          response.data[0].access_token
+        ).then((data) => {
+          setPageData(data);
+        });
+      }
+    });
+  }, [isConnected]);
   async function login() {
     fbLogin().then(async (response) => {
       console.log(response);
@@ -85,7 +86,7 @@ function Page() {
     });
   }
   return (
-    <div className="pt-20 bg-[#18191a] text-white min-h-screen">
+    <div className=" bg-[#18191a] text-white min-h-screen">
       <div className="flex">
         <div className="h-full min-w-[320px]">
           <div className="h-screen overflow-auto  min-w-[320px] max-w-[340px] p-5 top-20 flex flex-col  fixed">
@@ -176,14 +177,25 @@ function Page() {
                       ) : (
                         <SkeletonLoad />
                       )}
-                      {userPages?.length === 0 && <p>No pages found</p>}
+                      {userPages?.length === 0 && (
+                        <p>
+                          No pages found. <br /> <br /> Make sure you selected
+                          your page during the login and that you have Facebook
+                          access to the page. <br /> <br /> Go to your page
+                          settings {">"} new pages experience and make sure your
+                          account is listed under{" "}
+                          <span className="font-bold">
+                            Poeple with Facebook access
+                          </span>
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
               ) : (
                 <button
                   onClick={login}
-                  className="bg-blue-800 text-white p-3 rounded-md my-2"
+                  className="bg-blue-800 text-white p-3 rounded-md my-2 font-semibold"
                 >
                   <BsFacebook className="inline" size={20} /> Connect your
                   Facebook

@@ -27,7 +27,7 @@ function Page() {
         <div ref={ref} className="min-h-[300px]">
           {inview && (
             <div className="flex flex-col lg:flex-row items-center">
-              <div className="">
+              <div className="xl:max-w-[50vw]">
                 <GPT_Type_Effect text={text} />
               </div>
               <div className="m-auto lg:mr-0 min-h-[486px]">
