@@ -1,30 +1,35 @@
-'use client';
-import React from 'react';
-import Image from 'next/image';
-import { FaLongArrowAltRight } from 'react-icons/fa';
-import Banner from '@components/Banner';
+"use client";
+import React from "react";
+import Image from "next/image";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import Banner from "@components/Banner";
+import Link from "next/link";
 
 const arrImages: Array<string> = [
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_50_xzekzy.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_44_khna8j.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_45_svjlh7.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/trustpilot-2_1_gwmrrd.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_43_llhgbm.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_39_imisc4.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733902/image_48_xpn6xr.svg',
-  'https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/image_42_e131zo.svg',
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_50_xzekzy.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_44_khna8j.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_45_svjlh7.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/trustpilot-2_1_gwmrrd.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_43_llhgbm.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733890/image_39_imisc4.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733902/image_48_xpn6xr.svg",
+  "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733892/image_42_e131zo.svg",
 ];
 
-const arrRankingFeatures: Array<string> = ['Rank your Online Presence', 'Rank your Google SEO', 'Rank your Google maps SEO'];
+const arrRankingFeatures: Array<string> = [
+  "Google SEO",
+  "Google Maps SEO",
+  "Competitors Analysis",
+];
 
 export default function Main() {
   return (
     <main className="w-full overflow-x-hidden ">
       <section className=" p-2 md:p-5 !pt-32 main_gradient min-h-screen w-full flex flex-col md:flex-row items-center ">
         <div className="flex flex-col md:flex-row ">
-          <div className=" max-w-3xl md:pl-28 flex flex-col gap-8">
+          <div className=" max-w-4xl md:pl-28 flex flex-col gap-8">
             <p className=" text-xl sm:text-3xl md:text-6xl text-white font-bold font-serif">
-              We help you <br /> grow your business <br />{' '}
+              Grow your presence, reputation and revenue
               <span className="relative block w-fit mt-4">
                 faster
                 <Image
@@ -38,20 +43,24 @@ export default function Main() {
               </span>
             </p>
             <p className="text-white text-sm md:text-lg mt-8 font-serif">
-              Excel Rank analytics platform teams use to stay focused on the goals, track engagement for report your business .
+              With AI, you can analyze and manage your reviews across all
+              platforms, <br /> Stay focused and save your time.
             </p>
             <div className="flex gap-4">
-              <button
+              <Link
+                href={{ pathname: "/reviews" }}
                 className="bg-white px-8 py-4 rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300
               "
               >
-                {' '}
                 See How It Works
-              </button>
-              <button className="text-white px-8 py-4 font-semibold rounded-md hover:text-[#00A8DB] hover:bg-white transition-colors duration-300">
+              </Link>
+              <Link
+                href={{ pathname: "/pricing" }}
+                className="text-white px-8 py-4 font-semibold rounded-md hover:text-[#00A8DB] hover:bg-white transition-colors duration-300"
+              >
                 Get A Free Demo
-                <FaLongArrowAltRight className="inline-block ml-2" />
-              </button>
+                <FaLongArrowAltRight className="inline-block ml-2 " />
+              </Link>
             </div>
           </div>
         </div>
@@ -87,50 +96,98 @@ export default function Main() {
             />
           </div>
           <div className="absolute !w-[700px]">
-            <Image src="/images/main/ring.svg" alt="group1" className="w-full drop-shadow-2xl" layout="responsive" width={600} height={600} />
+            <Image
+              src="/images/main/ring.svg"
+              alt="group1"
+              className="w-full drop-shadow-2xl"
+              layout="responsive"
+              width={600}
+              height={600}
+            />
           </div>
         </div>
       </section>
       <section>
         {/* infinit horizontal auto scroll loop for the images */}
         <div className="w-full flex flex-col items-center gap-8">
-          <h1 className="text-4xl font-bold text-center mt-20 gradient_text font-serif"> Drive Growth with Reviews on: </h1>
+          <h1 className="text-4xl font-bold text-center mt-20 gradient_text font-serif">
+            Analyze thousands of comments and reviews on:
+          </h1>
           <Banner images={arrImages} />
           <article className="w-full flex flex-col gap-10">
-            <div className="flex flex-col md:flex-row gap-5">
+            <div className="flex flex-col md:flex-row gap-5 items-center">
               <div className="p-2 md:p-16 md:w-1/2 lg:w-1/3">
-                <Image src="/images/main/Group 21.png" alt="group1" className="" layout="responsive" width={300} height={500} />
+                <Image
+                  src="/images/main/Group 21.png"
+                  alt="group1"
+                  className=""
+                  layout="responsive"
+                  width={300}
+                  height={500}
+                />
               </div>
               <div className="p-2 md:p-16 md:w-1/2 lg:w-2/3 max-w-3xl flex flex-col gap-5">
-                <p className="text-[#034D82] text-4xl font-bold font-serif">Measure Impressions and Reach Post</p>
-                <p className="text-[#90A3B4]">
-                  Graphs displaying your performance for metrics like follower evolution, average engagement rate per post and reach and impressions
-                  to give you the insights.
+                <p className="text-[#034D82] text-4xl font-bold font-serif">
+                  Measure your posts impressions and reach
                 </p>
-                <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition">
-                  Learn about graphs
-                  <FaLongArrowAltRight className="inline-block ml-2" />
+                <p className="text-[#566d81]">
+                  Track your performance for metrics like follower evolution,
+                  average engagement rate per post and reach and impressions
+                  accross all your social media platforms from one dashboard.
                 </p>
+                <div className="group">
+                  <Link href={{ pathname: "/socialmonitor" }}>
+                    <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition">
+                      Learn more
+                      <FaLongArrowAltRight className="inline-block ml-2 group-hover:translate-x-3 transition-transform" />
+                    </p>
+                  </Link>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-5">
+            <div className="flex flex-col md:flex-row gap-5 items-center">
               <div className="p-2 md:p-16 md:w-1/2  max-w-3xl flex flex-col gap-5">
-                <p className="text-[#034D82] text-4xl font-bold font-serif">Rank your Priorities </p>
-                <p className="text-[#90A3B4]">Publish your content ensuring that your content reaches the right people.</p>
+                <p className="text-[#034D82] text-4xl font-bold font-serif">
+                  Grow your local ranking
+                </p>
+                <p className="text-[#566d81]">
+                  See how your business ranks on Google Maps and who your top
+                  copmetitors are.
+                </p>
                 <ul className="gap-2 flex flex-col">
                   {arrRankingFeatures.map((feature, index) => (
-                    <li key={index} className="text-[#90A3B4]">
-                      <Image src="images/check.svg" alt="check" width={20} height={20} layout="fixed" className="inline-block mr-2" /> {feature}
+                    <li key={index} className="text-[#566d81]">
+                      <Image
+                        src="images/check.svg"
+                        alt="check"
+                        width={20}
+                        height={20}
+                        layout="fixed"
+                        className="inline-block mr-2"
+                      />{" "}
+                      {feature}
                     </li>
                   ))}
                 </ul>
-                <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition">
-                  Learn about Rankings
-                  <FaLongArrowAltRight className="inline-block ml-2" />
-                </p>
+                <div className="group">
+                  <Link
+                    href={{ pathname: "/localranking" }}
+                    className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition"
+                  >
+                    Learn More
+                    <FaLongArrowAltRight className="inline-block ml-2 group-hover:translate-x-3 transition-transform" />
+                  </Link>
+                </div>
               </div>
               <div className="p-2 md:pt-16 md:w-1/2 ">
-                <Image src="/images/main/Mackbook.png" alt="group1" className="" layout="responsive" width={400} height={500} />
+                <Image
+                  src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1699020724/map_jfogmg.svg"
+                  priority
+                  alt="group1"
+                  className="rounded-lg shadow-xl m-auto mr-10"
+                  width={500}
+                  height={500}
+                />
               </div>
             </div>
           </article>
@@ -138,7 +195,11 @@ export default function Main() {
       </section>
       <section className="w-full flex flex-col items-center gap-8 p-5 md:p-16">
         <article
-          style={{ backgroundImage: 'url("/images/main/rings.png")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right center' }}
+          style={{
+            backgroundImage: 'url("/images/main/rings.png")',
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "right center",
+          }}
           className="w-full flex p-5 flex-col md:flex-row justify-between items-center  gap-8 bg-[#00B8D9] rounded-lg "
         >
           <div className="text-white font-semibold text-2xl">
@@ -149,7 +210,7 @@ export default function Main() {
             className="bg-white px-8 py-4 h-fit rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300
               "
           >
-            Get your trails now
+            Get your free trial
           </button>
         </article>
       </section>
