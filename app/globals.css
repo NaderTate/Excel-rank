@@ -107,8 +107,8 @@
   height: 100vh;
 }
 
-.main_gradient{
-  background: linear-gradient(216deg, #6727EF 13.84%, #00DBCE 83.53%);
+.main_gradient {
+  background: linear-gradient(216deg, #6727ef 13.84%, #00dbce 83.53%);
 }
 
 .exit-left {
@@ -120,11 +120,11 @@
 
 ::view-transition-old(exit-left) {
   -webkit-animation: slide-left 0.5s ease-in-out 1 forwards;
-          animation: slide-left 0.5s ease-in-out 1 forwards;
+  animation: slide-left 0.5s ease-in-out 1 forwards;
 }
 ::view-transition-old(exit-right) {
   -webkit-animation: slide-right 0.5s ease-in-out 1 forwards;
-          animation: slide-right 0.5s ease-in-out 1 forwards;
+  animation: slide-right 0.5s ease-in-out 1 forwards;
 }
 
 @-webkit-keyframes slide-right {
@@ -216,51 +216,51 @@
 .imgContainer img {
   opacity: 0;
   -webkit-animation: fade-and-scale-in 1s ease-in-out 1 forwards;
-          animation: fade-and-scale-in 1s ease-in-out 1 forwards;
+  animation: fade-and-scale-in 1s ease-in-out 1 forwards;
 }
 
 .imgContainer img:nth-child(1) {
   -webkit-animation-delay: 0.3s;
-          animation-delay: 0.3s;
+  animation-delay: 0.3s;
 }
 .imgContainer img:nth-child(2) {
   -webkit-animation-delay: 0.6s;
-          animation-delay: 0.6s;
+  animation-delay: 0.6s;
 }
 .imgContainer img:nth-child(3) {
   -webkit-animation-delay: 0.9s;
-          animation-delay: 0.9s;
+  animation-delay: 0.9s;
 }
 .imgContainer img:nth-child(4) {
   -webkit-animation-delay: 1.2s;
-          animation-delay: 1.2s;
+  animation-delay: 1.2s;
 }
 .imgContainer img:nth-child(5) {
   -webkit-animation-delay: 1.5s;
-          animation-delay: 1.5s;
+  animation-delay: 1.5s;
 }
 .imgContainer img:nth-child(6) {
   -webkit-animation-delay: 1.8s;
-          animation-delay: 1.8s;
+  animation-delay: 1.8s;
 }
 .imgContainer img:nth-child(7) {
   -webkit-animation-delay: 2.1s;
-          animation-delay: 2.1s;
+  animation-delay: 2.1s;
 }
 .imgContainer img:nth-child(8) {
   -webkit-animation-delay: 2.4s;
-          animation-delay: 2.4s;
+  animation-delay: 2.4s;
 }
 
 .landingImg {
   -webkit-animation: riseFromBottom 0.8s;
-          animation: riseFromBottom 0.8s;
+  animation: riseFromBottom 0.8s;
 }
 .cursor {
   display: inline-block;
   width: 1ch;
   -webkit-animation: flicker 0.5s infinite;
-          animation: flicker 0.5s infinite;
+  animation: flicker 0.5s infinite;
   margin-bottom: 4px;
 }
 @-webkit-keyframes flicker {

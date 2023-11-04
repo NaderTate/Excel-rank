@@ -25,10 +25,10 @@ const arrRankingFeatures: Array<string> = [
 export default function Main() {
   return (
     <main className="w-full overflow-x-hidden ">
-      <section className=" p-2 md:p-5 !pt-32 main_gradient min-h-screen w-full flex flex-col md:flex-row items-center ">
+      <section className=" p-2 md:p-5 !pt-32 main_gradient md:min-h-screen w-full flex flex-col md:flex-row items-center ">
         <div className="flex flex-col md:flex-row ">
           <div className=" max-w-4xl md:pl-28 flex flex-col gap-8">
-            <p className=" text-xl sm:text-3xl md:text-6xl text-white font-bold font-serif">
+            <p className="text-xl sm:text-3xl md:text-6xl text-white font-bold font-serif">
               Grow your presence, reputation and revenue
               <span className="relative block w-fit mt-4">
                 faster
@@ -46,10 +46,10 @@ export default function Main() {
               With AI, you can analyze and manage your reviews across all
               platforms, <br /> Stay focused and save your time.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <Link
                 href={{ pathname: "/reviews" }}
-                className="bg-white px-8 py-4 rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300
+                className="bg-white px-8 py-4 rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300 w-fit
               "
               >
                 See How It Works
@@ -64,7 +64,7 @@ export default function Main() {
             </div>
           </div>
         </div>
-        <div className="relative w-1/4 self-start ">
+        <div className="relative w-1/4 self-start hidden md:block ">
           <div className="absolute top-[13vh] !w-[700px]">
             <Image
               src="/images/main/group1.png"
@@ -110,18 +110,18 @@ export default function Main() {
       <section>
         {/* infinit horizontal auto scroll loop for the images */}
         <div className="w-full flex flex-col items-center gap-8">
-          <h1 className="text-4xl font-bold text-center mt-20 gradient_text font-serif">
+          <h1 className="text-xl md:text-3xl font-bold text-center mt-20 gradient_text font-serif">
             Analyze thousands of comments and reviews on:
           </h1>
           <Banner images={arrImages} />
           <article className="w-full flex flex-col gap-10">
-            <div className="flex flex-col md:flex-row gap-5 items-center">
+            <div className="flex flex-col-reverse md:flex-row gap-5 items-center">
               <div className="p-2 md:p-16 md:w-1/2 lg:w-1/3">
                 <Image
                   src="/images/main/Group 21.png"
                   alt="group1"
                   className=""
-                  layout="responsive"
+                  // layout="responsive"
                   width={300}
                   height={500}
                 />

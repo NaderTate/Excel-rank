@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { AiOutlineLike } from "react-icons/ai";
-import { BsInstagram } from "react-icons/bs";
 import { BiAnalyse } from "react-icons/bi";
-import InstagramCommentsPopup from "./InstagramCommentsPopup";
+import InstagramCommentsPopup from "./CommentsPopup";
+import InsightsPopup from "./InsightsPopup";
 
 function InstagramPostCard({
   data,
@@ -25,18 +25,7 @@ function InstagramPostCard({
         />
       )}
       <div className=" grid grid-cols-3 gap-3 md:gap-5">
-        <Link
-          href={{ pathname: data.permalink }}
-          className="w-full"
-          target="_blank"
-        >
-          <button className="bg-blue-600 text-white rounded-md p-2 line-clamp-1 w-full flex items-center justify-center gap-2">
-            <div>
-              <BsInstagram className="inline" size={20} />
-            </div>
-            <span className="line-clamp-1">View on Instagram</span>
-          </button>
-        </Link>
+        <InsightsPopup pageToken={pageToken} postId={data.id} />
         <div className="flex justify-around bg-blue-600 text-white rounded-md p-2">
           <div className="flex items-center">
             {data.like_count} <AiOutlineLike />

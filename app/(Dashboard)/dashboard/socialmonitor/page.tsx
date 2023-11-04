@@ -13,8 +13,8 @@ import {
 } from "@/lib/FacebookSDK";
 import { FiLogOut } from "react-icons/fi";
 import SkeletonLoad from "@/app/components/SkeletonLoad";
-import FacebookPageData from "@/app/components/FacebookPageData";
-import InstagramPageData from "@/app/components/InstagramPageData";
+import FacebookPageData from "@/app/components/Facebook/PageData";
+import InstagramPageData from "@/app/components/Instagram/PageData";
 function Page() {
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,9 +28,12 @@ function Page() {
   );
 
   // Check if the user is connected to facebook
-  useLayoutEffect(() => {
-    initFacebookSdk().then(() => {
-      getFacebookLoginStatus().then((response: any) => {
+  useEffect(() => {
+    console.log("test");
+
+    getFacebookLoginStatus()
+      .then((response: any) => {
+        console.log({ response });
         if (response.authResponse == null) {
           setIsConnected(false);
         } else if (response.authResponse) {
@@ -39,9 +42,11 @@ function Page() {
           alert("Something went wrong");
           setIsConnected(false);
         }
+      })
+
+      .then(() => {
         setIsLoading(false);
       });
-    });
   }, []);
 
   // get the user pages after login

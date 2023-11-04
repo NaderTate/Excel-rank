@@ -1,9 +1,9 @@
 import React from "react";
-import SkeletonLoad from "./SkeletonLoad";
+import SkeletonLoad from "../SkeletonLoad";
 import Image from "next/image";
 import Link from "next/link";
 import { BiLinkAlt } from "react-icons/bi";
-import InstagramPostCard from "./InstagramPostCard";
+import InstagramPostCard from "./PostCard";
 
 function InstagramPageData({
   data,

@@ -1,4 +1,4 @@
-import CircleSocials from "../components/CircleSocials";
+import CircleSocials from "../components/LandingPages/CircleSocials";
 
 function page() {
   return (

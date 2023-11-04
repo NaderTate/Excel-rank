@@ -1,23 +1,23 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { GoChevronDown } from 'react-icons/go';
-import { signOut } from 'next-auth/react';
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { GoChevronDown } from "react-icons/go";
+import { signOut } from "next-auth/react";
 
 export default function DropDown({ user }: any) {
   const [isOpen, setIsOpen] = useState(false);
   // close the dropdown menu when user clicks outside of it
 
   const handleClickOutside = (event: any) => {
-    if (event.target.closest('#dropDown') === null) {
+    if (event.target.closest("#dropDown") === null) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   });
 
@@ -25,14 +25,14 @@ export default function DropDown({ user }: any) {
     <div className="relative" id="dropDown">
       <GoChevronDown
         className={`h-5 w-5 text-gray-400 group-hover:text-gray-500 ms-2 transition duration-300 rounded-md hover:bg-gray-100 ${
-          isOpen && 'rotate-180'
+          isOpen && "rotate-180"
         }`}
         aria-hidden="true"
         onClick={() => setIsOpen(!isOpen)}
       />
       <div
         className={`absolute top-[130%] right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-black ring-opacity-5 ${
-          isOpen ? 'block' : 'hidden'
+          isOpen ? "block" : "hidden"
         }`}
         role="menu"
         aria-orientation="vertical"
@@ -41,9 +41,20 @@ export default function DropDown({ user }: any) {
         <ul className="space-y-1">
           <li>
             <p className="text-xs rounded-lg px-4 py-2">
-              <strong className="block font-medium">{user.name.split(' ')[0]}</strong>
+              <strong className="block font-medium">
+                {user.name.split(" ")[0]}
+              </strong>
               <span> {user?.email}</span>
             </p>
+          </li>
+          <li>
+            <Link
+              href="/dashboard"
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-full cursor-pointer block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+            >
+              Dashboard
+            </Link>
           </li>
           <li>
             <a
@@ -73,15 +84,6 @@ export default function DropDown({ user }: any) {
                 </span>
               </summary>
               <ul className="mt-2 space-y-1 px-4 ">
-                <li>
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="w-full cursor-pointer block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                  >
-                    Dashboard
-                  </Link>
-                </li>
                 <li>
                   <button
                     type="button"

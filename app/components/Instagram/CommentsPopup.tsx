@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { BiComment } from "react-icons/bi";
-import SkeletonLoad from "./SkeletonLoad";
+import SkeletonLoad from "../SkeletonLoad";
 
 function InstagramCommentsPopup({
   postId,

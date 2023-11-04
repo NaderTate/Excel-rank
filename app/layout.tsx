@@ -41,7 +41,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=603592791842712"
           nonce="FeUOmNvb"
-        ></Script>
+        />
         <SessionProv session={session}>
           <Navbar />
           {children}
