@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { BiComment } from "react-icons/bi";
-import SkeletonLoad from "../SkeletonLoad";
+import SkeletonLoad from "../../SkeletonLoad";
 
-function InstagramCommentsPopup({
+function CommentsPopup({
   postId,
   pageToken,
   commentsCount,
@@ -25,12 +25,13 @@ function InstagramCommentsPopup({
   const getComments = () => {
     if (showComments) return;
     fetch(
-      `https://graph.facebook.com/v18.0/${postId}/comments?fields=from,text,timestamp&access_token=${pageToken}`
+      `https://graph.facebook.com/v18.0/${postId}/comments?access_token=${pageToken}`
     )
       .then((res) => res.json())
       .then((res) => {
         setComments(res.data);
         setShowComments(true);
+        console.log(res.data);
       });
   };
 
@@ -55,14 +56,12 @@ function InstagramCommentsPopup({
             className="border border-blue-300 rounded-md p-2 w-full"
           >
             <div className="flex items-center">
-              <h1 className="text-lg font-bold  mr-1">
-                {comment.from?.username}
-              </h1>
+              <h1 className="text-lg font-bold  mr-1">{comment.from?.name}</h1>
               <span className="text-sm text-gray-100">
-                ({new Date(comment.timestamp).toDateString()})
+                ({new Date(comment.created_time).toDateString()})
               </span>
             </div>
-            <h1 className="">{comment.text}</h1>
+            <h1 className="">{comment.message}</h1>
           </div>
         ))}
       </DialogContent>
@@ -70,4 +69,4 @@ function InstagramCommentsPopup({
   );
 }
 
-export default InstagramCommentsPopup;
+export default CommentsPopup;

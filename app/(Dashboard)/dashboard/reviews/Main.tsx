@@ -161,7 +161,9 @@ export default function Main() {
                     className="text-white h-3/5 flex items-center justify-center p-8 text-5xl text-center"
                   >
                     {review.OverAllRating}
-                    <HiStar className="text-4xl text-amber-300 mt-2" />
+                    <div>
+                      <HiStar className="text-4xl text-amber-300 mt-2" />
+                    </div>
                   </p>
                 </motion.li>
                 <motion.li

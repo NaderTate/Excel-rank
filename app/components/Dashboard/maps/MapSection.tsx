@@ -1,10 +1,10 @@
-'use client';
-import { useState, useMemo } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
-import MCard from './MCard';
-import { AnimatePresence, motion } from 'framer-motion';
-import { AiOutlineDoubleRight } from 'react-icons/ai';
-import { generateCircleLocations } from '@/lib/helpers';
+"use client";
+import { useState, useMemo } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import MCard from "./MCard";
+import { AnimatePresence, motion } from "framer-motion";
+import { AiOutlineDoubleRight } from "react-icons/ai";
+import { generateCircleLocations } from "@/lib/helpers";
 
 export default function MapSection({
   keywords,
@@ -17,30 +17,42 @@ export default function MapSection({
     suggestedKeywords: string[];
   };
 }) {
-  const [locationsWithRanking, setLocationsWithRanking] = useState<{ id: number; lat: number; lng: number; ranking: number }[]>([]);
+  const [locationsWithRanking, setLocationsWithRanking] = useState<
+    { id: number; lat: number; lng: number; ranking: number }[]
+  >([]);
   const [results, setResults] = useState<any[]>([]);
   const [closed, setClosed] = useState<Boolean>(false);
 
-  const center = useMemo<google.maps.LatLngLiteral>(() => ({ lat: placeData.position.lat, lng: placeData.position.lng }), [placeData.position]);
+  const center = useMemo<google.maps.LatLngLiteral>(
+    () => ({ lat: placeData.position.lat, lng: placeData.position.lng }),
+    [placeData.position]
+  );
   const options = useMemo<google.maps.MapOptions>(
     () => ({
-      mapId: 'cc93c8e2ede4cd81',
+      mapId: "cc93c8e2ede4cd81",
       disableDefaultUI: true,
       clickableIcons: false,
     }),
-    [],
+    []
   );
 
   const onMapLoad = (map: any) => {
     let request = {
       location: center,
       radius: 2000,
-      keyword: keywords.join(','),
-      fields: ['name', 'formatted_address', 'place_id', 'rating', 'icon', 'photos'],
+      keyword: keywords.join(","),
+      fields: [
+        "name",
+        "formatted_address",
+        "place_id",
+        "rating",
+        "icon",
+        "photos",
+      ],
     };
     const service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, (results, status) => {
-      if (status === 'OK') {
+      if (status === "OK") {
         setResults(results as any[]);
       }
     });
@@ -50,14 +62,24 @@ export default function MapSection({
       let req = {
         location: location,
         radius: 2000,
-        keyword: keywords.join(','),
-        fields: ['place_id'],
+        keyword: keywords.join(","),
+        fields: ["place_id"],
       };
       service.nearbySearch(req, (results: any, status) => {
-        if (status === 'OK') {
+        if (status === "OK") {
           // get the index of the place_id the equals id
-          const index = results.findIndex((result: any) => result.place_id === placeData.id);
-          setLocationsWithRanking((prev) => [...prev, { id: index, lat: location.lat, lng: location.lng, ranking: index + 1 }]);
+          const index = results.findIndex(
+            (result: any) => result.place_id === placeData.id
+          );
+          setLocationsWithRanking((prev) => [
+            ...prev,
+            {
+              id: index,
+              lat: location.lat,
+              lng: location.lng,
+              ranking: index + 1,
+            },
+          ]);
         }
       });
     });
@@ -71,14 +93,23 @@ export default function MapSection({
           onClick={() => setClosed(!closed)}
           className="flex items-center gap-2 text-sm font-bold uppercase text-gray-900 transition hover:bg-white"
         >
-          <AiOutlineDoubleRight className={`text-2xl transition ${!closed ? 'transform rotate-180' : ''}`} />
+          <AiOutlineDoubleRight
+            className={`text-2xl transition ${
+              !closed ? "transform rotate-180" : ""
+            }`}
+          />
         </button>
       </div>
       <AnimatePresence>
         {!closed && (
           <motion.div
             initial={{ opacity: 0, x: -10, width: 0 }}
-            animate={{ opacity: 1, x: 0, width: 'auto', transition: { duration: 0.3, ease: 'easeInOut' } }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              width: "auto",
+              transition: { duration: 0.3, ease: "easeInOut" },
+            }}
             exit={{ opacity: 0, x: -10, width: 0 }}
             className="absolute z-[1] top-0 pt-16 left-0 h-full  max-w-xl bg-white/80 flex flex-col overflow-hidden"
           >
@@ -87,7 +118,7 @@ export default function MapSection({
               <div className="flex flex-wrap p-2 gap-2 items-center ">
                 {keywords &&
                   keywords.map((word, index) => (
-                    <div key={index + 'keyword' + word} className=" text-xs ">
+                    <div key={index + "keyword" + word} className=" text-xs ">
                       {word}
                     </div>
                   ))}
@@ -95,14 +126,25 @@ export default function MapSection({
             </div>
             <motion.div className="flex flex-col gap-2 p-4 flex-1 overflow-scroll">
               {results.map((result, index) => (
-                <MCard key={index + 'result' + result.place_id} id={placeData.id} placeData={result} Rank={index + 1} />
+                <MCard
+                  key={index + "result" + result.place_id}
+                  id={placeData.id}
+                  placeData={result}
+                  Rank={index + 1}
+                />
               ))}
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
       <div className="w-full h-full rounded-xl overflow-hidden bg-white">
-        <GoogleMap onLoad={onMapLoad} zoom={14} center={center} mapContainerClassName="mapContainer" options={options}>
+        <GoogleMap
+          onLoad={onMapLoad}
+          zoom={14}
+          center={center}
+          mapContainerClassName="mapContainer"
+          options={options}
+        >
           <Marker position={center} />
           {locationsWithRanking &&
             locationsWithRanking.map(
@@ -116,7 +158,7 @@ export default function MapSection({
                   lng: number;
                   ranking: number;
                 },
-                i,
+                i
               ) => (
                 <Marker
                   key={i}
@@ -124,29 +166,31 @@ export default function MapSection({
                     lat: lat,
                     lng: lng,
                   }}
-                  title={`You rank #${ranking > 0 ? ranking : '20+'} at this location`}
+                  title={`You rank #${
+                    ranking > 0 ? ranking : "20+"
+                  } at this location`}
                   options={{
                     icon: {
                       url: `${
                         ranking <= 5 && ranking > 0
-                          ? 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413191/Frame_18_tvweyd.svg'
+                          ? "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413191/Frame_18_tvweyd.svg"
                           : ranking <= 10 && ranking > 5
-                          ? 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_20_byzjky.svg'
-                          : 'https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_21_usmjgy.svg'
+                          ? "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_20_byzjky.svg"
+                          : "https://res.cloudinary.com/dqkyatgoy/image/upload/v1695413192/Frame_21_usmjgy.svg"
                       }`,
                       scaledSize: new google.maps.Size(50, 50),
                       anchor: new google.maps.Point(25, 25),
                     },
                     opacity: 1,
                     label: {
-                      text: ranking > 0 ? ranking.toString() : '20+',
-                      color: 'black',
-                      fontSize: '16px',
-                      fontWeight: 'bold',
+                      text: ranking > 0 ? ranking.toString() : "20+",
+                      color: "black",
+                      fontSize: "16px",
+                      fontWeight: "bold",
                     },
                   }}
                 />
-              ),
+              )
             )}
         </GoogleMap>
       </div>

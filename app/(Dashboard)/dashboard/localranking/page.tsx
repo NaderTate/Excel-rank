@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import Main from "@/app/components/maps/Main";
+import Main from "@/app/components/Dashboard/maps/Main";
 import { AnimatePresence, motion } from "framer-motion";
-import SearchSimulator from "@/app/components/SearchSimulator";
+import SearchSimulator from "@/app/components/Dashboard/SearchSimulator";
 
 function page() {
   const [content, setContent] = useState<"maps" | "search" | null>(null);

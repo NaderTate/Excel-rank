@@ -1,55 +1,56 @@
-'use client';
-import { useState } from 'react';
-import { useLoadScript } from '@react-google-maps/api';
-import KeywordsSection from './KeywordsSection';
-import PlacesSection from './PlacesSection';
-import MapSection from './MapSection';
+"use client";
+import { useState } from "react";
+import { useLoadScript } from "@react-google-maps/api";
+import KeywordsSection from "./KeywordsSection";
+import PlacesSection from "./PlacesSection";
+import MapSection from "./MapSection";
 
 export default function Main() {
-  const [step, setStep] = useState('Location');
+  const [step, setStep] = useState("Location");
   const [placeData, setPlaceData] = useState({
     position: null as any,
-    id: '' as string,
+    id: "" as string,
     suggestedKeywords: [] as string[],
   });
   const [keywords, setKeywords] = useState<string[]>([]);
-  const [placeResults, setPlaceResults] = useState<any[]>([]);
 
-  const stepsList = ['Location', 'Keyword', 'Map'];
-
-  const setPlaceDataHelper = (position: google.maps.LatLngLiteral, id: string, suggestedKeywords: string[]) => {
-    setPlaceData({ position, id, suggestedKeywords });
-  };
+  const stepsList = ["Location", "Keyword", "Map"];
 
   const locationHash: any = {
     Location: <PlacesSection setPlace={setPlaceData} />,
-    Keyword: <KeywordsSection keywords={keywords} suggestedKeywords={placeData.suggestedKeywords} setKeywords={setKeywords} />,
+    Keyword: (
+      <KeywordsSection
+        keywords={keywords}
+        suggestedKeywords={placeData.suggestedKeywords}
+        setKeywords={setKeywords}
+      />
+    ),
     Map: <MapSection keywords={keywords} placeData={placeData} />,
   };
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
-    libraries: ['places'],
+    libraries: ["places"],
   });
 
   const handleNext = async () => {
     switch (step) {
-      case 'Location':
+      case "Location":
         if (placeData.position) {
-          setStep('Keyword');
+          setStep("Keyword");
         } else {
-          alert('Please select a location');
+          alert("Please select a location");
         }
         break;
-      case 'Keyword':
+      case "Keyword":
         if (keywords.length > 0) {
-          setStep('Map');
+          setStep("Map");
           // return nearby places data from google places api
         } else {
-          alert('Please select a keyword');
+          alert("Please select a keyword");
         }
         break;
-      case 'Map':
+      case "Map":
         break;
       default:
         break;
@@ -66,11 +67,17 @@ export default function Main() {
               {stepsList.map((stepItem, index) => (
                 <li
                   key={index}
-                  className={`${stepsList.indexOf(stepItem) <= stepsList.indexOf(step) ? 'text-gray-900' : ''} flex items-center gap-2  p-2`}
+                  className={`${
+                    stepsList.indexOf(stepItem) <= stepsList.indexOf(step)
+                      ? "text-gray-900"
+                      : ""
+                  } flex items-center gap-2  p-2`}
                 >
                   <span
                     className={`flex items-center justify-center w-6 h-6 rounded-full  ${
-                      stepsList.indexOf(stepItem) <= stepsList.indexOf(step) ? 'bg-blue-600 text-white' : 'bg-gray-100 font-bold'
+                      stepsList.indexOf(stepItem) <= stepsList.indexOf(step)
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 font-bold"
                     }`}
                   >
                     <span>{index + 1}</span>
