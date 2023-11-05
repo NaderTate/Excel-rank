@@ -1,4 +1,7 @@
-export const setPlaceDataHelper = ({ position, id, keywords }: any, setPlaceData: (data: any) => void) => {
+export const setPlaceDataHelper = (
+  { position, id, keywords }: any,
+  setPlaceData: (data: any) => void
+) => {
   const placeData = {
     position,
     id,
@@ -7,7 +10,11 @@ export const setPlaceDataHelper = ({ position, id, keywords }: any, setPlaceData
   setPlaceData(placeData);
 };
 
-export const generateRandomLocations = (center: google.maps.LatLngLiteral, radius: number, steps: number) => {
+export const generateRandomLocations = (
+  center: google.maps.LatLngLiteral,
+  radius: number,
+  steps: number
+) => {
   const sections = Math.floor(radius / steps);
   const randomLocations: Array<{ id: number; lat: number; lng: number }> = [];
   // Generate the MATRIX
@@ -66,7 +73,11 @@ export const generateRandomLocations = (center: google.maps.LatLngLiteral, radiu
   return randomLocations;
 };
 
-export const generateCircleLocations = (center: google.maps.LatLngLiteral, radius: number, steps: number) => {
+export const generateCircleLocations = (
+  center: google.maps.LatLngLiteral,
+  radius: number,
+  steps: number
+) => {
   const sections = Math.floor(radius / steps),
     CirclarStep = 3.14 / 4;
   const randomLocations: Array<{ id: string; lat: number; lng: number }> = [];
@@ -83,10 +94,13 @@ export const generateCircleLocations = (center: google.maps.LatLngLiteral, radiu
   return randomLocations;
 };
 
-export const getPlaceData = async (position: google.maps.LatLngLiteral, keywords: Array<string>) => {
-  const formattedKeywords = keywords.join('|');
+export const getPlaceData = async (
+  position: google.maps.LatLngLiteral,
+  keywords: Array<string>
+) => {
+  const formattedKeywords = keywords.join("|");
   const response = await fetch(
-    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.lat},${position.lng}&keyword=${formattedKeywords}&type=restaurant&radius=2000&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`,
+    `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${position.lat},${position.lng}&keyword=${formattedKeywords}&type=restaurant&radius=2000&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
   );
   const data = await response.json();
   return data.results;

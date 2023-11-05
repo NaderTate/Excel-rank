@@ -1,9 +1,9 @@
-'use client';
-import { useRef, useState } from 'react';
-import { HiStar } from 'react-icons/hi';
-import { GoDot } from 'react-icons/go';
-import { motion, AnimatePresence } from 'framer-motion';
-import SkeletonLoad from '@components/SkeletonLoad';
+"use client";
+import { useRef, useState } from "react";
+import { HiStar } from "react-icons/hi";
+import { GoDot } from "react-icons/go";
+import { motion, AnimatePresence } from "framer-motion";
+import SkeletonLoad from "@components/SkeletonLoad";
 
 export default function Main() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -16,19 +16,19 @@ export default function Main() {
     if (!url) return;
     setLoading(true);
     const biz = await fetch(`/api/bizinfo`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({ link: url }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const yelpData = await biz.json();
     setInfo(yelpData);
-    const res = await fetch('/api/review', {
-      method: 'POST',
+    const res = await fetch("/api/review", {
+      method: "POST",
       body: JSON.stringify({ link: url, yelp: yelpData }),
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     const data = await res.json();
@@ -41,7 +41,7 @@ export default function Main() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 120, duration: 1 },
+      transition: { type: "spring", stiffness: 120, duration: 1 },
     },
   };
 
@@ -55,14 +55,16 @@ export default function Main() {
 
   const { day, month, year } = {
     day: new Date().getDate(),
-    month: new Date().toLocaleString('default', { month: 'short' }),
+    month: new Date().toLocaleString("default", { month: "short" }),
     year: new Date().getFullYear(),
   };
 
   return (
     <div className="flex flex-col w-full gap-3 p-2 md:p-8">
       <div className="flex flex-col gap-3 ">
-        <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">GET REVIEWS FROM CUSTOMERS</h2>
+        <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
+          GET REVIEWS FROM CUSTOMERS
+        </h2>
         <div className="relative w-full items-center flex">
           <input
             ref={inputRef}
@@ -73,7 +75,7 @@ export default function Main() {
           <button
             onClick={handleGetReviews}
             type="button"
-            className="absolute gradient_bg right-0 m-1 rounded-full  py-2 text-gray-200 hover:text-white transition"
+            className="absolute gradient_bg right-0 m-1 rounded-full px-2 py-2 text-gray-200 hover:text-white transition"
           >
             Get Reviews
           </button>
@@ -81,7 +83,13 @@ export default function Main() {
       </div>
       <AnimatePresence>
         {info && (
-          <motion.div variants={itemVariants} initial="hidden" animate="visible" exit="hidden" className="w-full text-slate-100">
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="w-full text-slate-100"
+          >
             <article className="flex bg-white transition hover:shadow-xl">
               <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
                 <div className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
@@ -94,23 +102,30 @@ export default function Main() {
               </div>
 
               <div className="hidden sm:block sm:basis-56">
-                <img alt="business image" src={info.image} className="aspect-square h-full w-full object-cover" />
+                <img
+                  alt="business image"
+                  src={info.image}
+                  className="aspect-square h-full w-full object-cover"
+                />
               </div>
 
               <div className="flex flex-1 flex-col justify-between">
                 <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
                   <a href="#">
-                    <h3 className="font-bold uppercase text-gray-900">{info.name}</h3>
+                    <h3 className="font-bold uppercase text-gray-900">
+                      {info.name}
+                    </h3>
                   </a>
 
                   <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
-                    {info.location?.address1} | {info.location?.city} | {info.location?.country}
+                    {info.location?.address1} | {info.location?.city} |{" "}
+                    {info.location?.country}
                   </p>
                 </div>
 
                 <div className="sm:flex sm:items-end sm:justify-end">
                   <span className="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
-                    {info.openNow ? 'Open' : 'Closed'}
+                    {info.openNow ? "Open" : "Closed"}
                   </span>
                 </div>
               </div>
@@ -119,7 +134,10 @@ export default function Main() {
         )}
         {review && (
           <div>
-            <motion.h2 variants={itemVariants} className="text-2xl text-gray-900 py-2 text-center">
+            <motion.h2
+              variants={itemVariants}
+              className="text-2xl text-gray-900 py-2 text-center"
+            >
               Results
             </motion.h2>
             {review.FinalReview && (
@@ -138,12 +156,14 @@ export default function Main() {
                   <h3 className="text-xl m-2 w-fit">Overall Rating</h3>
                   <p
                     style={{
-                      textShadow: '5px 5px 10px rgba(0,0,0,0.8)',
+                      textShadow: "5px 5px 10px rgba(0,0,0,0.8)",
                     }}
                     className="text-white h-3/5 flex items-center justify-center p-8 text-5xl text-center"
                   >
                     {review.OverAllRating}
-                    <HiStar className="text-4xl text-amber-300 mt-2" />
+                    <div>
+                      <HiStar className="text-4xl text-amber-300 mt-2" />
+                    </div>
                   </p>
                 </motion.li>
                 <motion.li
@@ -153,7 +173,9 @@ export default function Main() {
                   className="lg:col-span-5 gap-3 flex flex-col justify-between gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
                 >
                   <h3 className="text-xl m-2 w-fit">Final Review</h3>
-                  <p className="text-white m-2 drop-shadow-xl font-sans text-justify first-letter:ml-6">{review.FinalReview}</p>
+                  <p className="text-white m-2 drop-shadow-xl font-sans text-justify first-letter:ml-6">
+                    {review.FinalReview}
+                  </p>
                 </motion.li>
                 <motion.li
                   variants={itemVariants}
@@ -163,7 +185,7 @@ export default function Main() {
                 >
                   <h3 className="text-xl m-2 w-fit">Prositive Points</h3>
                   {review.max3PositiveThings.map((item: any, index: number) => (
-                    <p key={item + 'positive' + index} className="text-white">
+                    <p key={item + "positive" + index} className="text-white">
                       <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
@@ -177,7 +199,7 @@ export default function Main() {
                 >
                   <h3 className="text-xl m-2 w-fit">Negative Points</h3>
                   {review.max3NegativeThings.map((item: any, index: number) => (
-                    <p key={item + 'negative' + index} className="text-white">
+                    <p key={item + "negative" + index} className="text-white">
                       <GoDot className="inline-block mx-2" />
                       {item}
                     </p>
@@ -190,12 +212,14 @@ export default function Main() {
                   className="lg:col-span-2 gap-3 flex flex-col gradient_bg_dark border border-slate-200/40 rounded-2xl shadow-lg p-2"
                 >
                   <h3 className="text-xl m-2 w-fit">Suggestions</h3>
-                  {review.RecommendationsForImprovement.map((item: any, index: number) => (
-                    <p key={item + 'recom' + index} className="text-white">
-                      <GoDot className="inline-block mx-2" />
-                      {item}
-                    </p>
-                  ))}
+                  {review.RecommendationsForImprovement.map(
+                    (item: any, index: number) => (
+                      <p key={item + "recom" + index} className="text-white">
+                        <GoDot className="inline-block mx-2" />
+                        {item}
+                      </p>
+                    )
+                  )}
                 </motion.li>
               </motion.ul>
             )}

@@ -1,29 +1,29 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { signOut } from 'next-auth/react';
-import { BiMenuAltRight } from 'react-icons/bi';
-import SignIn from '@components/auth/SignIn-btn';
-import { navItems } from '@/lib/data';
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { BiMenuAltRight } from "react-icons/bi";
+import SignIn from "@components/auth/SignIn-btn";
+import { navItems } from "@/lib/data";
 
 export default function Drawer({ user }: any) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOutside = (event: any) => {
-    if (event.target.closest('#drawer') === null) {
+    if (event.target.closest("#drawer") === null) {
       setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   });
 
   return (
-    <div className="md:hidden w-10">
+    <div className="lg:hidden w-10">
       <BiMenuAltRight
         onClick={() => {
           setIsOpen(!isOpen);
@@ -32,7 +32,7 @@ export default function Drawer({ user }: any) {
       />
       <div
         className={` fixed right-0 top-0 h-screen w-72 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
+          isOpen ? "translate-x-0" : "translate-x-full"
         }`}
         id="drawer"
       >
@@ -40,7 +40,7 @@ export default function Drawer({ user }: any) {
           <div className="px-4 py-10">
             <ul className="mt-6 space-y-1">
               {navItems.map((item) => (
-                <li key={item.name + 'drawer'}>
+                <li key={item.name + "drawer"}>
                   <Link
                     href={item.url}
                     className="block rounded-lg hover:bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
@@ -98,8 +98,15 @@ export default function Drawer({ user }: any) {
           </div>
           {user && (
             <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-              <a href="#" className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
-                <img alt="Man" src={user.image} className="h-10 w-10 rounded-full object-cover" />
+              <a
+                href="#"
+                className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50"
+              >
+                <img
+                  alt="Man"
+                  src={user.image}
+                  className="h-10 w-10 rounded-full object-cover"
+                />
                 <div>
                   <p className="text-xs">
                     <strong className="block font-medium">{user.name}</strong>
