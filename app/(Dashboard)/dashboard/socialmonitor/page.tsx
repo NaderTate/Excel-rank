@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useLayoutEffect, useEffect } from "react";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import {
@@ -31,23 +30,23 @@ function Page() {
   // Check if the user is connected to facebook
   useEffect(() => {
     console.log("test");
-
-    getFacebookLoginStatus()
-      .then((response: any) => {
-        console.log({ response });
-        if (response.authResponse == null) {
-          setIsConnected(false);
-        } else if (response.authResponse) {
-          setIsConnected(true);
-        } else {
-          alert("Something went wrong");
-          setIsConnected(false);
-        }
-      })
-
-      .then(() => {
-        setIsLoading(false);
-      });
+    initFacebookSdk().then(() => {
+      getFacebookLoginStatus()
+        .then((response: any) => {
+          console.log({ response });
+          if (response.authResponse == null) {
+            setIsConnected(false);
+          } else if (response.authResponse) {
+            setIsConnected(true);
+          } else {
+            alert("Something went wrong");
+            setIsConnected(false);
+          }
+        })
+        .then(() => {
+          setIsLoading(false);
+        });
+    });
   }, []);
 
   // get the user pages after login
