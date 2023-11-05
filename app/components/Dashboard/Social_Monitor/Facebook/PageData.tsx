@@ -1,4 +1,4 @@
-import SkeletonLoad from "../SkeletonLoad";
+import SkeletonLoad from "@/app/components/SkeletonLoad";
 import PostCard from "./PostCard";
 
 function FacebookPageData({ data }: { data: any }) {

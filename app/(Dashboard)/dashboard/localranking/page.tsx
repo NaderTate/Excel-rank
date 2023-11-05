@@ -4,7 +4,7 @@ import Main from "@/app/components/Dashboard/maps/Main";
 import { AnimatePresence, motion } from "framer-motion";
 import SearchSimulator from "@/app/components/Dashboard/SearchSimulator";
 
-function page() {
+function Page() {
   const [content, setContent] = useState<"maps" | "search" | null>(null);
 
   const buttonStyle = `rounded-md font-semibold px-4 py-2`;
@@ -120,4 +120,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

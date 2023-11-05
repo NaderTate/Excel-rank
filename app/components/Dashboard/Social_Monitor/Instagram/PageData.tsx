@@ -1,5 +1,5 @@
 import React from "react";
-import SkeletonLoad from "../../SkeletonLoad";
+import SkeletonLoad from "@/app/components/SkeletonLoad";
 import Image from "next/image";
 import Link from "next/link";
 import { BiLinkAlt } from "react-icons/bi";

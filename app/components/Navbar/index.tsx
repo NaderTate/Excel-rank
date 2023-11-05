@@ -13,10 +13,6 @@ const Navbar = () => {
   const { data: session }: any = useSession();
   const pathname = usePathname();
 
-  if (pathname === "/signin") {
-    return null;
-  }
-
   // navbar scroll effect, Slide down when scrolling down, slide up when scrolling up and to stay at the top of the page when scrolling up and at the top of the page
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);

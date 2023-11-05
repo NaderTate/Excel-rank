@@ -245,10 +245,10 @@ export default function Main() {
                   Summarize your reviews on Yelp, Google and other websites
                 </p>
                 <p className="text-[#566d81]">
-                  With the power of AI, you don't have to maually go through
-                  thousands of reviews on different websites. Let the AI do the
-                  hard work and give you a brief of what your cusomers think
-                  about business.
+                  With the power of AI, you don&apos;t have to maually go
+                  through thousands of reviews on different websites. Let the AI
+                  do the hard work and give you a brief of what your cusomers
+                  think about business.
                 </p>
                 <div className="group">
                   <Link href={{ pathname: "/reviews" }}>
