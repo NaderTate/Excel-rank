@@ -1,10 +1,11 @@
-import { NextResponse } from 'next/server';
-import { getReview } from './utils';
-import prisma from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { NextResponse } from "next/server";
+import { getReview } from "./utils";
+import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+export const maxDuration = 200; // This function can run for a maximum of 200 seconds
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   const { link, yelp }: { link: string; yelp: any } = await request.json();
@@ -23,13 +24,17 @@ export async function POST(request: Request) {
       },
     });
     // return the review if exists and updated less than 24 hours ago
-    if (review && new Date(review.updatedAt).getTime() > Date.now() - 24 * 60 * 60 * 1000) {
+    if (
+      review &&
+      new Date(review.updatedAt).getTime() > Date.now() - 24 * 60 * 60 * 1000
+    ) {
       return NextResponse.json(review, { status: 200 });
     }
 
     // if not exists or updated more than 24 hours ago
     const data = await getReview(link);
-    if (!data) return NextResponse.json({ error: ` An error occured` }, { status: 500 });
+    if (!data)
+      return NextResponse.json({ error: ` An error occured` }, { status: 500 });
     if (review) {
       review = await prisma.aiReview.update({
         where: {
@@ -49,13 +54,16 @@ export async function POST(request: Request) {
           aiResponse: JSON.stringify(data),
           image: yelp.image,
           title: yelp.name,
-          address: yelp.location ? yelp.location.address1 : '',
+          address: yelp.location ? yelp.location.address1 : "",
         },
       });
     }
 
     return NextResponse.json(review, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: ` An error occured ${error}` }, { status: 500 });
+    return NextResponse.json(
+      { error: ` An error occured ${error}` },
+      { status: 500 }
+    );
   }
 }
