@@ -13,8 +13,8 @@ import {
 } from "@/lib/FacebookSDK";
 import { FiLogOut } from "react-icons/fi";
 import SkeletonLoad from "@/app/components/SkeletonLoad";
-import FacebookPageData from "@/app/components/Facebook/PageData";
-import InstagramPageData from "@/app/components/Social_Monitor/Instagram/PageData";
+import FacebookPageData from "@/app/components/Dashboard/Social_Monitor/Facebook/PageData";
+import InstagramPageData from "@/app/components/Dashboard/Social_Monitor/Instagram/PageData";
 function Page() {
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
