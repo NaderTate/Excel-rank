@@ -34,7 +34,7 @@ const Page = () => {
               <div className=" border-gray-100 drop-shadow-xl w-16 h-16 border-[18px] rounded-full"></div>
             </Link>
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to Excel Rank 🪄🛠️
+              Welcome to Excel Rank
             </h2>
             <p className="mt-4 leading-relaxed text-white/90 text-lg">
               Improve your business reputation, make more money
@@ -52,12 +52,10 @@ const Page = () => {
                 <Image src="/logo.svg" alt="icon" width={60} height={80} />
               </Link>
               <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
-                Welcome to Craft Care 🪄🛠️
+                Welcome to Excel Rank
               </h1>
               <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
-                Craft Care: Next.js-powered, MongoDB-backed. Unleash your online
-                presense with a customized, seamless, and scalable AI
-                experience.
+                Improve your business reputation, make more money
               </p>
             </div>
             <div className="relative flex flex-col-reverse sm:flex-col gap-5 mt-10">
@@ -67,8 +65,8 @@ const Page = () => {
                   Make Better Business Decisions
                 </h2>
                 <p className="mb-10 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
-                  Step into the World of AI and Machine Learning with Craft
-                  Care. We provide solutions to your business problems with the
+                  Step into the World of AI and Machine Learning with Excel
+                  Rank. We provide solutions to your business problems with the
                   help of AI and Machine Learning.
                 </p>
               </div>
