@@ -3,6 +3,7 @@ import LandingPageAnimatedSection from "@/app/components/LandingPages/LandingPag
 import { socialMonitoringLandingPageItems } from "@/lib/data";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
 function page() {
   return (
     <div className="bg-[#F3F3F3]">

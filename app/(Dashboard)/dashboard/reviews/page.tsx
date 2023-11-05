@@ -2,7 +2,10 @@ import Main from "./Main";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
-
+export const metadata = {
+  title: "Reviews Manager",
+  description: "Analyze thousands of reviews within seconds",
+};
 export default async function Page() {
   const session: any = await getServerSession(authOptions);
   const userLinks = await prisma.aiReview.findMany({

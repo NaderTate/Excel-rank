@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import SignWith from '@components/auth/SignWith';
-import Link from 'next/link';
-import Image from 'next/image';
+import SignWith from "@components/auth/SignWith";
+import Link from "next/link";
+import Image from "next/image";
 
-import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Page = () => {
   // get the session from the server side and redirect if user is logged in
   const { data: session, status } = useSession();
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return null;
   }
 
   if (session?.user) {
-    redirect('/dashboard');
+    redirect("/dashboard");
   }
 
   return (
@@ -34,11 +34,10 @@ const Page = () => {
               <div className=" border-gray-100 drop-shadow-xl w-16 h-16 border-[18px] rounded-full"></div>
             </Link>
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Welcome to Craft Care 🪄🛠️
+              Welcome to Excel Rank 🪄🛠️
             </h2>
             <p className="mt-4 leading-relaxed text-white/90 text-lg">
-              Craft Care: Next.js-powered, MongoDB-backed. Unleash your online presense with a
-              customized, seamless, and scalable AI experience.
+              Improve your business reputation, make more money
             </p>
           </div>
         </section>
@@ -56,8 +55,9 @@ const Page = () => {
                 Welcome to Craft Care 🪄🛠️
               </h1>
               <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
-                Craft Care: Next.js-powered, MongoDB-backed. Unleash your online presense with a
-                customized, seamless, and scalable AI experience.
+                Craft Care: Next.js-powered, MongoDB-backed. Unleash your online
+                presense with a customized, seamless, and scalable AI
+                experience.
               </p>
             </div>
             <div className="relative flex flex-col-reverse sm:flex-col gap-5 mt-10">
@@ -67,12 +67,15 @@ const Page = () => {
                   Make Better Business Decisions
                 </h2>
                 <p className="mb-10 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
-                  Step into the World of AI and Machine Learning with Craft Care. We provide
-                  solutions to your business problems with the help of AI and Machine Learning.
+                  Step into the World of AI and Machine Learning with Craft
+                  Care. We provide solutions to your business problems with the
+                  help of AI and Machine Learning.
                 </p>
               </div>
               <div className="flex flex-col gap-4">
-                <h2 className="text-xl  sm:text-xl md:text-2xl">Sign with Email</h2>
+                <h2 className="text-xl  sm:text-xl md:text-2xl">
+                  Sign with Email
+                </h2>
                 <div className="relative w-full items-center flex">
                   <input
                     type="email"

@@ -11,9 +11,8 @@ const quick = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "Craft Care",
-  description:
-    "Craft Care is a platform for crafters to manage their business.",
+  title: "Excel Rank",
+  description: "Improve your reputation, make more money",
   icons: [
     {
       href: "/logo.svg",
