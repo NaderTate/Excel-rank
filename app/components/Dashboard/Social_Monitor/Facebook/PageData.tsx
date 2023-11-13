@@ -4,14 +4,14 @@ import PostCard from "./PostCard";
 function FacebookPageData({ data }: { data: any }) {
   if (data?.published_posts)
     return (
-      <div className="p-5 bg-[#18191a] text-white w-full flex flex-col">
+      <div className="p-5  w-full flex flex-col">
         <div
           style={{
             backgroundImage: `linear-gradient(120deg, black, rgba(0,0,0,0.8), rgba(0,0,0,0.6), rgba(0, 0, 0, 0.067) , transparent),url(${data?.cover?.source})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="bg-[#242526] p-5 py-14 rounded-md flex flex-col"
+          className=" p-5 py-14 rounded-md flex flex-col"
         >
           <img
             width={50}

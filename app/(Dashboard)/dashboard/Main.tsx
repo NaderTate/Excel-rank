@@ -10,8 +10,8 @@ export default function Main() {
         {/* <div className="flex items-center justify-center flex-1 w-full h-32 animate-pulse bg-slate-400/50 rounded-lg">
           <p>history section comming soon...</p>
         </div> */}
-        <div className="py-1 my-3 border-b border-gray-300/50">
-          <h1 className="text-2xl text-gray-900">Services</h1>
+        <div className="py-1 my-3 border-b ">
+          <h1 className="text-2xl ">Services</h1>
         </div>
         <div className="items-center justify-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {productsList.map((product) => (

@@ -8,6 +8,7 @@ import DropDown from "./DropDown";
 import Drawer from "./Drawer";
 import { navItems } from "@/lib/data";
 import AnimatedLink from "../animatedLink";
+import { ThemeSwitcher } from "../ThemeSwitch";
 
 const Navbar = () => {
   const { data: session }: any = useSession();
@@ -39,7 +40,7 @@ const Navbar = () => {
   return (
     <nav
       style={{ top: visible ? "0" : "-100px", transition: "top 0.6s" }}
-      className="flex justify-between items-center bg-tra text-gray-600 right-0 w-full shadow-lg bg-white/80 backdrop-blur-sm dark:shadow-slate-800 z-50  dark:bg-gray-900 h-16 lg:h-20 fixed top-0"
+      className="flex justify-between items-center bg-tra  right-0 w-full shadow-lg bg-background/50 backdrop-blur-sm dark:shadow-slate-800 z-50   h-16 lg:h-20 fixed top-0"
     >
       <div className="py-2 sm:py-1 px-2 md:px-5 lg:px-8 sm:p-8 flex itmes-center ">
         <AnimatedLink href="/" className="flex items-center justify-center">
@@ -50,12 +51,12 @@ const Navbar = () => {
             height={100}
             alt="logo"
           />
-          <div className="hidden gradient_text sm:block ml-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl md:text-3xl">
+          <div className="hidden gradient_text sm:block ml-2 text-xl font-bold  sm:text-2xl md:text-3xl">
             EXCEL RANK
           </div>
         </AnimatedLink>
       </div>
-
+      <ThemeSwitcher />
       <ul className="hidden lg:flex items-center gap-5   font-medium">
         {navItems.map((item) => (
           <li className="navItem" key={item.name + "navbar"}>

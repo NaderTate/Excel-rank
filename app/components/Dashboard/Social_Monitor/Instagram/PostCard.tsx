@@ -15,7 +15,7 @@ function InstagramPostCard({
     console.log("analyzing");
   };
   return (
-    <div className="rounded-xl bg-[#242526] p-2 md:p-4 ">
+    <div className="rounded-xl bg-white dark:bg-background p-2 md:p-4 ">
       {" "}
       {(data.media_type == "IMAGE" || data.media_type == "CAROUSEL_ALBUM") && (
         <img

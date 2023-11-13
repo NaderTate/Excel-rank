@@ -20,23 +20,23 @@ const Page = () => {
   }
 
   return (
-    <section className=" dark:bg-gray-900 lg:h-screen lg:overflow-hidden">
+    <section className="  lg:h-screen lg:overflow-hidden">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-        <section className="relative flex h-56 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+        <section className="relative flex h-56 items-end  lg:col-span-5 lg:h-full xl:col-span-6">
           <img
             alt="Night"
             src="https://res.cloudinary.com/dyjiz4nff/image/upload/v1694502428/StarPi/dev/mahdis-mousavi-hJ5uMIRNg5k-unsplash_zfrgkx.webp"
-            className="absolute inset-0 h-full w-full object-cover opacity-80 z-0"
+            className="absolute inset-0 h-full w-full object-cover z-0"
           />
-          <div className="hidden lg:relative lg:block lg:p-12 bg-slate-500/25 backdrop-blur-sm">
-            <Link className="block text-white brightness-0 invert" href="/">
+          <div className="hidden lg:relative lg:block lg:p-12  backdrop-blur-sm text-white">
+            <Link className="block  brightness-0 invert" href="/">
               <span className="sr-only">Home</span>
               <div className=" border-gray-100 drop-shadow-xl w-16 h-16 border-[18px] rounded-full"></div>
             </Link>
-            <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+            <h2 className="mt-6 text-2xl font-bold  sm:text-3xl md:text-4xl">
               Welcome to Excel Rank
             </h2>
-            <p className="mt-4 leading-relaxed text-white/90 text-lg">
+            <p className="mt-4 leading-relaxed /90 text-lg">
               Improve your business reputation, make more money
             </p>
           </div>
@@ -45,26 +45,26 @@ const Page = () => {
           <div className="w-full px-3 sm:px-8">
             <div className="relative -mt-16 block lg:hidden">
               <Link
-                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 dark:bg-gray-900 sm:h-20 sm:w-20"
+                className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600  sm:h-20 sm:w-20"
                 href="/"
               >
                 <span className="sr-only">Home</span>
                 <Image src="/logo.svg" alt="icon" width={60} height={80} />
               </Link>
-              <h1 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl">
+              <h1 className="mt-2 text-2xl font-bold   sm:text-3xl md:text-4xl">
                 Welcome to Excel Rank
               </h1>
-              <p className="mt-4 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
+              <p className="mt-4 leading-relaxed   text-sm sm:text-lg">
                 Improve your business reputation, make more money
               </p>
             </div>
             <div className="relative flex flex-col-reverse sm:flex-col gap-5 mt-10">
-              <div className="absolute w-[140%] h-[140%] bg-slate-300/10 -top-10 -right-10 -z-[1] hidden sm:block"></div>
+              <div className="absolute w-[140%] h-[140%]  -top-10 -right-10 -z-[1] hidden sm:block"></div>
               <div className="flex flex-col gap-4">
                 <h2 className="text-xl font-semibold sm:text-2xl md:text-3xl">
                   Make Better Business Decisions
                 </h2>
-                <p className="mb-10 leading-relaxed text-gray-500 dark:text-gray-400 text-sm sm:text-lg">
+                <p className="mb-10 leading-relaxed  text-sm sm:text-lg">
                   Step into the World of AI and Machine Learning with Excel
                   Rank. We provide solutions to your business problems with the
                   help of AI and Machine Learning.

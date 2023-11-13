@@ -44,7 +44,6 @@ function Page() {
           setIsConnected(false);
         }
       })
-
       .then(() => {
         setIsLoading(false);
       });
@@ -92,7 +91,7 @@ function Page() {
     });
   }
   return (
-    <div className=" bg-[#18191a] text-white min-h-screen">
+    <div className="  min-h-screen">
       <div className="flex">
         <div className="h-full min-w-[320px]">
           <div className="h-screen overflow-auto  min-w-[320px] max-w-[340px] p-5 top-20 flex flex-col  fixed">
@@ -113,7 +112,7 @@ function Page() {
                         setIsConnected(false);
                       }}
                     >
-                      <FiLogOut className="text-white" />
+                      <FiLogOut className="" />
                     </button>
                   </div>
                   <div>
@@ -135,7 +134,7 @@ function Page() {
                                 );
                                 setPageData(data);
                               }}
-                              className={` rounded-md p-2 cursor-pointer text-white border flex items-center gap-3 ${
+                              className={` rounded-md p-2 cursor-pointer  border flex items-center gap-3 ${
                                 currentPage === page.id
                                   ? "bg-slate-200/30 border-transparent "
                                   : "hover:bg-slate-200/50 border-slate-200/50  transition-colors"
@@ -163,7 +162,7 @@ function Page() {
                                   );
                                   setPageData(data);
                                 }}
-                                className={`my-3 rounded-md p-2 cursor-pointer text-white border flex items-center gap-3 ${
+                                className={`my-3 rounded-md p-2 cursor-pointer  border flex items-center gap-3 ${
                                   currentPage ===
                                   page.instagram_business_account.id
                                     ? "bg-slate-200/30 border-transparent "
@@ -201,7 +200,7 @@ function Page() {
               ) : (
                 <button
                   onClick={login}
-                  className="bg-blue-800 text-white p-3 rounded-md my-2 font-semibold"
+                  className="bg-blue-800 text-white  p-3 rounded-md my-2 font-semibold"
                 >
                   <BsFacebook className="inline" size={20} /> Connect your
                   Facebook

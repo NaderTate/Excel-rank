@@ -4,6 +4,7 @@ import { Quicksand } from "next/font/google";
 import SessionProv from "@components/auth/SessionProv";
 import Navbar from "@components/Navbar";
 import Script from "next/script";
+import { Providers } from "./components/Providers";
 
 const quick = Quicksand({
   subsets: ["latin", "latin-ext"],
@@ -42,8 +43,10 @@ export default function RootLayout({
           nonce="FeUOmNvb"
         />
         <SessionProv session={session}>
-          <Navbar />
-          {children}
+          <Providers>
+            <Navbar />
+            {children}
+          </Providers>
         </SessionProv>
       </body>
     </html>

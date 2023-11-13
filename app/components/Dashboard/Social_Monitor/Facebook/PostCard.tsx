@@ -63,21 +63,18 @@ function PostCard({
 
   return (
     <div>
-      <div
-        key={id}
-        className="rounded-xl bg-[#242526] p-2 md:p-4 flex flex-col gap-4"
-      >
+      <div key={id} className="rounded-xl  p-2 md:p-4 flex flex-col gap-4">
         <div className="flex items-center">
           <img alt="port pic" src={picture} className="rounded-full w-12" />
           <div className="ml-2 flex justify-center flex-col mb-3">
             <h1 className="text-lg font-bold ">{name}</h1>
-            <h1 className="text-sm text-gray-200">
+            <h1 className="text-sm ">
               {new Date(created_time).toDateString()}
             </h1>
           </div>
         </div>
 
-        <p className=" text-gray-50 whitespace-pre-line">
+        <p className="  whitespace-pre-line">
           {message?.length > 200 ? (
             <div>
               {showMessage ? message : message.slice(0, 200) + "..."}
@@ -105,14 +102,14 @@ function PostCard({
             className="w-full"
             target="_blank"
           >
-            <button className="bg-blue-600 text-white rounded-md p-2 line-clamp-1 w-full flex items-center justify-center gap-2">
+            <button className="bg-blue-600  rounded-md p-2 line-clamp-1 w-full flex items-center justify-center gap-2">
               <div>
                 <BiLogoFacebookCircle className="inline" size={20} />
               </div>
               <span className="line-clamp-1">View on Facebook</span>
             </button>
           </Link>
-          <div className="flex justify-around bg-blue-600 text-white rounded-md p-2">
+          <div className="flex justify-around bg-blue-600  rounded-md p-2">
             <div className="flex items-center">
               {likesCount} <AiOutlineLike />
             </div>
@@ -135,7 +132,7 @@ function PostCard({
               commentsCount === null || commentsCount < 20
                 ? "bg-gray-600 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700"
-            } text-white rounded-md p-2 flex items-center gap-2 justify-center `}
+            }  rounded-md p-2 flex items-center gap-2 justify-center `}
           >
             <div>
               <BiAnalyse className="inline" size={20} />
