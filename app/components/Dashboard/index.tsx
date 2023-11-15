@@ -11,11 +11,6 @@ export default function Dashboard() {
   return (
     <>
       <div
-        className={` transition-all duration-300 ${
-          isOpened ? "w-16" : "w-0 opacity-0 -translate-x-28"
-        }`}
-      ></div>
-      <div
         className={` fixed top-0 left-0 flex h-screen flex-col justify-between border-e bg-white pt-20 transition-all duration-300 z-10 ${
           isOpened ? "w-16" : "w-0 opacity-0 -translate-x-28"
         }`}

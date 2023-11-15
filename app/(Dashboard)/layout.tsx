@@ -7,7 +7,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     // @ts-ignore
     <ProtectedRoute plan={["free", "standard", "plus", "premium"]}>
       <div className="flex min-h-screen overflow-x-hidden mt-20">
-        <Dashboard />
+        {/* <Dashboard /> */}
         <div className=" w-full">{children}</div>
       </div>
     </ProtectedRoute>

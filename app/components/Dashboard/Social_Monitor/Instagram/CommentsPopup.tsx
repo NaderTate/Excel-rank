@@ -41,7 +41,7 @@ function InstagramCommentsPopup({
           {commentsCount} <BiComment />
         </div>
       </DialogTrigger>
-      <DialogContent className="min-h-[70vh] flex flex-col items-start w-full bg-[#18191a] backdrop-blur-sm border-0 rounded-xl text-gray-50">
+      <DialogContent className="min-h-[70vh] flex flex-col items-start w-full  backdrop-blur-sm border-0 rounded-xl">
         <DialogHeader>
           <DialogTitle>Comments</DialogTitle>
         </DialogHeader>
@@ -58,7 +58,7 @@ function InstagramCommentsPopup({
               <h1 className="text-lg font-bold  mr-1">
                 {comment.from?.username}
               </h1>
-              <span className="text-sm text-gray-100">
+              <span className="text-sm ">
                 ({new Date(comment.timestamp).toDateString()})
               </span>
             </div>

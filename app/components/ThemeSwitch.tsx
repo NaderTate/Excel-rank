@@ -19,7 +19,7 @@ export function ThemeSwitcher() {
       onValueChange={() => {
         setTimeout(() => {
           setTheme(theme === "dark" ? "light" : "dark");
-        }, 100);
+        }, 165);
       }}
       startContent={<BiSolidSun />}
       endContent={<BsFillMoonFill />}

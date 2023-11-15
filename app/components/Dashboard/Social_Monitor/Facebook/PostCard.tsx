@@ -96,7 +96,7 @@ function PostCard({
             className="rounded-xl"
           />
         )}
-        <div className=" grid grid-cols-3 gap-3 md:gap-5">
+        <div className=" grid grid-cols-3 gap-3 md:gap-5 text-white">
           <Link
             href={{ pathname: permalink_url }}
             className="w-full"

@@ -43,7 +43,7 @@ function InstagramPageData({
             <h1 className="my-2 font-semibold">{data.name}</h1>
             <h1 className="max-w-2xl">{data.biography}</h1>
             <Link
-              className="flex items-center gap-2 text-blue-200 font-semibold"
+              className="flex items-center gap-2 text-blue-600 dark:text-blue-200 font-semibold"
               href={{ pathname: data.website }}
               target="_blank"
             >

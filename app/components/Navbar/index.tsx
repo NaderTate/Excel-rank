@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <nav
       style={{ top: visible ? "0" : "-100px", transition: "top 0.6s" }}
-      className="flex justify-between items-center bg-tra  right-0 w-full shadow-lg bg-background/50 backdrop-blur-sm dark:shadow-slate-800 z-50   h-16 lg:h-20 fixed top-0"
+      className="flex justify-between items-center bg-tra  right-0 w-full shadow-lg bg-background/70 backdrop-blur-sm dark:shadow-slate-800 z-50   h-16 lg:h-20 fixed top-0"
     >
       <div className="py-2 sm:py-1 px-2 md:px-5 lg:px-8 sm:p-8 flex itmes-center ">
         <AnimatedLink href="/" className="flex items-center justify-center">
