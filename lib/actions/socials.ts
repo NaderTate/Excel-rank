@@ -1,48 +1,47 @@
-'use server';
-import Prisma from '@/lib/prisma';
-import OpenAI from 'openai';
-import GPT3Tokenizer from 'gpt3-tokenizer';
+"use client";
+import OpenAI from "openai";
+import GPT3Tokenizer from "gpt3-tokenizer";
+import { createFBReview, isPostIdExists } from "./_actions";
 
-export const getFacebookReview = async (postId: string, comments: string) => {
-  console.log('getFacebookReview');
-  const savedReview = await Prisma.aiFacebookReview.findFirst({
-    where: {
-      postId: postId,
-    },
-  });
+export const AnalyzeSocialComments = async (
+  postId: string,
+  comments: string,
+  platform: "facebook" | "instagram"
+) => {
+  console.log("AnalyzeSocialComments");
+  const savedReview = await isPostIdExists(postId);
   // return if exists and updated less than 24 hours ago
-  if (savedReview && new Date(savedReview.updatedAt).getTime() > Date.now() - 24 * 60 * 60 * 1000) {
+  if (
+    savedReview &&
+    new Date(savedReview.updatedAt).getTime() > Date.now() - 24 * 60 * 60 * 1000
+  ) {
     return savedReview;
   } else {
     // get the review from openai
-    const tokenizer = new GPT3Tokenizer({ type: 'gpt3' });
+    const tokenizer = new GPT3Tokenizer({ type: "gpt3" });
     const tokens = tokenizer.encode(comments);
     const text = tokenizer.decode(tokens.bpe.slice(0, 2000));
 
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY });
+    const openai = new OpenAI({
+      apiKey: process.env.NEXT_PUBLIC_Nodz_OpenAI_Key,
+      dangerouslyAllowBrowser: true,
+    });
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: "gpt-3.5-turbo",
       messages: [
         {
-          role: 'system',
+          role: "system",
           content:
-            'Analyze these Comments in general and only return nothing but the following json has the following formate => "{"OverAllReview": "string", "OverAllRating": number, "max3PositiveThings":Array<string>, "max3NegativeThings":Array<string>, "ThingsToImproveInThePost":Array<string>}"',
+            'You will receive a bunch of comments about on a specific topic, the comments are separated by "/" , I want you to read the comments and give me a summary, like what are the main topics people are talking about, what are the positive aspects, negative aspects, etc.. . Try to give me the response in this form if you can : Positive aspects: ... Negative aspects: ... Overall summary: ... , If you can\'t, just give me a summary of the comments. ',
         },
         {
-          role: 'user',
+          role: "user",
           content: text,
         },
       ],
-      temperature: 0,
+      temperature: 0.5,
     });
-    // save the review to the database
-    const review = await Prisma.aiFacebookReview.create({
-      data: {
-        postId: postId,
-        // convert data to string
-        aiResponse: JSON.stringify(response),
-      },
-    });
+    const review = await createFBReview(postId, JSON.stringify(response));
     return review;
   }
 };

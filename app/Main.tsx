@@ -26,7 +26,7 @@ const arrRankingFeatures: Array<string> = [
 export default function Main() {
   return (
     <main className="w-full overflow-x-hidden ">
-      <section className=" p-2 md:p-5 !pt-32 main_gradient md:min-h-screen w-full flex flex-col md:flex-row items-center ">
+      <section className=" p-2 md:p-5 main_gradient md:min-h-screen w-full flex flex-col md:flex-row items-center ">
         <div className="flex flex-col md:flex-row ">
           <div className=" max-w-4xl md:pl-28 flex flex-col gap-8">
             <motion.p
@@ -175,7 +175,7 @@ export default function Main() {
                 </p>
                 <div className="group">
                   <Link href={{ pathname: "/socialmonitor" }}>
-                    <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition">
+                    <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black dark:hover:text-gray-100 transition">
                       Learn more
                       <FaLongArrowAltRight className="inline-block ml-2 group-hover:translate-x-3 transition-transform" />
                     </p>
@@ -210,7 +210,7 @@ export default function Main() {
                 <div className="group">
                   <Link
                     href={{ pathname: "/localranking" }}
-                    className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition"
+                    className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black dark:hover:text-gray-100 transition"
                   >
                     Learn More
                     <FaLongArrowAltRight className="inline-block ml-2 group-hover:translate-x-3 transition-transform" />
@@ -252,7 +252,7 @@ export default function Main() {
                 </p>
                 <div className="group">
                   <Link href={{ pathname: "/reviews" }}>
-                    <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black transition">
+                    <p className="text-[#04AADD] text-semibold text-xl cursor-pointer hover:text-black dark:hover:text-gray-100 transition">
                       Learn more
                       <FaLongArrowAltRight className="inline-block ml-2 group-hover:translate-x-3 transition-transform" />
                     </p>

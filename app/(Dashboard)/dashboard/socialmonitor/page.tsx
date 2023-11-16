@@ -130,14 +130,14 @@ function Page() {
       <div className="flex">
         <div
           id="sidebar"
-          className={` h-full min-w-[320px] fixed  lg:opacity-100 transition-all lg:translate-x-0 ${
+          className={` h-full min-w-[320px] fixed  lg:opacity-100 transition-all -mt-16 lg:translate-x-0 ${
             showSideBar
               ? " opacity-100 translate-x-0"
               : " -translate-x-full opacity-0"
           } `}
         >
           <div
-            className={` h-screen overflow-auto min-w-[320px] max-w-[340px] bg-background fixed -mt-20  z-10 `}
+            className={` h-screen overflow-auto min-w-[320px] max-w-[340px] bg-background fixed  z-10 `}
           >
             <div className=" p-5  flex flex-col ">
               <Link href={{ pathname: "/dashboard" }}>

@@ -10,7 +10,7 @@ import { BsFacebook } from "react-icons/bs";
 export default function Footer() {
   const size = 25;
   return (
-    <footer className="bg-white">
+    <footer className="">
       <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
@@ -18,7 +18,7 @@ export default function Footer() {
               <h1 className="text-3xl font-bold ">Excel Rank</h1>
             </div>
 
-            <p className="mt-4 max-w-xs text-gray-500">
+            <p className="mt-4 max-w-xs ">
               Grow your presence, reputation and revenue.
             </p>
 
@@ -28,7 +28,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className=" transition hover:opacity-75"
                 >
                   <span className="sr-only">Facebook</span>
 
@@ -41,7 +41,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className=" transition hover:opacity-75"
                 >
                   <span className="sr-only">Instagram</span>
 
@@ -54,7 +54,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className=" transition hover:opacity-75"
                 >
                   <span className="sr-only">Twitter</span>
 
@@ -67,7 +67,7 @@ export default function Footer() {
                   href="/"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-gray-700 transition hover:opacity-75"
+                  className=" transition hover:opacity-75"
                 >
                   <span className="sr-only">Lindedin</span>
 
@@ -79,13 +79,13 @@ export default function Footer() {
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
             <div>
-              <p className="font-medium text-gray-900">Services</p>
+              <p className="font-medium ">Services</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link
                     href={{ pathname: "/reviews" }}
-                    className="text-gray-700 transition hover:opacity-75"
+                    className=" transition hover:opacity-75"
                   >
                     Reviews Management
                   </Link>
@@ -94,7 +94,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href={{ pathname: "/localranking" }}
-                    className="text-gray-700 transition hover:opacity-75"
+                    className=" transition hover:opacity-75"
                   >
                     Local Ranking
                   </Link>
@@ -103,7 +103,7 @@ export default function Footer() {
                 <li>
                   <Link
                     href={{ pathname: "/socialmonitor" }}
-                    className="text-gray-700 transition hover:opacity-75"
+                    className=" transition hover:opacity-75"
                   >
                     Social Monitor
                   </Link>
@@ -112,23 +112,17 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="font-medium text-gray-900">Company</p>
+              <p className="font-medium ">Company</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     About
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     Meet the Team
                   </a>
                 </li>
@@ -136,46 +130,34 @@ export default function Footer() {
             </div>
 
             <div>
-              <p className="font-medium text-gray-900">Helpful Links</p>
+              <p className="font-medium ">Helpful Links</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     Customer Support
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     FAQs
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="font-medium text-gray-900">Legal</p>
+              <p className="font-medium ">Legal</p>
 
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     Privacy Policy
                   </a>
                 </li>
 
                 <li>
-                  <a
-                    href="#"
-                    className="text-gray-700 transition hover:opacity-75"
-                  >
+                  <a href="#" className=" transition hover:opacity-75">
                     Refund Policy
                   </a>
                 </li>

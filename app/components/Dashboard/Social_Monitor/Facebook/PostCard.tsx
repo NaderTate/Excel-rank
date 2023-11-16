@@ -2,9 +2,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AiOutlineLike } from "react-icons/ai";
-import { BiAnalyse, BiLogoFacebookCircle } from "react-icons/bi";
+import { BiLogoFacebookCircle } from "react-icons/bi";
 import CommentsPopup from "./CommentsPopup";
-import { getFacebookReview } from "@/lib/actions/socials";
+import AIReviewPopup from "./AIReviewPopup";
 
 function PostCard({
   data,
@@ -22,6 +22,7 @@ function PostCard({
   const [commentsCount, setCommentsCount] = useState<number | null>(null);
   const [likesCount, setLikesCount] = useState<number | null>(null);
   const [showMessage, setShowMessage] = useState<boolean>(false);
+
   useEffect(() => {
     fetch(
       `https://graph.facebook.com/v18.0/${postId}?fields=likes.summary(true).limit(0),comments.summary(true).limit(0)&access_token=${pageToken}`
@@ -55,10 +56,10 @@ function PostCard({
     if (comments.data.length < 20) return;
     const commentsString = comments.data
       .map((comment: any) => comment.message)
-      .join(" ");
+      .join("/");
     console.log(commentsString);
-    const review = await getFacebookReview(id, commentsString);
-    console.log(review);
+    // const review = await getFacebookReview(id, commentsString);
+    // console.log(review);
   };
 
   return (
@@ -119,26 +120,11 @@ function PostCard({
               commentsCount={commentsCount}
             />
           </div>
-          <button
-            title={
-              commentsCount === null || commentsCount < 20
-                ? "You need at least 20 comments to analyze"
-                : ""
-            }
-            disabled={commentsCount === null || commentsCount < 20}
-            onClick={handleAnalylize}
-            type="button"
-            className={`${
-              commentsCount === null || commentsCount < 20
-                ? "bg-gray-600 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700"
-            }  rounded-md p-2 flex items-center gap-2 justify-center `}
-          >
-            <div>
-              <BiAnalyse className="inline" size={20} />
-            </div>
-            <span className=" line-clamp-1">Analyze Post</span>
-          </button>
+          <AIReviewPopup
+            postId={postId}
+            commentsCount={commentsCount || 0}
+            pageToken={pageToken}
+          />
         </div>
       </div>
     </div>
