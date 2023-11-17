@@ -27,7 +27,7 @@ function AIReviewPopup({
 
   const getComments = async () => {
     const comments = await fetch(
-      `https://graph.facebook.com/v18.0/${postId}/comments?access_token=${pageToken}`
+      `https://graph.facebook.com/v18.0/${postId}/comments?fields=text&access_token=${pageToken}`
     );
     return comments.json();
   };
@@ -35,12 +35,12 @@ function AIReviewPopup({
     if (showComments || commentsCount < 20) return;
     const comments = await getComments();
     const commentsString: string = comments.data
-      .map((comment: { message: string }) => comment.message)
+      .map((comment: { text: string }) => comment.text)
       .join("/");
     const review = await AnalyzeSocialComments(
       postId,
       commentsString,
-      "facebook"
+      "instagram"
     );
     const JsonReview: ChatCompletion = JSON.parse(review.aiResponse);
     setReview(JsonReview.choices[0].message.content);

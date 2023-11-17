@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { AiOutlineLike } from "react-icons/ai";
-import { BiAnalyse } from "react-icons/bi";
 import InstagramCommentsPopup from "./CommentsPopup";
 import InsightsPopup from "./InsightsPopup";
+import AIReviewPopup from "./AIReviewPopup";
 
 function InstagramPostCard({
   data,
@@ -11,9 +10,6 @@ function InstagramPostCard({
   data: any;
   pageToken: string;
 }) {
-  const handleAnalylize = async () => {
-    console.log("analyzing");
-  };
   return (
     <div className="rounded-xl bg-white dark:bg-background p-2 md:p-4 ">
       {" "}
@@ -36,26 +32,11 @@ function InstagramPostCard({
             commentsCount={data.comments_count}
           />
         </div>
-        <button
-          title={
-            data.comments_count < 20
-              ? "You need at least 20 comments to analyze"
-              : ""
-          }
-          disabled={data.comments_count === null || data.comments_count < 20}
-          onClick={handleAnalylize}
-          type="button"
-          className={`${
-            data.comments_count < 20
-              ? "bg-gray-600 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          } text-white rounded-md p-2 flex items-center gap-2 justify-center"`}
-        >
-          <div>
-            <BiAnalyse className="inline" size={20} />
-          </div>
-          <span className=" line-clamp-1">Analyze Post</span>
-        </button>
+        <AIReviewPopup
+          postId={data.id}
+          commentsCount={data.comments_count}
+          pageToken={pageToken}
+        />
       </div>
     </div>
   );

@@ -8,7 +8,8 @@ export const maxDuration = 200; // This function can run for a maximum of 200 se
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  const { link, yelp }: { link: string; yelp: any } = await request.json();
+  const { link, yelp }: { link: string; yelp: YelpBusiness } =
+    await request.json();
   const session: any = await getServerSession(authOptions);
   // check if the link is already in the database
 
@@ -20,7 +21,7 @@ export async function POST(request: Request) {
     let review = await prisma.aiReview.findFirst({
       where: {
         userId: session.user.id,
-        link: link,
+        link,
       },
     });
     // return the review if exists and updated less than 24 hours ago

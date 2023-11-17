@@ -1,14 +1,13 @@
 "use client";
 import OpenAI from "openai";
 import GPT3Tokenizer from "gpt3-tokenizer";
-import { createFBReview, isPostIdExists } from "./_actions";
+import { createFBReview, createIGReview, isPostIdExists } from "./_actions";
 
 export const AnalyzeSocialComments = async (
   postId: string,
   comments: string,
   platform: "facebook" | "instagram"
 ) => {
-  console.log("AnalyzeSocialComments");
   const savedReview = await isPostIdExists(postId);
   // return if exists and updated less than 24 hours ago
   if (
@@ -41,7 +40,12 @@ export const AnalyzeSocialComments = async (
       ],
       temperature: 0.5,
     });
-    const review = await createFBReview(postId, JSON.stringify(response));
-    return review;
+    if (platform === "facebook") {
+      const review = await createFBReview(postId, JSON.stringify(response));
+      return review;
+    } else {
+      const review = await createIGReview(postId, JSON.stringify(response));
+      return review;
+    }
   }
 };

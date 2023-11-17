@@ -4,13 +4,14 @@ import { HiStar } from "react-icons/hi";
 import { GoDot } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
 import SkeletonLoad from "@components/SkeletonLoad";
-
+import { useSession } from "next-auth/react";
+import { handleReviews } from "@/lib/actions/yelp";
 export default function Main() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [review, setReview] = useState<any>(null);
-  const [info, setInfo] = useState<any>(null);
+  const [info, setInfo] = useState<YelpBusiness | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const { data: session } = useSession();
   const handleGetReviews = async () => {
     const url = inputRef.current?.value;
     if (!url) return;
@@ -22,17 +23,15 @@ export default function Main() {
         "Content-Type": "application/json",
       },
     });
-    const yelpData = await biz.json();
+    const yelpData: YelpBusiness = await biz.json();
     setInfo(yelpData);
-    const res = await fetch("/api/review", {
-      method: "POST",
-      body: JSON.stringify({ link: url, yelp: yelpData }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const data = await res.json();
-    setReview(JSON.parse(JSON.parse(data.aiResponse).data.content));
+    const data =
+      session && (await handleReviews(url, session?.user?.id, yelpData));
+    if (data?.success) {
+      setReview(
+        JSON.parse(JSON.parse(data?.data?.aiResponse || "").data.content)
+      );
+    }
     setLoading(false);
   };
 
