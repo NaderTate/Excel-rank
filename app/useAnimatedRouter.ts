@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { ExtendedDocument } from "./types";
 
 export default function useAnimatedRouter() {
   const router = useRouter();

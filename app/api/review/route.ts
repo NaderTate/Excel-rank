@@ -3,6 +3,7 @@ import { getReview } from "./utils";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { YelpBusiness } from "@/app/types";
 export const maxDuration = 200; // This function can run for a maximum of 200 seconds
 
 export const dynamic = "force-dynamic";

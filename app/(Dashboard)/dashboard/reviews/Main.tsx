@@ -1,20 +1,30 @@
 "use client";
-import { useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { HiStar } from "react-icons/hi";
 import { GoDot } from "react-icons/go";
 import { motion, AnimatePresence } from "framer-motion";
 import SkeletonLoad from "@components/SkeletonLoad";
 import { useSession } from "next-auth/react";
 import { handleReviews } from "@/lib/actions/yelp";
+import { Input, Button, Tooltip } from "@nextui-org/react";
+import { YelpBusiness } from "@/app/types";
 export default function Main() {
-  const inputRef = useRef<HTMLInputElement>(null);
   const [review, setReview] = useState<any>(null);
   const [info, setInfo] = useState<YelpBusiness | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [url, setUrl] = useState<string>("");
   const { data: session } = useSession();
+  function validateYelpLink(link: string) {
+    const yelpRegex = /^https?:\/\/(www\.)?yelp\.com\/biz\/[a-zA-Z0-9_-]+$/;
+    return yelpRegex.test(link);
+  }
+  const isInvalid = useMemo(() => {
+    if (url === "") return false;
+
+    return validateYelpLink(url) ? false : true;
+  }, [url]);
   const handleGetReviews = async () => {
-    const url = inputRef.current?.value;
-    if (!url) return;
+    if (!url || !validateYelpLink(url)) return;
     setLoading(true);
     const biz = await fetch(`/api/bizinfo`, {
       method: "POST",
@@ -27,6 +37,7 @@ export default function Main() {
     setInfo(yelpData);
     const data =
       session && (await handleReviews(url, session?.user?.id, yelpData));
+    console.log(data);
     if (data?.success) {
       setReview(
         JSON.parse(JSON.parse(data?.data?.aiResponse || "").data.content)
@@ -61,24 +72,32 @@ export default function Main() {
   return (
     <div className="flex flex-col w-full gap-3 p-2 md:p-8">
       <div className="flex flex-col gap-3 ">
-        <h2 className="text-2xl text-gray-900 border-b py-2 border-gray-300/50 w-fit">
-          GET REVIEWS FROM CUSTOMERS
+        <h2 className="text-2xl  border-b py-2  w-fit">
+          Analyze your business reviews
         </h2>
-        <div className="relative w-full items-center flex">
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Input the business URL"
-            className="w-full px-4 py-3 border border-gray-300 rounded-full focus:ring-2 focus:border-transparent"
-          />
-          <button
-            onClick={handleGetReviews}
-            type="button"
-            className="absolute gradient_bg right-0 m-1 rounded-full px-2 py-2 text-gray-200 hover:text-white transition"
-          >
-            Get Reviews
-          </button>
-        </div>
+        <Input
+          value={url}
+          type="text"
+          label="Yelp page link"
+          radius="full"
+          variant="bordered"
+          isInvalid={isInvalid}
+          errorMessage={isInvalid && "Please enter a yelp link"}
+          onValueChange={setUrl}
+          endContent={
+            <div className="flex items-center h-full">
+              <Button
+                isLoading={loading}
+                isDisabled={!url || url.length < 1 || isInvalid}
+                color="primary"
+                radius="full"
+                onClick={handleGetReviews}
+              >
+                Analyze
+              </Button>
+            </div>
+          }
+        />
       </div>
       <AnimatePresence>
         {info && (
@@ -87,13 +106,13 @@ export default function Main() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="w-full text-slate-100"
+            className="w-full "
           >
-            <article className="flex bg-white transition hover:shadow-xl">
+            <article className="flex  transition hover:shadow-xl rounded-xl border">
               <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
-                <div className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
+                <div className="flex items-center justify-between gap-4 text-xs font-bold uppercase ">
                   <span>{year}</span>
-                  <span className="w-px flex-1 bg-gray-900/10"></span>
+                  <span className="w-px flex-1 bg-gray-900/10 dark:bg-white/10"></span>
                   <span>
                     {day} - {month}
                   </span>
@@ -109,23 +128,31 @@ export default function Main() {
               </div>
 
               <div className="flex flex-1 flex-col justify-between">
-                <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                <div className="border-s  p-4 sm:border-l-transparent sm:p-6">
                   <a href="#">
-                    <h3 className="font-bold uppercase text-gray-900">
-                      {info.name}
-                    </h3>
+                    <h3 className="font-bold uppercase ">{info.name}</h3>
                   </a>
 
-                  <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">
+                  <p className="mt-2 line-clamp-3 text-sm/relaxed ">
                     {info.location?.address1} | {info.location?.city} |{" "}
                     {info.location?.country}
                   </p>
                 </div>
 
-                <div className="sm:flex sm:items-end sm:justify-end">
-                  <span className="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
-                    {info.openNow ? "Open" : "Closed"}
-                  </span>
+                <div className="flex items-end justify-end">
+                  <Tooltip
+                    color={info.openNow ? "success" : "danger"}
+                    showArrow={true}
+                    content={
+                      info.openNow
+                        ? "This business is open now"
+                        : "This business is closed now"
+                    }
+                  >
+                    <Button color={info.openNow ? "success" : "danger"}>
+                      {info.openNow ? "Open" : "Closed"}
+                    </Button>
+                  </Tooltip>
                 </div>
               </div>
             </article>
@@ -135,7 +162,7 @@ export default function Main() {
           <div>
             <motion.h2
               variants={itemVariants}
-              className="text-2xl text-gray-900 py-2 text-center"
+              className="text-2xl  py-2 text-center"
             >
               Results
             </motion.h2>

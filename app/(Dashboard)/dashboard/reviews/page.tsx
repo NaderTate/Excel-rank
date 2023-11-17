@@ -15,17 +15,17 @@ export default async function Page() {
   });
 
   return (
-    <div className="flex flex-col sm:flex-row w-full min-h-screen  gap-4 md:gap-8">
+    <div className="flex flex-col sm:flex-row w-full min-h-screen  gap-4 md:gap-8 px-5">
       {userLinks.length > 0 && (
-        <div className="sm:flex flex-col hidden sm:w-1/4 md:w-1/5 w-full gap-3 bg-slate-200/50 p-1 pt-14 -mt-10">
-          <h1 className="text-2xl text-gray-900">Reviewed Links</h1>
+        <div className="sm:flex flex-col hidden sm:w-1/4 md:w-1/5 w-full gap-3 border-r p-1 pt-14 -mt-10">
+          <h1 className="text-2xl ">Reviewed Links</h1>
 
           {userLinks && (
             <div className="flex flex-col gap-2">
               {userLinks.map((link) => (
                 <div
                   key={link.id + "reviewedlinks"}
-                  className="flex items-center rounded-lg shadow-lg bg-slate-400/10 p-2 cursor-pointer hover:bg-slate-400/30"
+                  className="flex items-center rounded-lg shadow-lg shadow-blue-800/20 transition-colors p-2 cursor-pointer hover:bg-slate-400/30"
                 >
                   <img
                     className="w-10 mr-1 h-10 rounded-full"
@@ -33,9 +33,7 @@ export default async function Page() {
                     alt="business image"
                   />
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm text-gray-900  line-clamp-1">
-                      {link.title}
-                    </p>
+                    <p className="text-sm   line-clamp-1">{link.title}</p>
                     <p className="text-xs text-gray-500 line-clamp-1">
                       {link.address}
                     </p>

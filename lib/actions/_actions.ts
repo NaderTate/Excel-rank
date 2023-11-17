@@ -1,5 +1,8 @@
 "use server";
+import { YelpBusiness } from "@/app/types";
 import Prisma from "@/lib/prisma";
+import axios from "axios";
+import * as cheerio from "cheerio";
 
 // check if postId exists
 export const isPostIdExists = async (postId: string) => {
@@ -75,4 +78,35 @@ export const updateYelpReview = async (id: string, aiResponse: string) => {
     },
   });
   return yelp;
+};
+
+// get yelp page data
+export const getYelpPageData = async (link: string) => {
+  const pages = await Promise.all([
+    axios.get(link),
+    axios.get(link + "?start=10"),
+    // axios.get(link + '?start=20'),
+    // axios.get(link + '?start=30'),
+    // axios.get(link + '?start=40'),
+  ]);
+  const $ = cheerio.load(pages.map((page) => page.data).join(""));
+  const comments = $("ul.list__09f24__ynIEd span.raw__09f24__T4Ezm")
+    .map((index, element) => {
+      return $(element).text();
+    })
+    .get();
+
+  const starRating = $("ul.list__09f24__ynIEd div.five-stars__09f24__mBKym")
+    .map((index, element) => {
+      return $(element).attr("aria-label");
+    })
+    .get();
+
+  const textData = comments
+    .map(
+      (comment, index) =>
+        "starRating: " + starRating[index] + " comment: " + comment
+    )
+    .join(" ");
+  return textData;
 };

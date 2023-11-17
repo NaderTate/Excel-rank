@@ -1,4 +1,11 @@
 import { DefaultSession } from "next-auth";
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+    } & DefaultSession["user"];
+  }
+}
 interface ExtendedDocument extends Document {
   startViewTransition?: any;
 }
@@ -73,11 +80,3 @@ type YelpBusiness = {
   };
   openNow: boolean;
 };
-
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-    } & DefaultSession["user"];
-  }
-}
