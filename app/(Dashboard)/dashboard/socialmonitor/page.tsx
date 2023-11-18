@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useLayoutEffect, useEffect } from "react";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import {
@@ -15,7 +14,6 @@ import { FiLogOut } from "react-icons/fi";
 import SkeletonLoad from "@/app/components/SkeletonLoad";
 import FacebookPageData from "@/app/components/Dashboard/Social_Monitor/Facebook/PageData";
 import InstagramPageData from "@/app/components/Dashboard/Social_Monitor/Instagram/PageData";
-import { RxHamburgerMenu } from "react-icons/rx";
 import { FcNext } from "react-icons/fc";
 import Image from "next/image";
 import { Image as NextUIImage } from "@nextui-org/react";
@@ -36,7 +34,6 @@ function Page() {
   useEffect(() => {
     getFacebookLoginStatus()
       .then((response: any) => {
-        console.log({ response });
         if (response.authResponse == null) {
           setIsConnected(false);
         } else if (response.authResponse) {
@@ -54,7 +51,6 @@ function Page() {
   // get the user pages after login
   useLayoutEffect(() => {
     getUserPages().then((response) => {
-      console.log(response);
       setUserPages(response.data);
       if (response.data.length > 0) {
         setCurrentPage(response.data[0].id);
@@ -71,7 +67,6 @@ function Page() {
   }, [isConnected]);
   async function login() {
     fbLogin().then(async (response) => {
-      console.log(response);
       if (response.status === "connected") {
         setIsConnected(true);
         const longTokenRequest = await fetch(`/api/extend_token`, {
@@ -130,7 +125,7 @@ function Page() {
       <div className="flex">
         <div
           id="sidebar"
-          className={` h-full min-w-[320px] fixed  lg:opacity-100 transition-all -mt-16 lg:translate-x-0 ${
+          className={`z-20 h-full min-w-[320px] fixed  lg:opacity-100 transition-all -mt-16 lg:translate-x-0 ${
             showSideBar
               ? " opacity-100 translate-x-0"
               : " -translate-x-full opacity-0"
@@ -268,7 +263,7 @@ function Page() {
             </div>
           </div>
         </div>
-        <div className="lg:ml-80">
+        <div className="lg:ml-80 w-full">
           {isConnected &&
             showPageData &&
             (contentType === "facebook" ? (

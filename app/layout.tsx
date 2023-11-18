@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import SessionProv from "@components/auth/SessionProv";
-import Navbar from "@components/Navbar";
 import Script from "next/script";
 import { Providers } from "./components/Providers";
 
@@ -43,10 +42,7 @@ export default function RootLayout({
           nonce="FeUOmNvb"
         />
         <SessionProv session={session}>
-          <Providers>
-            <Navbar />
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </SessionProv>
       </body>
     </html>

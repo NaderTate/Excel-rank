@@ -1,13 +1,13 @@
 "use client";
 import ProtectedRoute from "@components/auth/ProtectedRoute";
-import Dashboard from "@components/Dashboard";
+import DashboardNav from "../components/Navbar/DashboardNav";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     // @ts-ignore
     <ProtectedRoute plan={["free", "standard", "plus", "premium"]}>
-      <div className="flex min-h-screen overflow-x-hidden">
-        {/* <Dashboard /> */}
+      <div className="">
+        <DashboardNav />
         <div className=" w-full">{children}</div>
       </div>
     </ProtectedRoute>

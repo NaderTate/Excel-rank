@@ -25,15 +25,8 @@ export default function Places({ setPlace }: PlacesProps) {
     setValue(val, false);
     clearSuggestions();
     const results = await getGeocode({ placeId: val });
-    console.log(val);
     const details: any = await getDetails({ placeId: results[0].place_id });
     const { lat, lng } = await getLatLng(results[0]);
-    // const res = await fetch(`/api/nearBySearch`, {
-    //   method: "POST",
-    //   body: JSON.stringify({ lat, lng }),
-    // });
-    // const data = await res.json();
-    // console.log(data);
     setPlace({ lat, lng }, details.place_id, details.types);
   };
 

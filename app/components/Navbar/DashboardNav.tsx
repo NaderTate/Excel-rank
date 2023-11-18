@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { navItems } from "@/lib/data";
+import { dashboardNavItems } from "@/lib/data";
 import { ThemeSwitcher } from "../ThemeSwitch";
 import {
   Navbar as NextUINav,
@@ -16,7 +16,7 @@ import {
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
 
-const Navbar = () => {
+const DashboardNav = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -51,7 +51,7 @@ const Navbar = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden lg:flex gap-4" justify="center">
-        {navItems.map((item, index) => (
+        {dashboardNavItems.map((item, index) => (
           <NavbarItem key={`${item}-${index}`}>
             <Link
               color={pathname === item.url ? "primary" : "foreground"}
@@ -72,7 +72,7 @@ const Navbar = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {navItems.map((item, index) => (
+        {dashboardNavItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={pathname === item.url ? "primary" : "foreground"}
@@ -88,4 +88,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNav;

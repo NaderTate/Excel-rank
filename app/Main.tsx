@@ -5,6 +5,7 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 import Banner from "@components/Banner";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Button } from "@nextui-org/react";
 
 const arrImages: Array<string> = [
   "https://res.cloudinary.com/dqkyatgoy/image/upload/v1697733891/image_50_xzekzy.svg",
@@ -165,10 +166,10 @@ export default function Main() {
                 />
               </div>
               <div className="p-2 md:p-16 md:w-1/2 lg:w-2/3 max-w-3xl flex flex-col gap-5">
-                <p className="text-[#034D82] text-4xl font-bold font-serif">
+                <p className="text-[#034D82] dark:text-blue-300 text-4xl font-bold font-serif">
                   Measure your posts impressions and reach
                 </p>
-                <p className="text-[#566d81]">
+                <p className="text-[#566d81] dark:text-gray-300">
                   Track your performance for metrics like follower evolution,
                   average engagement rate per post and reach and impressions
                   accross all your social media platforms from one dashboard.
@@ -185,16 +186,19 @@ export default function Main() {
             </div>
             <div className="flex flex-col md:flex-row gap-5 items-center">
               <div className="p-2 md:p-16 md:w-1/2  max-w-3xl flex flex-col gap-5">
-                <p className="text-[#034D82] text-4xl font-bold font-serif">
+                <p className="text-[#034D82] dark:text-blue-300 text-4xl font-bold font-serif">
                   Grow your local ranking
                 </p>
-                <p className="text-[#566d81]">
+                <p className="text-[#566d81] dark:text-gray-300">
                   See how your business ranks on Google Maps and who your top
                   copmetitors are.
                 </p>
                 <ul className="gap-2 flex flex-col">
                   {arrRankingFeatures.map((feature, index) => (
-                    <li key={index} className="text-[#566d81]">
+                    <li
+                      key={index}
+                      className="text-[#566d81] dark:text-gray-300"
+                    >
                       <Image
                         src="images/check.svg"
                         alt="check"
@@ -232,7 +236,7 @@ export default function Main() {
               <div className="p-2 md:p-16 md:w-[1000px] w-full">
                 <Image
                   quality={100}
-                  src="/images/main/macbook.png"
+                  src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1700253517/macbook_o24pbs.png"
                   alt="group1"
                   className="object-contain"
                   // layout="responsive"
@@ -241,10 +245,10 @@ export default function Main() {
                 />
               </div>
               <div className="p-2 md:p-16 md:w-1/2 lg:w-2/3 max-w-3xl flex flex-col gap-5">
-                <p className="text-[#034D82] text-4xl font-bold font-serif">
+                <p className="text-[#034D82] dark:text-blue-300 text-4xl font-bold font-serif">
                   Summarize your reviews on Yelp, Google and other websites
                 </p>
-                <p className="text-[#566d81]">
+                <p className="text-[#566d81] dark:text-gray-300">
                   With the power of AI, you don&apos;t have to maually go
                   through thousands of reviews on different websites. Let the AI
                   do the hard work and give you a brief of what your cusomers
@@ -275,13 +279,9 @@ export default function Main() {
           <div className="text-white font-semibold text-2xl">
             <p>Improve your rating, make more money</p>
           </div>
-          {/* button to trail */}
-          <button
-            className="bg-white px-8 py-4 h-fit rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300
-              "
-          >
+          <Button className="bg-white px-8 py-4 h-fit rounded-md font-bold text-[#00A8DB] hover:text-white hover:bg-[#00A8DB] transition-colors duration-300">
             Get your free trial
-          </button>
+          </Button>
         </article>
       </section>
     </main>

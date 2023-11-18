@@ -1,4 +1,4 @@
-import SkeletonLoad from "@/app/components/SkeletonLoad";
+import { Spinner, Tooltip } from "@nextui-org/react";
 import { AnalyzeSocialComments } from "@/lib/actions/socials";
 import {
   Modal,
@@ -23,6 +23,7 @@ function AIReviewPopup({
 }) {
   const [review, setReview] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const getComments = async () => {
@@ -33,6 +34,7 @@ function AIReviewPopup({
   };
   const handleAnalylize = async () => {
     if (showComments || commentsCount < 20) return;
+    setLoading(true);
     const comments = await getComments();
     const commentsString: string = comments.data
       .map((comment: { text: string }) => comment.text)
@@ -45,32 +47,21 @@ function AIReviewPopup({
     const JsonReview: ChatCompletion = JSON.parse(review.aiResponse);
     setReview(JsonReview.choices[0].message.content);
     setShowComments(true);
+    setLoading(false);
   };
   return (
     <div>
-      <button
-        title={
-          commentsCount === null || commentsCount < 20
-            ? "You need at least 20 comments to analyze"
-            : ""
-        }
-        disabled={commentsCount === null || commentsCount < 20}
-        onClick={() => {
+      <Button
+        fullWidth
+        color="primary"
+        onPress={() => {
           handleAnalylize();
           onOpen();
         }}
-        type="button"
-        className={`${
-          commentsCount === null || commentsCount < 20
-            ? "bg-gray-600 cursor-not-allowed"
-            : "bg-blue-600 hover:bg-blue-700"
-        }  rounded-md p-2 flex items-center gap-2 justify-center w-full`}
+        startContent={<BiAnalyse />}
       >
-        <div>
-          <BiAnalyse className="inline" size={20} />
-        </div>
-        <span className=" line-clamp-1">Analyze Post</span>
-      </button>
+        Analyze Post
+      </Button>
       <Modal
         placement="center"
         className="bg-background"
@@ -85,9 +76,19 @@ function AIReviewPopup({
                 <h1 className="text-lg font-bold">Summary</h1>
               </ModalHeader>
               <ModalBody>
-                {!review && <SkeletonLoad />}
+                {!review && loading && (
+                  <div className="flex justify-center flex-col items-center gap-2">
+                    <h1>Analyzing</h1>
+                    <Spinner />
+                  </div>
+                )}
 
                 <p className="whitespace-pre-line">{review}</p>
+                {commentsCount < 20 && (
+                  <p className="text-center">
+                    You need at least 20 comments to start the analysis
+                  </p>
+                )}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>

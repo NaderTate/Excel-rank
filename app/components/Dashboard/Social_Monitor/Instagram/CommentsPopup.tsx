@@ -1,11 +1,3 @@
-"use client";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import {
   Modal,
   ModalContent,
@@ -18,15 +10,18 @@ import {
 import { useState } from "react";
 import { BiComment } from "react-icons/bi";
 import SkeletonLoad from "@/app/components/SkeletonLoad";
+import { FaRegHeart } from "react-icons/fa";
 
 function InstagramCommentsPopup({
   postId,
   pageToken,
   commentsCount,
+  likesCount,
 }: {
   postId: string;
   pageToken: string;
   commentsCount: number | null;
+  likesCount: number;
 }) {
   const [comments, setComments] = useState<[] | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
@@ -46,15 +41,24 @@ function InstagramCommentsPopup({
 
   return (
     <div>
-      <div
+      <Button
+        fullWidth
+        color="primary"
         onClick={() => {
           getComments();
           onOpen();
         }}
-        className="flex items-center cursor-pointer"
       >
-        {commentsCount} <BiComment />
-      </div>
+        <div className="flex items-center justify-around w-full">
+          <div className="flex items-center">
+            {likesCount} <FaRegHeart />
+          </div>
+          <div className="flex items-center">
+            {commentsCount} <BiComment />
+          </div>
+        </div>
+      </Button>
+
       <Modal
         placement="center"
         className="bg-background"

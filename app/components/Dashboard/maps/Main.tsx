@@ -59,20 +59,13 @@ export default function Main() {
 
   return (
     <div className="flex flex-col items-stretch  justify-center py-14 px-5 lg:px-28">
-      <div className="p-2 md:p-10 rounded-2xl bg-slate-50 shadow-lg">
-        <div className=" ">
+      <div className="p-2 md:p-10 rounded-2xl border shadow-lg">
+        <div>
           <h2 className="sr-only">Steps</h2>
-          <div className="relative after:absolute after:inset-x-0 after:top-1/2 after:block after:h-0.5 after:-translate-y-1/2 after:rounded-lg after:bg-gray-100 border-b ">
-            <ol className="relative z-[1] flex justify-between text-sm font-medium text-gray-500">
+          <div className="relative after:absolute after:inset-x-0 after:top-1/2 after:block after:h-0.5 after:-translate-y-1/2 after:rounded-lg after:bg-gray-100 dark:after:bg-slate-900">
+            <ol className="relative z-[1] flex justify-between text-sm font-medium ">
               {stepsList.map((stepItem, index) => (
-                <li
-                  key={index}
-                  className={`${
-                    stepsList.indexOf(stepItem) <= stepsList.indexOf(step)
-                      ? "text-gray-900"
-                      : ""
-                  } flex items-center gap-2  p-2`}
-                >
+                <li key={index} className={` flex items-center gap-2  p-2`}>
                   <span
                     className={`flex items-center justify-center w-6 h-6 rounded-full  ${
                       stepsList.indexOf(stepItem) <= stepsList.indexOf(step)

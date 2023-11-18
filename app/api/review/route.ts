@@ -11,8 +11,6 @@ export async function POST(request: Request) {
   const { link, yelp }: { link: string; yelp: YelpBusiness } =
     await request.json();
   const session: any = await getServerSession(authOptions);
-  // check if the link is already in the database
-
   // if (!session || ['free', '', null].includes(session.user.plan)) {
   //   return NextResponse.redirect('/pricing');
   // }

@@ -5,6 +5,8 @@ import { AiOutlineLike } from "react-icons/ai";
 import { BiLogoFacebookCircle } from "react-icons/bi";
 import CommentsPopup from "./CommentsPopup";
 import AIReviewPopup from "./AIReviewPopup";
+import { Image } from "@nextui-org/react";
+import InsightsPopup from "./InsightsPopup";
 
 function PostCard({
   data,
@@ -50,23 +52,17 @@ function PostCard({
     return comments.json();
   };
 
-  const handleAnalylize = async () => {
-    console.log("analyzing");
-    const comments = await getComments();
-    if (comments.data.length < 20) return;
-    const commentsString = comments.data
-      .map((comment: any) => comment.message)
-      .join("/");
-    console.log(commentsString);
-    // const review = await getFacebookReview(id, commentsString);
-    // console.log(review);
-  };
-
   return (
     <div>
       <div key={id} className="rounded-xl  p-2 md:p-4 flex flex-col gap-4">
         <div className="flex items-center">
-          <img alt="port pic" src={picture} className="rounded-full w-12" />
+          <Image
+            alt="port pic"
+            src={picture}
+            className="rounded-full"
+            width={50}
+            height={50}
+          />
           <div className="ml-2 flex justify-center flex-col mb-3">
             <h1 className="text-lg font-bold ">{name}</h1>
             <h1 className="text-sm ">
@@ -98,28 +94,13 @@ function PostCard({
           />
         )}
         <div className=" grid grid-cols-3 gap-3 md:gap-5 text-white">
-          <Link
-            href={{ pathname: permalink_url }}
-            className="w-full"
-            target="_blank"
-          >
-            <button className="bg-blue-600  rounded-md p-2 line-clamp-1 w-full flex items-center justify-center gap-2">
-              <div>
-                <BiLogoFacebookCircle className="inline" size={20} />
-              </div>
-              <span className="line-clamp-1">View on Facebook</span>
-            </button>
-          </Link>
-          <div className="flex justify-around bg-blue-600  rounded-md p-2">
-            <div className="flex items-center">
-              {likesCount} <AiOutlineLike />
-            </div>
-            <CommentsPopup
-              postId={postId}
-              pageToken={pageToken}
-              commentsCount={commentsCount}
-            />
-          </div>
+          <InsightsPopup pageToken={pageToken} postId={postId} />
+          <CommentsPopup
+            postId={postId}
+            pageToken={pageToken}
+            commentsCount={commentsCount}
+            likesCount={likesCount || 0}
+          />
           <AIReviewPopup
             postId={postId}
             commentsCount={commentsCount || 0}

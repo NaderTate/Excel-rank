@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 function page() {
   return (
-    <div className="bg-[#F3F3F3]">
+    <div className="">
       <div className="min-h-screen w-screen main_gradient text-white">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}

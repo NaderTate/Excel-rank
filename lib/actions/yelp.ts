@@ -38,7 +38,6 @@ const getReview = async (link: string) => {
     });
     return { data: response.choices[0].message };
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
@@ -57,7 +56,6 @@ export const handleReviews = async (
   }
 
   const data = await getReview(link);
-  console.log(data);
   if (!data) return { success: false, message: "An error occured" };
   if (review) {
     review = await updateYelpReview(review.id, JSON.stringify(data));

@@ -1,9 +1,9 @@
 import React from "react";
-import SkeletonLoad from "@/app/components/SkeletonLoad";
-import Image from "next/image";
 import Link from "next/link";
 import { BiLinkAlt } from "react-icons/bi";
 import InstagramPostCard from "./PostCard";
+import { Image } from "@nextui-org/react";
+import Loading from "./Loading";
 
 function InstagramPageData({
   data,
@@ -16,7 +16,7 @@ function InstagramPageData({
     return (
       <div className="p-5">
         <div className="flex items-center gap-5">
-          <img
+          <Image
             loading="lazy"
             src={data?.profile_picture_url}
             width={100}
@@ -64,7 +64,7 @@ function InstagramPageData({
         </div>
       </div>
     );
-  else return <SkeletonLoad />;
+  else return <Loading />;
 }
 
 export default InstagramPageData;

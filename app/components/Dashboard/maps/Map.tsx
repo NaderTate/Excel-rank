@@ -150,7 +150,7 @@ function Map() {
     competitorId: string;
   }) => (
     <div
-      className={`bg-white rounded-md p-1 my-1 border-2 text-black w-full ${
+      className={` rounded-md p-1 my-1 border-2 text-black w-full ${
         competitorId == id &&
         (position <= 5
           ? "border-green-500/80"

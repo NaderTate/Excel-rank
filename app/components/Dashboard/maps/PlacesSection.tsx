@@ -7,6 +7,7 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import { FiChevronDown } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import { Input } from "@nextui-org/react";
 
 export default function PlacesSection({ setPlace }: any) {
   const {
@@ -52,16 +53,16 @@ export default function PlacesSection({ setPlace }: any) {
         Find your buisness 🔎
       </h1>
       <div id="SearchBox" className="flex justify-center relative">
-        <input
+        <Input
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onValueChange={setValue}
           disabled={!ready}
           type="text"
-          className="rounded-full w-full p-2 outline-1 border border-teal-800 outline-teal-600"
-          placeholder="Type your business name"
+          radius="full"
+          label="Type your business name"
           autoComplete="off"
         />
-        <ul className="absolute top-12 w-full bg-white rounded-lg shadow-lg z-10 flex flex-col gap-1">
+        <ul className="absolute top-12 w-full bg-content1 rounded-lg shadow-lg z-10 flex flex-col gap-1  shadow-blue-800/10">
           {data.map((suggestion) => {
             const {
               place_id,
@@ -71,7 +72,7 @@ export default function PlacesSection({ setPlace }: any) {
               <li
                 key={place_id}
                 onClick={() => handleSelect(place_id, main_text)}
-                className="p-2 hover:bg-gray-200 cursor-pointer"
+                className="p-2 hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
               >
                 <strong>{main_text}</strong> <small>{secondary_text}</small>
               </li>
@@ -80,7 +81,7 @@ export default function PlacesSection({ setPlace }: any) {
         </ul>
       </div>
       {/* Accordion */}
-      <div className="flex flex-col gap-2 mt-10 bg-gray-300 shadow-sm border rounded-xl p-4">
+      <div className="flex flex-col gap-2 mt-10 shadow-sm border rounded-xl p-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

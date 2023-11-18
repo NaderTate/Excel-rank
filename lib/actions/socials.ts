@@ -31,7 +31,7 @@ export const AnalyzeSocialComments = async (
         {
           role: "system",
           content:
-            'You will receive a bunch of comments about on a specific topic, the comments are separated by "/" , I want you to read the comments and give me a summary, like what are the main topics people are talking about, what are the positive aspects, negative aspects, etc.. . Try to give me the response in this form if you can : Positive aspects: ... Negative aspects: ... Overall summary: ... , If you can\'t, just give me a summary of the comments. ',
+            'You will receive a bunch of comments about on a specific topic, the comments are separated by "/" , I want you to read the comments and give me a summary, like what are the main topics people are talking about, what are the positive aspects, negative aspects, etc.. . Try to give me the response in this form if you can : Positive aspects: ... Negative aspects: ... Overall summary: ... , If you can\'t, just give me a summary of the comments. Make the summary as short as possible. ',
         },
         {
           role: "user",

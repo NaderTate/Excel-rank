@@ -3,6 +3,7 @@ import { useState } from "react";
 import Main from "@/app/components/Dashboard/maps/Main";
 import { AnimatePresence, motion } from "framer-motion";
 import SearchSimulator from "@/app/components/Dashboard/SearchSimulator";
+import Image from "next/image";
 
 function Page() {
   const [content, setContent] = useState<"maps" | "search" | null>(null);
@@ -25,9 +26,15 @@ function Page() {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0, opacity: 0 }}
         transition={{ duration: 0.5, type: "spring" }}
-        className={`flex flex-col items-center justify-center rounded-xl w-80 h-96 p-5 bg-gradient-to-tl from-fuchsia-400 via-sky-100 to-sky-400 transition-all cursor-pointer hover:shadow-xl`}
+        className={`text-gray-900 flex flex-col items-center justify-center rounded-xl w-80 h-96 p-5 bg-gradient-to-tl from-fuchsia-400 via-sky-100 to-sky-400 transition-all cursor-pointer hover:shadow-xl`}
       >
-        <img src={img} className=" rounded-full h-52 object-contain " />
+        <Image
+          alt="icon"
+          width={200}
+          height={200}
+          src={img}
+          className=" rounded-full object-contain "
+        />
         <h1 className="text-2xl font-bold ">{title}</h1>
         <p className="text-center font-semibold mt-4">{description}</p>
       </motion.div>

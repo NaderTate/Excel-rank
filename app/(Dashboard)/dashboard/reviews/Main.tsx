@@ -37,7 +37,6 @@ export default function Main() {
     setInfo(yelpData);
     const data =
       session && (await handleReviews(url, session?.user?.id, yelpData));
-    console.log(data);
     if (data?.success) {
       setReview(
         JSON.parse(JSON.parse(data?.data?.aiResponse || "").data.content)

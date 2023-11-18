@@ -13,7 +13,10 @@ function UserAvatar() {
   return (
     <div>
       {session?.user ? (
-        <Dropdown placement="bottom-end">
+        <Dropdown
+          placement="bottom-end"
+          className="bg-background shadow-xl shadow-blue-600/10"
+        >
           <DropdownTrigger>
             <Avatar
               isBordered

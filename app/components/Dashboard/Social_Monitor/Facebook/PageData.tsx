@@ -1,5 +1,6 @@
-import SkeletonLoad from "@/app/components/SkeletonLoad";
 import PostCard from "./PostCard";
+import Loading from "./Loading";
+import { Image } from "@nextui-org/react";
 
 function FacebookPageData({ data }: { data: any }) {
   if (data?.published_posts)
@@ -13,7 +14,7 @@ function FacebookPageData({ data }: { data: any }) {
           }}
           className=" p-5 py-14 rounded-md flex flex-col"
         >
-          <img
+          <Image
             width={50}
             height={50}
             className="rounded-md mb-2"
@@ -46,7 +47,7 @@ function FacebookPageData({ data }: { data: any }) {
         </div>
       </div>
     );
-  else return <SkeletonLoad />;
+  else return <Loading />;
 }
 
 export default FacebookPageData;

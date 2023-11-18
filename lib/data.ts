@@ -42,6 +42,20 @@ export const navItems = [
     url: "/pricing",
   },
 ];
+export const dashboardNavItems = [
+  {
+    name: "Review Manager",
+    url: "/dashboard/reviews",
+  },
+  {
+    name: "Local Ranking",
+    url: "/dashboard/localranking",
+  },
+  {
+    name: "Social Monitoring",
+    url: "/dashboard/socialmonitor",
+  },
+];
 
 export const pricingItems = [
   {

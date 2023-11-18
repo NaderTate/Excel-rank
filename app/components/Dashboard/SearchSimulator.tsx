@@ -10,7 +10,6 @@ import {
   CommandInput,
   CommandItem,
 } from "@/components/ui/command";
-import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -20,11 +19,12 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { AiFillGoogleCircle, AiOutlineCheck } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
-import { Checkbox } from "@/components/ui/checkbox";
 import { FaTabletAlt } from "react-icons/fa";
 import { RiComputerLine } from "react-icons/ri";
 import { PiDeviceMobileSpeaker } from "react-icons/pi";
 import { MdOpenInNew } from "react-icons/md";
+import { Checkbox, Input } from "@nextui-org/react";
+
 function SearchSimulator() {
   const [openCountry, setOpenCountry] = useState(false);
   const [openState, setOpenState] = useState(false);
@@ -65,9 +65,10 @@ function SearchSimulator() {
         google ads SEO performance in any country in the world
       </p>
       <Input
-        placeholder="Type your keywords..."
+        variant="bordered"
+        label="Type your keywords..."
         className="my-5"
-        onChange={(e) => setSearchWords(e.target.value)}
+        onValueChange={setSearchWords}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-10">
         <Popover open={openCountry} modal onOpenChange={setOpenCountry}>
@@ -86,13 +87,14 @@ function SearchSimulator() {
               <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className=" h-52 p-0">
+          <PopoverContent className=" h-52 p-0 bg-background">
             <Command>
               <CommandInput placeholder="Search a country" />
               <CommandEmpty>Couldn&apos;t find any country...</CommandEmpty>
               <CommandGroup className="overflow-auto">
                 {allCountries.map((country, i) => (
                   <CommandItem
+                    className="hover:bg-gray-200 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                     key={i}
                     onSelect={() => {
                       setSelectedCountry(country.shortName);
@@ -131,13 +133,14 @@ function SearchSimulator() {
               <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className=" h-52 p-0">
+          <PopoverContent className=" h-52 p-0 bg-background">
             <Command>
               <CommandInput placeholder="Search a state" />
               <CommandEmpty>Couldn&apos;t find any state...</CommandEmpty>
               <CommandGroup className="overflow-auto">
                 {allStates?.map((state) => (
                   <CommandItem
+                    className="hover:bg-gray-200 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                     key={state}
                     onSelect={() => {
                       setSelectedState(state);
@@ -173,13 +176,14 @@ function SearchSimulator() {
               <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className=" h-52 p-0">
+          <PopoverContent className=" h-52 p-0 bg-background">
             <Command>
               <CommandInput placeholder="Search a city" />
               <CommandEmpty>Couldn&apos;t find any city...</CommandEmpty>
               <CommandGroup className="overflow-auto">
                 {allCities?.map((city) => (
                   <CommandItem
+                    className="hover:bg-gray-200 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                     key={city}
                     onSelect={() => {
                       setSelectedCity(city);
@@ -215,13 +219,14 @@ function SearchSimulator() {
               <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className=" h-52 p-0">
+          <PopoverContent className=" h-52 p-0 bg-background">
             <Command>
               <CommandInput placeholder="Search a language" />
               <CommandEmpty>Couldn&apos;t find any language...</CommandEmpty>
               <CommandGroup className="overflow-auto">
                 {languages?.map((language) => (
                   <CommandItem
+                    className="hover:bg-gray-200 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                     key={language.symbol}
                     onSelect={() => {
                       setSelectedLanguage(language.symbol);
@@ -257,13 +262,14 @@ function SearchSimulator() {
               <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className=" h-52 p-0">
-            <Command>
+          <PopoverContent className=" h-52 p-0 ">
+            <Command className="bg-background">
               <CommandInput placeholder="Search a domain" />
               <CommandEmpty>Couldn&apos;t find any domain...</CommandEmpty>
               <CommandGroup className="overflow-auto">
                 {googleDomains?.map((domain) => (
                   <CommandItem
+                    className="hover:bg-gray-200 dark:hover:bg-slate-800 cursor-pointer transition-colors"
                     key={domain}
                     onSelect={() => {
                       setSelectedDomain(domain);
@@ -284,16 +290,9 @@ function SearchSimulator() {
           </PopoverContent>
         </Popover>
         <div className="items-center flex space-x-2  m-auto">
-          <Checkbox
-            id="safeSearch"
-            onClick={(e) => setSafeSearch(!safeSearch)}
-          />
-          <label
-            htmlFor="safeSearch"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-          >
-            Safe search{" "}
-          </label>
+          <Checkbox id="safeSearch" onClick={() => setSafeSearch(!safeSearch)}>
+            Safe Search
+          </Checkbox>
         </div>
       </div>
       <div className="flex justify-center items-center gap-10 my-5">

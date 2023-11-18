@@ -11,15 +11,18 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { AiOutlineLike } from "react-icons/ai";
 
 function CommentsPopup({
   postId,
   pageToken,
   commentsCount,
+  likesCount,
 }: {
   postId: string;
   pageToken: string;
   commentsCount: number | null;
+  likesCount: number;
 }) {
   const [comments, setComments] = useState<[] | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
@@ -34,21 +37,28 @@ function CommentsPopup({
       .then((res) => {
         setComments(res.data);
         setShowComments(true);
-        console.log(res.data);
       });
   };
 
   return (
     <div>
-      <div
+      <Button
+        fullWidth
+        color="primary"
         onClick={() => {
           getComments();
           onOpen();
         }}
-        className="flex items-center cursor-pointer"
       >
-        {commentsCount} <BiComment />
-      </div>
+        <div className="flex items-center justify-around w-full">
+          <div className="flex items-center">
+            {likesCount} <AiOutlineLike />
+          </div>
+          <div className="flex items-center">
+            {commentsCount} <BiComment />
+          </div>
+        </div>
+      </Button>
       <Modal
         placement="center"
         className="bg-background"

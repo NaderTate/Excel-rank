@@ -13,11 +13,9 @@ import { SlGraph } from "react-icons/sl";
 function InsightsPopup({
   postId,
   pageToken,
-  media_type,
 }: {
   postId: string;
   pageToken: string;
-  media_type: string;
 }) {
   const [insights, setInsights] = useState<[] | null>(null);
   const [showInsights, setShowInsights] = useState<boolean>(false);
@@ -50,13 +48,8 @@ function InsightsPopup({
   }
   const getInsights = () => {
     if (showInsights) return;
-    let metric = "saved,reach,impressions,total_interactions,";
-    if (media_type == "CAROUSEL_ALBUM") metric += "";
-    else if (media_type == "IMAGE")
-      metric += "likes,comments,follows,profile_visits";
-
     fetch(
-      `https://graph.facebook.com/v18.0/${postId}/insights?metric=${metric}&access_token=${pageToken}`
+      `https://graph.facebook.com/v18.0/${postId}/insights?metric=saved%2Creach%2Cimpressions%2Ctotal_interactions%2Clikes%2Ccomments%2Cfollows%2Cprofile_visits&access_token=${pageToken}`
     )
       .then((res) => res.json())
       .then((res) => {
