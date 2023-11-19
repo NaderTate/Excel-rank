@@ -8,6 +8,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import Image from "next/image";
 import { useState } from "react";
 import { SlGraph } from "react-icons/sl";
 function InsightsPopup({
@@ -17,46 +18,82 @@ function InsightsPopup({
   postId: string;
   pageToken: string;
 }) {
-  const [insights, setInsights] = useState<[] | null>(null);
+  const [insights, setInsights] = useState<any[] | null>(null);
   const [showInsights, setShowInsights] = useState<boolean>(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const emojiWidth = 25;
+  // function rearrangeArray(data: []) {
+  //   const order = [
+  //     "likes",
+  //     "comments",
+  //     "saved",
+  //     "reach",
+  //     "impressions",
+  //     "total_interactions",
+  //     "follows",
+  //     "profile_visits",
+  //   ];
+  //   function customSort(a: { name: string }, b: { name: string }) {
+  //     const indexA = order.indexOf(a.name);
+  //     const indexB = order.indexOf(b.name);
+  //     return indexA - indexB;
+  //   }
 
-  function rearrangeArray(data: []) {
-    // Define the desired order of keys
-    const order = [
-      "likes",
-      "comments",
-      "saved",
-      "reach",
-      "impressions",
-      "total_interactions",
-      "follows",
-      "profile_visits",
-    ];
+  //   // Sort the data array using the custom sorting function
+  //   const sortedData = data.sort(customSort);
 
-    // Create a custom sorting function based on the order
-    function customSort(a: { name: string }, b: { name: string }) {
-      const indexA = order.indexOf(a.name);
-      const indexB = order.indexOf(b.name);
-      return indexA - indexB;
-    }
-
-    // Sort the data array using the custom sorting function
-    const sortedData = data.sort(customSort);
-
-    return sortedData;
-  }
+  //   return sortedData;
+  // }
+  const metrics = [
+    { name: "post_engaged_users", displayName: "Engaged Users" },
+    {
+      name: "post_engaged_fan",
+      displayName: "Engaged Fans",
+    },
+    {
+      name: "post_negative_feedback",
+      displayName: "Negative Feedback",
+    },
+    {
+      name: "post_clicks",
+      displayName: "Clicks",
+    },
+    {
+      name: "post_impressions",
+      displayName: "Impressions",
+    },
+    {
+      name: "post_impressions_paid",
+      displayName: "Paid Impressions",
+    },
+    {
+      name: "post_impressions_organic",
+      displayName: "Organic Impressions",
+    },
+  ];
+  const reactions = [
+    { name: "post_reactions_like_total", img: "like.svg" },
+    { name: "post_reactions_love_total", img: "love.svg" },
+    { name: "post_reactions_wow_total", img: "wow.svg" },
+    { name: "post_reactions_haha_total", img: "haha.svg" },
+    { name: "post_reactions_sorry_total", img: "sad.svg" },
+    { name: "post_reactions_anger_total", img: "angry.svg" },
+  ];
   const getInsights = () => {
     if (showInsights) return;
+
     fetch(
-      `https://graph.facebook.com/v18.0/${postId}/insights?metric=saved%2Creach%2Cimpressions%2Ctotal_interactions%2Clikes%2Ccomments%2Cfollows%2Cprofile_visits&access_token=${pageToken}`
+      `https://graph.facebook.com/v18.0/${postId}/insights?metric=${metrics
+        .map((metric) => metric.name)
+        .join(",")}
+      ,${reactions
+        .map((reaction) => reaction.name)
+        .join(",")}&access_token=${pageToken}`
     )
       .then((res) => res.json())
       .then((res) => {
-        const rearrangedInsights = rearrangeArray(res.data);
-
-        setInsights(rearrangedInsights);
-        setShowInsights(true);
+        setInsights(res.data);
+        // setShowInsights(true);
       });
   };
 
@@ -87,14 +124,50 @@ function InsightsPopup({
                 <h1 className="text-lg font-bold">Insights</h1>
               </ModalHeader>
               <ModalBody>
-                {insights?.map((insight: any) => (
-                  <div key={insight.name}>
-                    <div className="flex justify-between mfgdr-36 border-b ">
-                      <h1 className="text-lg font-bold">{insight.title}</h1>
-                      <h1 className="text-lg ">{insight.values[0].value}</h1>
+                <div className="flex gap-3">
+                  {reactions.map((reaction) => (
+                    <div
+                      key={reaction.name}
+                      className="flex flex-col items-center"
+                    >
+                      <Image
+                        src={`/images/emojies/${reaction.img}`}
+                        alt="sad"
+                        width={emojiWidth}
+                        height={emojiWidth}
+                      />
+                      <span>
+                        {
+                          insights?.find(
+                            (insight: any) => insight.name === reaction.name
+                          )?.values[0].value
+                        }
+                      </span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+
+                {insights
+                  ?.filter(
+                    (insight: any) =>
+                      !reactions.find(
+                        (reaction) => reaction.name === insight.name
+                      )
+                  )
+                  .map((insight: any) => (
+                    <div key={insight.name}>
+                      <div className="flex justify-between mfgdr-36 border-b ">
+                        <h1 className=" font-bold">
+                          {
+                            metrics.find(
+                              (metric) => metric.name === insight.name
+                            )?.displayName
+                          }
+                        </h1>
+                        <h1 className=" ">{insight.values[0].value}</h1>
+                      </div>
+                    </div>
+                  ))}
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
