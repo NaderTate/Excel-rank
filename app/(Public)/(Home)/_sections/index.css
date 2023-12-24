@@ -1,0 +1,57 @@
+.inner img {
+  max-width: 100px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* filter to gray */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  @apply mx-4 md:mx-10 opacity-80 transition duration-500 ease-in-out;
+}
+
+.inner img:hover {
+  -webkit-filter: grayscale(0%);
+  filter: grayscale(0%);
+  @apply opacity-100;
+}
+
+.inner img:last-of-type {
+  padding-left: 0;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 5rem;
+}
+
+.wrapper {
+  position: absolute;
+  display: flex;
+}
+
+.logos-sections {
+  display: flex;
+  -webkit-animation: swipe 15000ms linear infinite backwards;
+  animation: swipe 15000ms linear infinite backwards;
+}
+
+@-webkit-keyframes swipe {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+@keyframes swipe {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-100%);
+  }
+}

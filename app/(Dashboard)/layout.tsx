@@ -1,16 +1,19 @@
-"use client";
-import ProtectedRoute from "@components/auth/ProtectedRoute";
-import DashboardNav from "../components/Navbar/DashboardNav";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+import DashboardNav from "@/components/Dashboard/DashboardNavbar";
+
+import { authOptions } from "@/lib/authOptions";
+
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await getServerSession(authOptions);
+  if (!session) redirect("/login");
+
   return (
-    // @ts-ignore
-    <ProtectedRoute plan={["free", "standard", "plus", "premium"]}>
-      <div className="">
-        <DashboardNav />
-        <div className=" w-full">{children}</div>
-      </div>
-    </ProtectedRoute>
+    <>
+      <DashboardNav />
+      <div className=" w-full">{children}</div>
+    </>
   );
 };
 

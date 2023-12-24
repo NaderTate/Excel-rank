@@ -1,16 +1,23 @@
-import Main from "./Main";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
+
+import { Image } from "@nextui-org/react";
+import { getServerSession } from "next-auth";
+import { Image as NUIImage } from "@nextui-org/react";
+
+import BusinessForm from "./_components/BusinessForm";
+
+import { authOptions } from "@/lib/authOptions";
+
 export const metadata = {
   title: "Reviews Manager",
   description: "Analyze thousands of reviews within seconds",
 };
+
 export default async function Page() {
-  const session: any = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   const userLinks = await prisma.aiReview.findMany({
     where: {
-      userId: session.user.id,
+      userId: session?.user.id,
     },
   });
 
@@ -27,13 +34,16 @@ export default async function Page() {
                   key={link.id + "reviewedlinks"}
                   className="flex items-center rounded-lg shadow-lg shadow-blue-800/20 transition-colors p-2 cursor-pointer hover:bg-slate-400/30"
                 >
-                  <img
-                    className="w-10 mr-1 h-10 rounded-full"
+                  <NUIImage
+                    as={Image}
+                    width={40}
+                    height={40}
+                    className="mr-1 rounded-full aspect-square object-cover"
                     src={link.image as string}
                     alt="business image"
                   />
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm   line-clamp-1">{link.title}</p>
+                    <p className="text-sm line-clamp-1">{link.title}</p>
                     <p className="text-xs text-gray-500 line-clamp-1">
                       {link.address}
                     </p>
@@ -46,7 +56,7 @@ export default async function Page() {
       )}
 
       <div className="flex flex-col flex-1 w-full gap-3">
-        <Main />
+        <BusinessForm />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use server";
-import { YelpBusiness } from "@/app/types";
+import { YelpBusiness } from "@/types";
 import Prisma from "@/lib/prisma";
 import axios from "axios";
 import * as cheerio from "cheerio";

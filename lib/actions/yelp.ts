@@ -8,7 +8,7 @@ import {
   isYelpLinkExists,
   updateYelpReview,
 } from "./_actions";
-import { YelpBusiness } from "@/app/types";
+import { YelpBusiness } from "@/types";
 // export const maxDuration = 200;
 const GPTPrompt = `Analyze these responses in general and only return nothing but the following json with the following format => "{"FinalReview": "string", "OverAllRating": number, "max3PositiveThings":Array<string>, "max3NegativeThings":Array<string>, "RecommendationsForImprovement":Array<string>}"`;
 const getReview = async (link: string) => {

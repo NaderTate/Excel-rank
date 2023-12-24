@@ -1,11 +1,16 @@
 "use client";
 
-import SignWith from "@components/auth/SignWith";
+import SignWith from "@/app/(auth)/signin/_components/SignInOptions";
 import Link from "next/link";
 import Image from "next/image";
 
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+
+const metadata = {
+  title: "Excel Rank",
+  description: "Improve your reputation, make more money",
+};
 
 const Page = () => {
   // get the session from the server side and redirect if user is logged in

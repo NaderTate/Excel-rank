@@ -11,14 +11,16 @@ import {
   getInstagramPageData,
 } from "@/lib/FacebookSDK";
 import { FiLogOut } from "react-icons/fi";
-import SkeletonLoad from "@/app/components/SkeletonLoad";
-import FacebookPageData from "@/app/components/Dashboard/Social_Monitor/Facebook/PageData";
-import InstagramPageData from "@/app/components/Dashboard/Social_Monitor/Instagram/PageData";
+
+import FacebookPageData from "./_components/facebook/PageData";
+import InstagramPageData from "./_components/instagram/PageData";
 import { FcNext } from "react-icons/fc";
 import Image from "next/image";
 import { Image as NextUIImage } from "@nextui-org/react";
 import Link from "next/link";
+import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
 function Page() {
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userPages, setUserPages] = useState<Array<{}> | null>(null);
@@ -30,6 +32,10 @@ function Page() {
     "facebook"
   );
   const [showSideBar, setShowSideBar] = useState(false);
+  useEffect(() => {
+    setIsPageLoaded(true);
+  }, []);
+
   // Check if the user is connected to facebook
   useEffect(() => {
     getFacebookLoginStatus()
@@ -46,10 +52,10 @@ function Page() {
       .then(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [isPageLoaded]);
 
   // get the user pages after login
-  useLayoutEffect(() => {
+  useEffect(() => {
     getUserPages().then((response) => {
       setUserPages(response.data);
       if (response.data.length > 0) {
@@ -108,6 +114,7 @@ function Page() {
       document.removeEventListener("keydown", handleKeyPress);
     };
   });
+  if (!isPageLoaded) return null;
   return (
     <div className="  min-h-screen">
       <div className="fixed bottom-[20px] left-0 w-12 rounded-r-full bg-gray-100/70 z-50">
@@ -151,7 +158,7 @@ function Page() {
               <span className="text-sm mb-5">
                 Get insights about your business on social media
               </span>
-              {isLoading && <SkeletonLoad />}
+              {isLoading && <LoadingSkeleton />}
               {!isLoading &&
                 (isConnected ? (
                   <div>
@@ -234,7 +241,7 @@ function Page() {
                             </div>
                           ))
                         ) : (
-                          <SkeletonLoad />
+                          <LoadingSkeleton />
                         )}
                         {userPages?.length === 0 && (
                           <p>

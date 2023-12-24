@@ -1,9 +1,13 @@
 import "./globals.css";
+
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
-import SessionProv from "@components/auth/SessionProv";
-import Script from "next/script";
-import { Providers } from "./components/Providers";
+import { getServerSession } from "next-auth";
+
+import { Providers } from "../components/Providers";
+
+import { authOptions } from "@/lib/authOptions";
 
 const quick = Quicksand({
   subsets: ["latin", "latin-ext"],
@@ -23,27 +27,27 @@ export const metadata: Metadata = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  session,
 }: {
   children: React.ReactNode;
-  session: any;
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body className={quick.className}>
-        <div id="fb-root"></div>
-        <Script
-          async
-          defer
-          crossOrigin="anonymous"
-          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=603592791842712"
-          nonce="FeUOmNvb"
-        />
-        <SessionProv session={session}>
-          <Providers>{children}</Providers>
-        </SessionProv>
+        <Providers session={session}>
+          <div id="fb-root"></div>
+          <Script
+            async
+            defer
+            crossOrigin="anonymous"
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0&appId=603592791842712"
+            nonce="FeUOmNvb"
+          />
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -2,15 +2,15 @@ import { NextResponse } from "next/server";
 import { getReview } from "./utils";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { YelpBusiness } from "@/app/types";
+import { YelpBusiness } from "@/types";
+import { authOptions } from "@/lib/authOptions";
 // export const maxDuration = 200;
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   const { link, yelp }: { link: string; yelp: YelpBusiness } =
     await request.json();
-  const session: any = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions);
   // if (!session || ['free', '', null].includes(session.user.plan)) {
   //   return NextResponse.redirect('/pricing');
   // }
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   try {
     let review = await prisma.aiReview.findFirst({
       where: {
-        userId: session.user.id,
+        userId: session?.user.id,
         link,
       },
     });
@@ -45,17 +45,19 @@ export async function POST(request: Request) {
         },
       });
     } else {
-      review = await prisma.aiReview.create({
-        data: {
-          link: link,
-          userId: session.user.id,
-          // convert data to string
-          aiResponse: JSON.stringify(data),
-          image: yelp.image,
-          title: yelp.name,
-          address: yelp.location ? yelp.location.address1 : "",
-        },
-      });
+      review =
+        session &&
+        (await prisma.aiReview.create({
+          data: {
+            link: link,
+            userId: session.user.id,
+            // convert data to string
+            aiResponse: JSON.stringify(data),
+            image: yelp.image,
+            title: yelp.name,
+            address: yelp.location ? yelp.location.address1 : "",
+          },
+        }));
     }
 
     return NextResponse.json(review, { status: 200 });
