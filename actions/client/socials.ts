@@ -1,7 +1,11 @@
 "use client";
 import OpenAI from "openai";
 import GPT3Tokenizer from "gpt3-tokenizer";
-import { createFBReview, createIGReview, isPostIdExists } from "./_actions";
+import {
+  createFBReview,
+  createIGReview,
+  isPostIdExists,
+} from "@/actions/server/socials";
 
 export const AnalyzeSocialComments = async (
   postId: string,

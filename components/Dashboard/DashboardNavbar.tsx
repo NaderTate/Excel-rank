@@ -1,9 +1,5 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { dashboardNavItems } from "@/lib/data";
-import { ThemeSwitcher } from "@/components/ThemeSwitch";
+
 import {
   Navbar as NextUINav,
   NavbarBrand,
@@ -13,9 +9,16 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@nextui-org/react";
-import { Link as NUILink } from "@nextui-org/react";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { Link as NUILink } from "@nextui-org/react";
+
 import UserAvatar from "../Navbar/UserAvatar";
+import { ThemeSwitcher } from "@/components/ThemeSwitch";
+
+import { dashboardNavItems } from "@/lib/data";
 
 const DashboardNav = () => {
   const pathname = usePathname();

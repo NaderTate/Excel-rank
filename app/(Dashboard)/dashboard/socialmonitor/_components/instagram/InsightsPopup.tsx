@@ -1,5 +1,5 @@
 "use client";
-import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
+
 import {
   Modal,
   ModalContent,
@@ -10,16 +10,18 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
+
+import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
+
 import { SlGraph } from "react-icons/sl";
-function InsightsPopup({
-  postId,
-  pageToken,
-  media_type,
-}: {
+
+type Props = {
   postId: string;
   pageToken: string;
   media_type: string;
-}) {
+};
+
+function InsightsPopup({ postId, pageToken, media_type }: Props) {
   const [insights, setInsights] = useState<[] | null>(null);
   const [showInsights, setShowInsights] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -71,7 +73,7 @@ function InsightsPopup({
   };
 
   return (
-    <div>
+    <>
       <Button
         fullWidth
         color="primary"
@@ -117,7 +119,7 @@ function InsightsPopup({
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

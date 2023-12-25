@@ -1,8 +1,13 @@
-import PostCard from "./PostCard";
-import Loading from "./Loading";
 import { Image } from "@nextui-org/react";
 
-function FacebookPageData({ data }: { data: any }) {
+import PostCard from "./PostCard";
+import Loading from "./Loading";
+
+type Props = {
+  data: any;
+};
+
+function FacebookPageData({ data }: Props) {
   if (data?.published_posts)
     return (
       <div className="p-5  w-full flex flex-col">

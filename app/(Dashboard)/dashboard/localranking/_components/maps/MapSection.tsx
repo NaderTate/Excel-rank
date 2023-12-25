@@ -8,7 +8,7 @@ import BusinessCard from "./BusinessCard";
 
 import { AiOutlineDoubleRight } from "react-icons/ai";
 
-import { generateCircleLocations } from "@/lib/helpers";
+import { generateCircleLocations } from "../utils";
 
 type Props = {
   keywords: string[];

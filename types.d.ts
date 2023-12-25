@@ -70,7 +70,7 @@ type PageData = {
   id: string;
 };
 
-type YelpBusiness = {
+type YelpBusinessInfo = {
   name: string;
   image: string;
   location: {
@@ -79,4 +79,12 @@ type YelpBusiness = {
     city: string;
   };
   openNow: boolean;
+};
+
+type YelpReview = {
+  OverAllRating: string;
+  FinalReview: string;
+  max3PositiveThings: string[];
+  max3NegativeThings: string[];
+  RecommendationsForImprovement: string[];
 };

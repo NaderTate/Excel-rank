@@ -1,8 +1,15 @@
 import "./styles.css";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
 import { FaCircleChevronLeft, FaCircleChevronRight } from "react-icons/fa6";
-const Carousel = ({ images }: { images: string[] }) => {
+
+type Props = {
+  images: string[];
+};
+
+const Carousel = ({ images }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<string | null>(null);
 
@@ -30,11 +37,13 @@ const Carousel = ({ images }: { images: string[] }) => {
       },
     },
   };
+
   const slidersVariants = {
     hover: {
       scale: 1.2,
     },
   };
+
   const dotsVariants = {
     initial: {
       y: 0,

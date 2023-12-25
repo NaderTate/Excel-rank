@@ -1,5 +1,4 @@
 "use client";
-import * as cheerio from "cheerio";
 import OpenAI from "openai";
 import GPT3Tokenizer from "gpt3-tokenizer";
 import {
@@ -7,8 +6,8 @@ import {
   getYelpPageData,
   isYelpLinkExists,
   updateYelpReview,
-} from "./_actions";
-import { YelpBusiness } from "@/types";
+} from "@/actions/server/yelp";
+import { YelpBusinessInfo } from "@/types";
 // export const maxDuration = 200;
 const GPTPrompt = `Analyze these responses in general and only return nothing but the following json with the following format => "{"FinalReview": "string", "OverAllRating": number, "max3PositiveThings":Array<string>, "max3NegativeThings":Array<string>, "RecommendationsForImprovement":Array<string>}"`;
 const getReview = async (link: string) => {
@@ -45,12 +44,12 @@ const getReview = async (link: string) => {
 export const handleReviews = async (
   link: string,
   userId: string,
-  yelpData: YelpBusiness
+  yelpData: YelpBusinessInfo
 ) => {
   let review = await isYelpLinkExists(link, userId);
   if (
     review &&
-    new Date(review.updatedAt).getTime() > Date.now() - 24 * 60 * 60 * 1000
+    new Date(review.updatedAt).getTime() < Date.now() - 24 * 60 * 60 * 1000
   ) {
     return { success: true, data: review };
   }

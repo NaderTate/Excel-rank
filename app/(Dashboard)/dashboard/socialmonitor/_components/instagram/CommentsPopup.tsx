@@ -8,21 +8,25 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import { useState } from "react";
-import { BiComment } from "react-icons/bi";
+
 import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
+
+import { BiComment } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
+
+type Props = {
+  postId: string;
+  pageToken: string;
+  commentsCount: number | null;
+  likesCount: number;
+};
 
 function InstagramCommentsPopup({
   postId,
   pageToken,
   commentsCount,
   likesCount,
-}: {
-  postId: string;
-  pageToken: string;
-  commentsCount: number | null;
-  likesCount: number;
-}) {
+}: Props) {
   const [comments, setComments] = useState<[] | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
 
@@ -40,7 +44,7 @@ function InstagramCommentsPopup({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div>
+    <>
       <Button
         fullWidth
         color="primary"
@@ -103,7 +107,7 @@ function InstagramCommentsPopup({
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

@@ -1,9 +1,5 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { navItems } from "@/lib/data";
-import { ThemeSwitcher } from "@/components/ThemeSwitch";
+
 import {
   Navbar as NextUINav,
   NavbarBrand,
@@ -14,7 +10,14 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+
 import UserAvatar from "./UserAvatar";
+import { ThemeSwitcher } from "@/components/ThemeSwitch";
+
+import { navItems } from "@/lib/data";
 
 const Navbar = () => {
   const pathname = usePathname();

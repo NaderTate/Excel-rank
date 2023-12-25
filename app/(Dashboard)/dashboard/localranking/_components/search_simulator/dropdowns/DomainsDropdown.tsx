@@ -19,7 +19,7 @@ import { LuChevronsUpDown } from "react-icons/lu";
 
 import { cn } from "@/lib/utils";
 
-import { googleDomains } from "@/lib/googleDomains";
+import { googleDomains } from "@/app/(Dashboard)/dashboard/localranking/googleDomains";
 
 type Props = {
   selectedDomain: string;

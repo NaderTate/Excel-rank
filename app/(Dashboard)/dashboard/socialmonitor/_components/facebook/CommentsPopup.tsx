@@ -1,7 +1,5 @@
 "use client";
-import { useState } from "react";
-import { BiComment } from "react-icons/bi";
-import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
+
 import {
   Modal,
   ModalContent,
@@ -11,19 +9,26 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { useState } from "react";
+
+import LoadingSkeleton from "@/components/Dashboard/LoadingSkeleton";
+
+import { BiComment } from "react-icons/bi";
 import { AiOutlineLike } from "react-icons/ai";
+
+type Props = {
+  postId: string;
+  pageToken: string;
+  commentsCount: number | null;
+  likesCount: number;
+};
 
 function CommentsPopup({
   postId,
   pageToken,
   commentsCount,
   likesCount,
-}: {
-  postId: string;
-  pageToken: string;
-  commentsCount: number | null;
-  likesCount: number;
-}) {
+}: Props) {
   const [comments, setComments] = useState<[] | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -41,7 +46,7 @@ function CommentsPopup({
   };
 
   return (
-    <div>
+    <>
       <Button
         fullWidth
         color="primary"
@@ -103,7 +108,7 @@ function CommentsPopup({
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

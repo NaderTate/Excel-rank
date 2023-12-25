@@ -1,40 +1,9 @@
 "use server";
-import { YelpBusiness } from "@/types";
-import Prisma from "@/lib/prisma";
-import axios from "axios";
 import * as cheerio from "cheerio";
+import Prisma from "@/lib/prisma";
 
-// check if postId exists
-export const isPostIdExists = async (postId: string) => {
-  const post = await Prisma.aiFacebookReview.findFirst({
-    where: {
-      postId: postId,
-    },
-  });
-  return post;
-};
-
-// create new Facebook review
-export const createFBReview = async (postId: string, aiResponse: string) => {
-  const review = await Prisma.aiFacebookReview.create({
-    data: {
-      postId: postId,
-      aiResponse,
-    },
-  });
-  return review;
-};
-
-// create new Instagram review
-export const createIGReview = async (postId: string, aiResponse: string) => {
-  const review = await Prisma.aIInstagramReview.create({
-    data: {
-      postId: postId,
-      aiResponse,
-    },
-  });
-  return review;
-};
+import axios from "axios";
+import { YelpBusinessInfo } from "@/types";
 
 // check if yelp link exists in user schema
 export const isYelpLinkExists = async (link: string, userId: string) => {
@@ -52,7 +21,7 @@ export const createYelpReview = async (
   link: string,
   userId: string,
   aiResponse: string,
-  yelp: YelpBusiness
+  yelp: YelpBusinessInfo
 ) => {
   const yelpReview = await Prisma.aiReview.create({
     data: {

@@ -6,12 +6,14 @@ import {
   Avatar,
   Button,
 } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+
+import { signOut, useSession } from "next-auth/react";
+
 function UserAvatar() {
   const { data: session } = useSession();
   return (
-    <div>
+    <>
       {session?.user ? (
         <Dropdown
           placement="bottom-end"
@@ -46,7 +48,7 @@ function UserAvatar() {
             <DropdownItem
               key="logout"
               color="danger"
-              onClick={() => {
+              onPress={() => {
                 signOut();
               }}
             >
@@ -65,7 +67,7 @@ function UserAvatar() {
           Login
         </Button>
       )}
-    </div>
+    </>
   );
 }
 

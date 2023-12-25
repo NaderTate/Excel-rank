@@ -19,7 +19,7 @@ import { LuChevronsUpDown } from "react-icons/lu";
 
 import { cn } from "@/lib/utils";
 
-import { languages } from "@/lib/languages";
+import { languages } from "@/app/(Dashboard)/dashboard/localranking/languages";
 
 type Props = {
   selectedLanguage: string;

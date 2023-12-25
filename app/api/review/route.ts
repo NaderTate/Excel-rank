@@ -1,14 +1,18 @@
-import { NextResponse } from "next/server";
-import { getReview } from "./utils";
 import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
-import { YelpBusiness } from "@/types";
+
+import { getReview } from "./utils";
+
+import { YelpBusinessInfo } from "@/types";
+
 import { authOptions } from "@/lib/authOptions";
+
 // export const maxDuration = 200;
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  const { link, yelp }: { link: string; yelp: YelpBusiness } =
+  const { link, yelp }: { link: string; yelp: YelpBusinessInfo } =
     await request.json();
   const session = await getServerSession(authOptions);
   // if (!session || ['free', '', null].includes(session.user.plan)) {

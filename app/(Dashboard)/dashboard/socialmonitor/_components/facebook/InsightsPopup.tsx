@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Modal,
   ModalContent,
@@ -10,40 +11,21 @@ import {
 } from "@nextui-org/react";
 import Image from "next/image";
 import { useState } from "react";
+
 import { SlGraph } from "react-icons/sl";
-function InsightsPopup({
-  postId,
-  pageToken,
-}: {
+
+type Props = {
   postId: string;
   pageToken: string;
-}) {
+};
+
+function InsightsPopup({ postId, pageToken }: Props) {
   const [insights, setInsights] = useState<any[] | null>(null);
   const [showInsights, setShowInsights] = useState<boolean>(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const emojiWidth = 25;
-  // function rearrangeArray(data: []) {
-  //   const order = [
-  //     "likes",
-  //     "comments",
-  //     "saved",
-  //     "reach",
-  //     "impressions",
-  //     "total_interactions",
-  //     "follows",
-  //     "profile_visits",
-  //   ];
-  //   function customSort(a: { name: string }, b: { name: string }) {
-  //     const indexA = order.indexOf(a.name);
-  //     const indexB = order.indexOf(b.name);
-  //     return indexA - indexB;
-  //   }
 
-  //   // Sort the data array using the custom sorting function
-  //   const sortedData = data.sort(customSort);
-
-  //   return sortedData;
-  // }
   const metrics = [
     { name: "post_engaged_users", displayName: "Engaged Users" },
     {
@@ -71,6 +53,7 @@ function InsightsPopup({
       displayName: "Organic Impressions",
     },
   ];
+
   const reactions = [
     { name: "post_reactions_like_total", img: "like.svg" },
     { name: "post_reactions_love_total", img: "love.svg" },
@@ -79,6 +62,7 @@ function InsightsPopup({
     { name: "post_reactions_sorry_total", img: "sad.svg" },
     { name: "post_reactions_anger_total", img: "angry.svg" },
   ];
+
   const getInsights = () => {
     if (showInsights) return;
 
@@ -98,7 +82,7 @@ function InsightsPopup({
   };
 
   return (
-    <div>
+    <>
       <Button
         fullWidth
         color="primary"
@@ -178,7 +162,7 @@ function InsightsPopup({
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

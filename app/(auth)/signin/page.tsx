@@ -1,11 +1,12 @@
 "use client";
 
-import SignWith from "@/app/(auth)/signin/_components/SignInOptions";
 import Link from "next/link";
 import Image from "next/image";
 
-import { useSession } from "next-auth/react";
+import SignInOptions from "./_components/SignInOptions";
+
 import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const metadata = {
   title: "Excel Rank",
@@ -94,7 +95,7 @@ const Page = () => {
                   </button>
                 </div>
               </div>
-              <SignWith />
+              <SignInOptions />
             </div>
           </div>
         </main>

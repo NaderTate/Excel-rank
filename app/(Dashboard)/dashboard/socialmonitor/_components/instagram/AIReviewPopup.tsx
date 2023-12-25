@@ -1,5 +1,3 @@
-import { Spinner, Tooltip } from "@nextui-org/react";
-import { AnalyzeSocialComments } from "@/lib/actions/socials";
 import {
   Modal,
   ModalContent,
@@ -9,18 +7,21 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { ChatCompletion } from "openai/resources/chat/index.mjs";
 import { useState } from "react";
+import { Spinner } from "@nextui-org/react";
+
+import { AnalyzeSocialComments } from "@/actions/client/socials";
+import { ChatCompletion } from "openai/resources/chat/index.mjs";
+
 import { BiAnalyse } from "react-icons/bi";
-function AIReviewPopup({
-  postId,
-  commentsCount,
-  pageToken,
-}: {
+
+type Props = {
   postId: string;
   commentsCount: number;
   pageToken: string;
-}) {
+};
+
+function AIReviewPopup({ postId, commentsCount, pageToken }: Props) {
   const [review, setReview] = useState<string | null>(null);
   const [showComments, setShowComments] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
@@ -32,6 +33,7 @@ function AIReviewPopup({
     );
     return comments.json();
   };
+
   const handleAnalylize = async () => {
     if (showComments || commentsCount < 20) return;
     setLoading(true);
@@ -44,13 +46,14 @@ function AIReviewPopup({
       commentsString,
       "instagram"
     );
+
     const JsonReview: ChatCompletion = JSON.parse(review.aiResponse);
     setReview(JsonReview.choices[0].message.content);
     setShowComments(true);
     setLoading(false);
   };
   return (
-    <div>
+    <>
       <Button
         fullWidth
         color="primary"
@@ -99,7 +102,7 @@ function AIReviewPopup({
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

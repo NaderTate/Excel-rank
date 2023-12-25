@@ -1,4 +1,4 @@
-import { Card, Skeleton } from "@nextui-org/react";
+import { Skeleton } from "@nextui-org/react";
 function Loading() {
   return (
     <div className="w-full space-y-5 p-4">

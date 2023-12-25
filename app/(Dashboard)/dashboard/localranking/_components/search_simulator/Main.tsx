@@ -10,8 +10,8 @@ import DomainsDropdown from "./dropdowns/DomainsDropdown";
 import LanguagesDropdown from "./dropdowns/LanguagesDropdown";
 import CountriesDropdown from "./dropdowns/CountriesDropdown";
 
-import { AiFillGoogleCircle } from "react-icons/ai";
 import { MdOpenInNew } from "react-icons/md";
+import { AiFillGoogleCircle } from "react-icons/ai";
 
 import { useHandleSearchData } from "../../_hooks/useHandleSearchData";
 

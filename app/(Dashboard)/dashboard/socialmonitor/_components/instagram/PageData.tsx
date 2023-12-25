@@ -1,17 +1,17 @@
-import React from "react";
 import Link from "next/link";
-import { BiLinkAlt } from "react-icons/bi";
-import InstagramPostCard from "./PostCard";
 import { Image } from "@nextui-org/react";
-import Loading from "./Loading";
 
-function InstagramPageData({
-  data,
-  pageToken,
-}: {
+import Loading from "./Loading";
+import InstagramPostCard from "./PostCard";
+
+import { BiLinkAlt } from "react-icons/bi";
+
+type Props = {
   data: any;
   pageToken: string;
-}) {
+};
+
+function InstagramPageData({ data, pageToken }: Props) {
   if (data?.ig_id)
     return (
       <div className="p-5">

@@ -1,15 +1,16 @@
-import InstagramCommentsPopup from "./CommentsPopup";
+import { Image } from "@nextui-org/react";
+
+import Carousel from "./Carousel";
 import InsightsPopup from "./InsightsPopup";
 import AIReviewPopup from "./AIReviewPopup";
-import { Image } from "@nextui-org/react";
-import Carousel from "./Carousel";
-function InstagramPostCard({
-  data,
-  pageToken,
-}: {
+import InstagramCommentsPopup from "./CommentsPopup";
+
+type Props = {
   data: any;
   pageToken: string;
-}) {
+};
+
+function InstagramPostCard({ data, pageToken }: Props) {
   return (
     <div className="rounded-xl bg-white dark:bg-background p-2 md:p-4 ">
       {data.media_type == "IMAGE" && (

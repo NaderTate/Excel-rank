@@ -25,7 +25,9 @@ export const useHandleSearchData = () => {
     name: string;
     languages: string[];
   }[] = yourhandle.getCountries();
+
   const allStates: string[] = yourhandle.getStatesByShort(locationData.country);
+
   const allCities: string[] = yourhandle.getCities(
     locationData.country,
     locationData.state

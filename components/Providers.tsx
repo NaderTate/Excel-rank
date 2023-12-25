@@ -1,13 +1,15 @@
 "use client";
 
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
+
 type Props = {
   children: React.ReactNode;
   session: Session | null;
 };
+
 export function Providers({ children, session }: Props) {
   return (
     <SessionProvider
