@@ -5,6 +5,7 @@ import { useLoadScript } from "@react-google-maps/api";
 import MapSection from "./MapSection";
 import PlacesSection from "./PlacesSection";
 import KeywordsSection from "./KeywordsSection";
+import { Button } from "@nextui-org/react";
 
 export default function Main() {
   const [step, setStep] = useState("Location");
@@ -13,6 +14,7 @@ export default function Main() {
     id: "" as string,
     suggestedKeywords: [] as string[],
   });
+
   const [keywords, setKeywords] = useState<string[]>([]);
 
   const stepsList = ["Location", "Keyword", "Map"];
@@ -84,24 +86,24 @@ export default function Main() {
         </div>
         <div className=" w-full">{isLoaded && locationHash[step]}</div>
         {/* Next and Prev */}
-        <div className="flex justify-between w-full px-2 md:px-10  ">
+        <div className="flex justify-between w-full px-2 md:px-10 mt-10 ">
           {step !== stepsList[0] ? (
-            <button
-              onClick={() => setStep(stepsList[stepsList.indexOf(step) - 1])}
+            <Button
+              onPress={() => setStep(stepsList[stepsList.indexOf(step) - 1])}
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
             >
               Previous
-            </button>
+            </Button>
           ) : (
             <span></span>
           )}
           {step !== stepsList[2] && (
-            <button
-              onClick={handleNext}
+            <Button
+              onPress={handleNext}
               className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700"
             >
               Next
-            </button>
+            </Button>
           )}
         </div>
       </div>

@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-const Card = ({
-  img,
-  title,
-  description,
-}: {
+
+type Props = {
   img: string;
   title: string;
   description: string;
-}) => {
+};
+
+const Card = ({ img, title, description }: Props) => {
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}

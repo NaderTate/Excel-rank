@@ -1,13 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
   getDetails,
 } from "use-places-autocomplete";
-import { FiChevronDown } from "react-icons/fi";
-import { AnimatePresence, motion } from "framer-motion";
 import { Input } from "@nextui-org/react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+import { FiChevronDown } from "react-icons/fi";
 
 export default function PlacesSection({ setPlace }: any) {
   const {
@@ -54,6 +56,7 @@ export default function PlacesSection({ setPlace }: any) {
       </h1>
       <div id="SearchBox" className="flex justify-center relative">
         <Input
+          variant="bordered"
           value={value}
           onValueChange={setValue}
           disabled={!ready}

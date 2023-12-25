@@ -1,22 +1,25 @@
 "use client";
+
 import { useState, useMemo } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import BusinessCard from "./BusinessCard";
 import { AnimatePresence, motion } from "framer-motion";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+
+import BusinessCard from "./BusinessCard";
+
 import { AiOutlineDoubleRight } from "react-icons/ai";
+
 import { generateCircleLocations } from "@/lib/helpers";
 
-export default function MapSection({
-  keywords,
-  placeData,
-}: {
-  keywords: Array<string>;
+type Props = {
+  keywords: string[];
   placeData: {
     position: google.maps.LatLngLiteral;
     id: string;
     suggestedKeywords: string[];
   };
-}) {
+};
+
+export default function MapSection({ keywords, placeData }: Props) {
   const [locationsWithRanking, setLocationsWithRanking] = useState<
     { id: number; lat: number; lng: number; ranking: number }[]
   >([]);
@@ -88,7 +91,9 @@ export default function MapSection({
   return (
     <div className="relative w-full h-full ">
       <div className="absolute z-[2] top-0 left-0 flex items-center gap-5 bg-white rounded-br-2xl px-5 ">
-        <h1 className="sm:text-lg my-2 font-bold">Top 20 results </h1>
+        <h1 className="sm:text-lg my-2 font-bold text-black">
+          Top 20 results{" "}
+        </h1>
         <button
           onClick={() => setClosed(!closed)}
           className="flex items-center gap-2 text-sm font-bold uppercase text-gray-900 transition hover:bg-white"
@@ -113,7 +118,7 @@ export default function MapSection({
             exit={{ opacity: 0, x: -10, width: 0 }}
             className="absolute z-[1] top-0 pt-16 left-0 h-full  max-w-xl bg-white/80 flex flex-col overflow-hidden"
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col text-black ml-5">
               <h1 className="text-sm">Keywords 📝</h1>
               <div className="flex flex-wrap p-2 gap-2 items-center ">
                 {keywords &&

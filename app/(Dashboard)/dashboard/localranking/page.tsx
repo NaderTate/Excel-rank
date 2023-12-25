@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Main from "./_components/maps/Main";
 import { AnimatePresence, motion } from "framer-motion";
-import SearchSimulatorForm from "./_components/search_simulator/SearchSimulatorForm";
+import SearchSimulatorForm from "./_components/search_simulator/Main";
 import Card from "./_components/ServiceCard";
 
 function Page() {
@@ -19,7 +19,7 @@ function Page() {
           className="h-screen flex flex-col justify-center items-center"
         >
           <h1 className="text-4xl text-center font-bold my-5 ">
-            Select a tool
+            Select a service
           </h1>
           <div className="flex flex-col md:flex-row gap-5">
             <div onClick={() => setContent("maps")}>
