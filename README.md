@@ -106,6 +106,8 @@ the number inside the cirlcle indicates the business position in that location
 
 #### This service could be used by anyone, not just infleuncers, news pages, meme pages, cars pages, you name it...
 
+##### Note: This service isn't availbe for everyone yet, as facebook needs official documents for my agency to verify the app before it's public. I'm working on that.
+
 # Next steps
 
 #### I'll keep working on the website when I have time, I'll add support for more website like airbnb, google reviews, trip advisor,etc...
